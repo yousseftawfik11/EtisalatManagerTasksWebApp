@@ -1,0 +1,28 @@
+body{
+  /* background-image: url('../images/backgroundImg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%; */
+  background-color: rgba(79, 171, 199, 0.486) !important;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
+
+
+
+/* login design start*/
+.LoginContainer{
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  width: fit-content !important;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.SignIn-btn{
+  width: 100%;
+  border-radius: 16px;
+}
+
+
+/* login design start*/
