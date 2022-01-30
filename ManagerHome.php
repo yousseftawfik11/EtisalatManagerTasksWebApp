@@ -78,12 +78,14 @@ include 'AddTask.php';
 <input type="submit" name="submit">
 </form>
 
+<a href="/18766-Youssef Tawfik ResumeBefore.pdf">trial </a>
+
 
 <h1>Open Tasks</h1>
 
 <?php 
 
-$sql="SELECT Task_title,Content,start_Date,due,status,priority,attachment_name FROM tasks WHERE status='0'";
+$sql="SELECT task_id,Task_title,Content,start_Date,due,status,priority,attachment_name FROM tasks WHERE status='0'";
 if($result= mysqli_query($conn,$sql)){
     if(mysqli_num_rows($result)>0){
         echo "<table>";
@@ -95,10 +97,20 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<th>Status</th>";
                 echo "<th>Priority</th>";
                 echo "<th>Attachment</th>";
+                echo "<th>Member Names</th>";
+                echo "<th>leader Names</th>";
                 
             echo "</tr>";
             while($row = mysqli_fetch_array($result)){
-                
+               //get members names for each task query and exectution
+                $namesSql="SELECT name FROM team_members INNER JOIN 
+            task_members ON team_members.member_id=task_members.member_id 
+            WHERE task_id=".$row['task_id'];
+            $names= mysqli_query($conn,$namesSql);
+            echo mysqli_error($conn); 
+            echo "</tr>";
+
+
                 echo "<tr>";
                 echo "<td>" . $row['Task_title'] . "</td>";
                 echo "<td>" . $row['Content'] . "</td>";
@@ -106,11 +118,26 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<td>" . $row['due'] . "</td>";
                 echo "<td>Open</td>";
                 echo "<td>" . $row['priority'] . "</td>";
-                echo "<td>" . $row['attachment_name'] . "</td>";
+                echo "<td>";
+                echo "<td> <a href='/uploads/". $row['attachment_name'] ."'>" . $row['attachment_name'] . "</a></td>";
+//loop to get all names from the sql result beause each task can have many names
+                while($row2 = mysqli_fetch_array($names)){
+                    echo "<td><br>member".$row2['name']." </td>";
+                }
 
-                //$membersQuery="SELECT name. ";
+                  //get members names for each task query and exectution
+                  $namesSql="SELECT name FROM team_members INNER JOIN 
+                  task_leaders ON team_members.member_id=task_leaders.leader_id 
+                  WHERE task_id=".$row['task_id'];
+                  $names= mysqli_query($conn,$namesSql);
+                  echo mysqli_error($conn); 
 
-            echo "</tr>";
+ //loop to get all names from the sql result beause each task can have many names
+                while($row2 = mysqli_fetch_array($names)){
+                    echo "<td>Leader ".$row2['name']."<br></td>";
+                }
+
+            
         }
         echo "</table>";
         mysqli_free_result($result);
@@ -125,7 +152,7 @@ if($result= mysqli_query($conn,$sql)){
 echo "<h1>Closed Tasks</h1>";
 
 
-$sql="SELECT Task_title,Content,start_Date,due,status,priority,attachment_name FROM tasks WHERE status='1'";
+$sql="SELECT task_id,Task_title,Content,start_Date,due,status,priority,attachment_name FROM tasks WHERE status='1'";
 if($result= mysqli_query($conn,$sql)){
     if(mysqli_num_rows($result)>0){
         echo "<table>";
@@ -137,9 +164,13 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<th>Status</th>";
                 echo "<th>Priority</th>";
                 echo "<th>Attachment</th>";
+                echo "<th>Names</th>";
                 
             echo "</tr>";
             while($row = mysqli_fetch_array($result)){
+
+              
+          
                 
                 echo "<tr>";
                 echo "<td>" . $row['Task_title'] . "</td>";
@@ -149,6 +180,8 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<td>Closed</td>";
                 echo "<td>" . $row['priority'] . "</td>";
                 echo "<td>" . $row['attachment_name'] . "</td>";
+
+               
 
             echo "</tr>";
         }
