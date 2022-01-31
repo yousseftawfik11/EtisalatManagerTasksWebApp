@@ -3,6 +3,19 @@
 include 'db.php';
 include 'AddTask.php';
 
+
+
+
+if(isset($_POST["namesFilter"])){
+
+$member_id=$_POST["memberList"];
+
+$filterQuery="SELECT task_id,task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
+INNER JOIN task_members ON task_members.task_id=tasks.task_id
+WHERE task_members.member_id=".$member_id;
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -199,9 +212,22 @@ if($result= mysqli_query($conn,$sql)){
 
 ?>
 
+<h1>Team Members filter</h1>
+<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+<?php
 
+$query="SELECT member_id,name FROM team_members";
+if($result= mysqli_query($conn,$query)){
+    if(mysqli_num_rows($result)>0){
+        while($row = mysqli_fetch_array($result)){
+            echo "<input type='radio' name='memberList' value=".$row['member_id'].">".$row['name']."</input><br>";
+        }
 
-
+    }
+}
+?>
+<input type="submit" name="namesFilter">
+</form>
 
 <script src="js/controls.js"></script>
 </body>
