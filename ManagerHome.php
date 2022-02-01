@@ -242,7 +242,7 @@ if(isset($_POST["namesFilter"])){
                  echo "<td>" . $row['Content'] . "</td>";
                  echo "<td>" . $row['start_Date'] . "</td>";
                  echo "<td>" . $row['due'] . "</td>";
-                 echo "<td>Open</td>";
+                 echo "<td>Closed</td>";
                  echo "<td>" . $row['priority'] . "</td>";
                  echo "<td>";
                  echo "<td> <a href='/uploads/". $row['attachment_name'] ."'>" . $row['attachment_name'] . "</a></td>";
