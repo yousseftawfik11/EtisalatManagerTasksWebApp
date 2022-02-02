@@ -119,7 +119,7 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<td>Open</td>";
                 echo "<td>" . $row['priority'] . "</td>";
                 echo "<td>";
-                echo "<td> <a href='/uploads/". $row['attachment_name'] ."'>" . $row['attachment_name'] . "</a></td>";
+                echo "<td> <a href='uploads/". $row['attachment_name'] ."' target='_blank'>" . $row['attachment_name'] . "</a></td>";
 //loop to get all names from the sql result beause each task can have many names
                 while($row2 = mysqli_fetch_array($names)){
                     echo "<td><br>member".$row2['name']." </td>";
