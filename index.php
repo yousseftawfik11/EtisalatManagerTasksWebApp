@@ -6,23 +6,42 @@ include 'db.php';
 
 if(isset($_POST['submit'])){
 
-    $userID = mysqli_real_escape_string($conn, $_POST['userID']);
+    $userMail = mysqli_real_escape_string($conn, $_POST['userMail']);
 	$password = mysqli_real_escape_string($conn, $_POST['Loginpass']);
 
-    $ManagerLoginQuery = "SELECT * FROM managers WHERE M_ID = '$userID' AND password = '$password'";
+    $ManagerLoginQuery = "SELECT * FROM managers WHERE email = '$userMail' AND password = '$password'";
     $ManagerCheck = mysqli_query($conn, $ManagerLoginQuery);
+	$row = mysqli_fetch_array($ManagerCheck);
+
+	$MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail' AND password = '$password'";
+    $MemberCheck = mysqli_query($conn, $MemberLoginQuery);
+	$row2 = mysqli_fetch_array($MemberCheck);
+
 
     if(mysqli_num_rows($ManagerCheck) > 0){
 
 		session_start();
-        $_SESSION["username"] = $_POST['userID'];
+        $_SESSION["username"] = $row['M_ID'];
+
 
         echo '
 				<script>
 				window.location.href="ManagerHome.php";
 				</script>
 			  ';
-		}  else {
+		}  elseif(mysqli_num_rows($MemberCheck) > 0) {
+
+			session_start();
+			$_SESSION["username"] = $row2['member_id'];
+
+
+			echo '
+				<script>
+				window.location.href="MembersHome.php";
+				</script>
+			  ';
+
+		} else{
 			echo 'failed';
 		}
 
@@ -57,7 +76,7 @@ if(isset($_POST['submit'])){
 										<div>
 											<div>
 											<label for="userID" >Username</label>
-											<input id="userID" name="userID" type="text">
+											<input id="userID" name="userMail" type="text">
 											</div>
 										</div>
 										<div >
