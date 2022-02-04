@@ -22,6 +22,7 @@
       <a class="nav-item nav-link" href="modifyTask.php">Modify Tasks</a>
       <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
+      <a class="nav-item nav-link " href="newUser.php">Add User</a>
     </div>
   </div>
 </nav>  
