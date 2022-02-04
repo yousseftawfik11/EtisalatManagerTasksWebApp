@@ -1,3 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Document</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Tasks System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link " href="ManagerHome.php">Create Tasks</a>
+      <a class="nav-item nav-link" href="TasksView.php">View Tasks</a>
+      <a class="nav-item nav-link active" href="modifyTask.php">Modify Tasks</a>
+      <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
+    </div>
+  </div>
+</nav>
+
 <?php
 include 'db.php';   
 session_start();
@@ -6,33 +33,22 @@ session_start();
 <h1>Modify Tasks</h1>
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 
-    <input type="button" onclick=selectsLeaders() value="Select All"/> 
-    <input type="button" onclick=deSelectLeaders() value="Deselect All"/><br>   
-    <input type="submit" name="Change_Leader" value="Change Leaders">
-    <input type="submit" name="Change_Members" value ="Change Members">
+    
 
 <?php
-    $sqlQMembers="SELECT * FROM team_members";
-    $result1= mysqli_query($conn, $sqlQMembers);
-    if(mysqli_num_rows($result1)>0){
-        while($row= mysqli_fetch_assoc($result1)){
-            echo '<input type="checkbox" name="check_list_leaders[]" value="'.$row["member_id"].'"><label>'.$row["name"].'</label> <br>' ;                
-        }
-    }else{
-        echo "0 records";
-    }
+   
                
 
 $sql="SELECT task_id,Task_title,Content,start_Date,due,status,priority,attachment_name FROM tasks WHERE status='0'";
 if($result= mysqli_query($conn,$sql)){
     if(mysqli_num_rows($result)>0){
-        echo "<table>";
+        echo "<table class='table table-hover'>";
         echo "<tr>";
-        echo "<th>Title</th>";
-        echo "<th>Content</th>";
-        echo "<th>Member Names</th>";
-        echo "<th>leader Names</th>"; 
-        echo "<th>Select task</th>"; 
+        echo "<th scope='col'>Title</th>";
+        echo "<th scope='col'>Content</th>";
+        echo "<th scope='col'>Member Names</th>";
+        echo "<th scope='col'>leader Names</th>"; 
+        echo "<th scope='col'>Select task</th>"; 
         echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             //get members names for each task query and exectution
@@ -47,10 +63,12 @@ if($result= mysqli_query($conn,$sql)){
              echo "<tr>";
              echo "<td>" . $row['Task_title'] . "</td>";
              echo "<td>" . $row['Content'] . "</td>";
+             echo "<td>";
 //loop to get all names from the sql result beause each task can have many names
              while($row2 = mysqli_fetch_array($names)){
-                 echo "<td><br>member".$row2['name']." </td>";
+                 echo "<a>".$row2['name']." </a>";
              }
+             echo "</td>";
            
             //get members names for each task query and exectution
             $namesSql="SELECT name FROM team_members INNER JOIN 
@@ -59,10 +77,12 @@ if($result= mysqli_query($conn,$sql)){
             $names= mysqli_query($conn,$namesSql);
             echo mysqli_error($conn); 
 
+            echo "<td>";
  //loop to get all names from the sql result beause each task can have many names
             while($row2 = mysqli_fetch_array($names)){
-                echo "<td>Leader ".$row2['name']."&nbsp&nbsp</td>";
+                echo "<a> ".$row2['name']."</a>";
             }
+            echo "</td>";
             echo "<td><input type='radio' name='chosen_task' value=".$row['task_id']."></input></td>";
 
             
@@ -76,8 +96,21 @@ if($result= mysqli_query($conn,$sql)){
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 }
 
-?>
+$sqlQMembers="SELECT * FROM team_members";
+$result1= mysqli_query($conn, $sqlQMembers);
+if(mysqli_num_rows($result1)>0){
+    while($row= mysqli_fetch_assoc($result1)){
+        echo '<input type="checkbox" name="check_list_leaders[]" value="'.$row["member_id"].'"><label>'.$row["name"].'</label> <br>' ;                
+    }
+}else{
+    echo "0 records";
+}
 
+?>
+<input type="button" onclick=selectsLeaders() value="Select All"/> 
+    <input type="button" onclick=deSelectLeaders() value="Deselect All"/><br>   
+    <input type="submit" name="Change_Leader" value="Change Leaders">
+    <input type="submit" name="Change_Members" value ="Change Members">
 <input type="submit" name="load" value="Change"><br>
 
 
@@ -233,15 +266,6 @@ if(isset($_POST["ChangeDate"])){
         
     }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 
 <?php
@@ -250,15 +274,14 @@ if(isset($_POST["ChangeDate"])){
 $sql="SELECT task_id,Task_title,Content,start_Date,due FROM tasks WHERE status='0'";
 if($result= mysqli_query($conn,$sql)){
     if(mysqli_num_rows($result)>0){
-        echo "<table>";
+        echo "<table class='table table-hover'>";
         echo "<tr>";
-        echo "<th>Title</th>";
-        echo "<th>Content</th>";
-        echo "<th>Status</th>";
-        echo "<th>Priority</th>";
-        echo "<th>Attachment</th>";
-        echo "<th>Member Names</th>";
-        echo "<th>leader Names</th>";              
+        echo "<th  scope='col'>Title</th>";
+        echo "<th  scope='col'>Content</th>";
+        echo "<th  scope='col'>Start Date</th>";
+        echo "<th  scope='col'>Due Date</th>"; 
+        echo "<th  scope='col'>Select Task</th>"; 
+                
         echo "</tr>";
 
         while($row = mysqli_fetch_array($result)){
@@ -275,6 +298,9 @@ if($result= mysqli_query($conn,$sql)){
     }
 
 ?>
+
+<h1>Change Task Due Date</h1>
+
 <label for="new_due">New Due Date</label>
 <input type="date" name="new_due">
 <input type="submit" name="ChangeDate">
@@ -287,13 +313,13 @@ if($result= mysqli_query($conn,$sql)){
 $sql="SELECT task_id,Task_title,Content,start_Date,due FROM tasks WHERE status='0'";
 if($result= mysqli_query($conn,$sql)){
     if(mysqli_num_rows($result)>0){
-        echo "<table>";
+        echo "<table class='table table-hover'>";
         echo "<tr>";
-                echo "<th>Title</th>";
-                echo "<th>Content</th>";
-                echo "<th>Start Date</th>";
-                echo "<th>Due Date</th>";
-                echo "<th>Select Task</th>";               
+                echo "<th scope='col'>Title</th>";
+                echo "<th scope='col'>Content</th>";
+                echo "<th scope='col'>Start Date</th>";
+                echo "<th scope='col'>Due Date</th>";
+                echo "<th scope='col'>Select Task</th>";               
             echo "</tr>";
 
          while($row = mysqli_fetch_array($result)){
@@ -311,6 +337,7 @@ if($result= mysqli_query($conn,$sql)){
     }
 
 ?>
+<h1>View Deadline History</h1>
 <input type="submit" name="GetHistory" value="Get History">
 </form>
 <?php
@@ -323,7 +350,7 @@ if(isset($_POST["GetHistory"])){
 
     if($result= mysqli_query($conn,$getHistory)){
         if(mysqli_num_rows($result)>0){
-            echo "<table>";
+            echo "<table class='table table-hover'>";
             echo "<tr>";
                     echo "<th>Old Date</th>";
                     echo "<th>New Date</th>";             
@@ -331,8 +358,8 @@ if(isset($_POST["GetHistory"])){
     
              while($row = mysqli_fetch_array($result)){
                 echo "<tr>";
-                echo "<td>" . $row['old_due'] . "</td>";
-                echo "<td>" . $row['new_due'] . "</td>";
+                echo "<td scope='col'>" . $row['old_due'] . "</td>";
+                echo "<td scope='col'>" . $row['new_due'] . "</td>";
                 echo "</tr>";
 
              }
@@ -346,5 +373,12 @@ if(isset($_POST["GetHistory"])){
 
 <script src="js/controls.js"></script>
 
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </body>
 </html>
+
+

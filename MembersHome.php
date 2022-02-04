@@ -8,6 +8,9 @@ $member_id = 111;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+
     <title>Members Page</title>
 </head>
 <body>
@@ -26,17 +29,17 @@ $member_id = 111;
     
     if($result= mysqli_query($conn,$filterQuery)){
         if(mysqli_num_rows($result)>0){
-            echo "<table>";
+            echo "<table class='table table-hover' >";
             echo "<tr>";
-                    echo "<th>Title</th>";
-                    echo "<th>Content</th>";
-                    echo "<th>Start Date</th>";
-                    echo "<th>Due Date</th>";
-                    echo "<th>Status</th>";
-                    echo "<th>Priority</th>";
-                    echo "<th>Attachment</th>";
-                    echo "<th>Member Names</th>";
-                    echo "<th>leader Names</th>";
+            echo "<th scope='col'>Title</th>";
+            echo "<th scope='col'>Content</th>";
+            echo "<th scope='col'>Start Date</th>";
+            echo "<th scope='col'>Due Date</th>";
+            echo "<th scope='col'>Status</th>";
+            echo "<th scope='col'>Priority</th>";
+            echo "<th scope='col'>Attachment</th>";
+            echo "<th scope='col'>Member Names</th>";
+            echo "<th scope='col'>leader Names</th>";
                     
                 echo "</tr>";
     
@@ -56,12 +59,13 @@ $member_id = 111;
                  echo "<td>" . $row['due'] . "</td>";
                  echo "<td>Open</td>";
                  echo "<td>" . $row['priority'] . "</td>";
-                 echo "<td>";
                  echo "<td> <a href='/uploads/". $row['attachment_name'] ."'>" . $row['attachment_name'] . "</a></td>";
+                 echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
                  while($row2 = mysqli_fetch_array($names)){
-                     echo "<td><br>member".$row2['name']." </td>";
+                     echo "<a>".$row2['name']."</a> ";
                  }
+                 echo "</td>";
                    //get members names for each task query and exectution
                    $namesSql="SELECT name FROM team_members INNER JOIN 
                    task_leaders ON team_members.member_id=task_leaders.leader_id 
@@ -69,10 +73,12 @@ $member_id = 111;
                    $names= mysqli_query($conn,$namesSql);
                    echo mysqli_error($conn); 
     
+                   echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
                  while($row2 = mysqli_fetch_array($names)){
-                     echo "<td>Leader ".$row2['name']."<br></td>";
+                     echo "<a>".$row2['name']."</a>";
                  }
+                 echo "</td>";
     
              
          }
@@ -191,6 +197,10 @@ $member_id = 111;
 </form>
 
 
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
 </body>

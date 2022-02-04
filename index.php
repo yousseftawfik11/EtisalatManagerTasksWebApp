@@ -23,6 +23,17 @@ if(isset($_POST['submit'])){
 		session_start();
         $_SESSION["username"] = $row['M_ID'];
 
+		if(isset($_POST["rememberme"])) { //set cookie if checkbox is checked
+			setcookie ("member_ID",  $userMail, time()+ (86400));
+			setcookie ("member_Password", $password, time()+ (86400));
+		}else { //delete cookie if checkbox is not checked
+			if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])) {
+				$CookieID = $_COOKIE["member_ID"];
+				$Cookiepassword = $_COOKIE["member_Password"];
+				setcookie("member_ID", $CookieID, time() - 1);
+				setcookie("member_Password", $Cookiepassword, time() - 1);
+			}
+		} 		
 
         echo '
 				<script>
