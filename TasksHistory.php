@@ -25,6 +25,8 @@ include('db.php');
       <a class="nav-item nav-link active" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link " href="newUser.php">Add User</a>
+      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
+
     </div>
   </div>
 </nav>

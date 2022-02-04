@@ -31,6 +31,7 @@ include 'AddTask.php';
       <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link " href="newUser.php">Add User</a>
+      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
     </div>
   </div>
 </nav>
@@ -38,20 +39,30 @@ include 'AddTask.php';
 <div class="CreateTask">
 <h1>Create a new task</h1>
     
-<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
-    
-    <label for="TaskTitle">Task title</label>
-    <input type="text" name="TaskTitle" required><br>
+<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" class="FormCenter">
+    <div>
+      <div class="labelSpace">
+       <label for="TaskTitle" class="NewTaskLabel">Task title</label>
+      </div>
+      <input type="text" name="TaskTitle" class="titleInput" required>
+    </div>
+    <div>
+      <div  class="labelSpace">
+    <label for="TaskInfo" class="NewTaskLabel">Task Info</label>
+    </div>
+    <input type="text" name="TaskInfo" class="contentInput" required>
+    </div>
+    <div>
+      <div  class="labelSpace">
+    <label for="TaskDue" class="NewTaskLabel">Task Due</label>
+      </div>
+    <input type="date" name="TaskDue" class="titleInput" required>
+    </div>
 
-    <label for="TaskInfo">Task Info</label>
-    <input type="text" name="TaskInfo" required><br>
+    <div>
+    <label for="team_mem" class="NewTaskLabel">Team Members:</label>
+    </div>
 
-    <label for="TaskDue">Task Due</label>
-    <input type="date" name="TaskDue" required><br>
-    
-    <label for="team_mem">Team Members:</label> <br>
-    <input type="button" onclick='selectsMember()' value="Select All"/> 
-        <input type="button" onclick='deSelectMember()' value="Deselect All"/> <br>
 <?php
         $sqlQMembers="SELECT * FROM team_members";
         $result1= mysqli_query($conn, $sqlQMembers);
@@ -62,7 +73,7 @@ include 'AddTask.php';
 
             while($row= mysqli_fetch_assoc($result1)){
 
-                echo '<input type="checkbox" name="check_list_member[]" value="'.$row["member_id"].'" ><label>'.$row["name"].'</label> <br>' ;                
+                echo '<input type="checkbox" name="check_list_member[]" value="'.$row["member_id"].'" ><label>'.$row["name"].'</label>' ;                
             }
             echo'</div>';
         }else{
@@ -70,10 +81,13 @@ include 'AddTask.php';
         }       
         
 ?>
-<label for="team_mem">Team Leaders:</label> <br>
+    <input type="button" onclick='selectsMember()' value="Select All"/> 
+        <input type="button" onclick='deSelectMember()' value="Deselect All"/> 
+
+<div>
+<label for="team_mem" class="NewTaskLabel">Team Owners:</label>
+</div>
  
-        <input type="button" onclick='selectsLeader()' value="Select All"/> 
-        <input type="button" onclick='deSelectLeader()' value="Deselect All"/><br>   
 <?php
         $sqlQMembers="SELECT * FROM team_members";
         $result1= mysqli_query($conn, $sqlQMembers);
@@ -89,16 +103,25 @@ include 'AddTask.php';
         }
                
 ?>
-
-<label for="priority">Priority: </label>
+<div>
+        <input type="button" onclick='selectsLeader()' value="Select All"/> 
+        <input type="button" onclick='deSelectLeader()' value="Deselect All"/> 
+        </div>
+        <div class="labelSpace">
+<label for="priority" class="NewTaskLabel">Priority: </label>
+</div>
 <select name="priority">
   <option value="1">Low</option>
   <option value="2">Medium</option>
   <option value="3">High</option>
   <option value="4">Very High</option>
 </select>
-<br>
-<input type="File" name="file"> <br>
+<div class="labelSpace">
+<label for="priority" class="NewTaskLabel">Upload File </label>
+</div>
+<div >
+<input type="File" name="file">
+</div>
 <input type="submit" name="submit">
 </form>
 </div>

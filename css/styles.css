@@ -53,3 +53,24 @@ table{
 .OpenTickSize{
   width: 35px;
 }
+
+.labelSpace{
+  margin-bottom: -10px;
+}
+.contentInput{
+  height: 200px;
+  width: 400px;
+}
+.titleInput{
+  width: 400px;
+}
+.FormCenter{
+  margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+}
+.NewTaskLabel{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: medium;
+}
