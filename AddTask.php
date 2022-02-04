@@ -23,9 +23,15 @@ if(isset($_POST["submit"])){
     $query = mysqli_query($conn, $addTask);
 
     if ($query) {
-        echo "<script>alert('Enrolled Successfully, payment can be made from the Payment page.');</script>";
+        echo "<script>alert('Task created successfully');</script>";
+        echo '
+        <script>
+        window.location.href="TasksView.php";
+        </script>
+      ';
+
     } else {
-        echo "<script>alert('Failed to Enroll, please fill the enrollment form again.');</script>";
+        echo "<script>alert('Failed to create task, please contact website admin');</script>";
     }
 
     $getTaskID= "SELECT MAX(task_id) FROM tasks";
@@ -44,12 +50,6 @@ if(isset($_POST["submit"])){
 
         $QueryMembersTasksTable="INSERT INTO task_members(member_id, task_id) VALUES('".$memberslist[$i]."','$value[0]')" ;
         $query = mysqli_query($conn, $QueryMembersTasksTable);
-
-        if ($query) {
-            echo " team members added";
-        } else {
-            
-        }
         
     }
 
@@ -57,12 +57,6 @@ if(isset($_POST["submit"])){
 
         $QueryMembersTasksTable="INSERT INTO task_leaders(leader_id, task_id) VALUES('".$leaderslist[$i]."','$value[0]')" ;
         $query = mysqli_query($conn, $QueryMembersTasksTable);
-
-        if ($query) {
-            echo " team members added";
-        } else {
-            
-        }
         
     }
     //echo mysqli_error($conn); 

@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--Implementing icon's library for navbar-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <!--Libraries for bootstrap table-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
 
     
     <!--Libraries for Calendar-->
@@ -28,7 +29,7 @@
                 right:'month, agendaWeek, agendaDay'
                 },
                 //events: 'loadCalendarEvents.php'
-                events: function(start, end, timezone, callback){
+                events: function(start,end, timezone, callback){
                   $.ajax({
                     url: 'calendarLoader.php',
                     dataType: 'json',
@@ -39,9 +40,9 @@
                   
                       for (var i=0; i<data.length; i++){
                         events.push({
-                          title: data[i]['class'],
-                          start: data[i]['start_event'],
-                          end: data[i]['end_event'],
+                          title: data[i]['Task_title'],
+                          start: data[i]['due'],
+                          end: data[i]['due'],
                         });
                       }
                       //adding the callback
@@ -55,9 +56,24 @@
     <title>Document</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Tasks System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="ManagerHome.php">Create Tasks</a>
+      <a class="nav-item nav-link" href="TasksView.php">View Tasks</a>
+      <a class="nav-item nav-link" href="modifyTask.php">Modify Tasks</a>
+      <a class="nav-item nav-link active" href="DueCalendar.php">Calendar</a>
+    </div>
+  </div>
+</nav>
     <!--Calendar-->
     <div class="container">
         <div id="calendar"></div>
     </div>
+
 </body>
 </html>
