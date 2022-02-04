@@ -30,15 +30,15 @@
 
 <div>
     <label for="Username">Name</label>
-    <input type="text" name="Username">
+    <input type="text" name="Username" required>
 </div>
 <div>
     <label for="Email">Email</label>
-    <input type="email" name="userEmail">
+    <input type="email" name="userEmail" required>
 </div>
 <div>
     <label for="pass">Password</label>
-    <input type="password" name="pass">
+    <input type="password" name="pass" required>
 </div>
 <div>
     <input type="submit" name="NewUser" value="Create User">

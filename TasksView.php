@@ -153,15 +153,20 @@ if($result= mysqli_query($conn,$sql)){
 
 if(isset($_POST["OpenClosedTask"])){ //Re-open closed tasks
 
-    $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);       
+    if(empty($_POST['chosen_task'])){
+        echo '<script>
+        alert("Please choose task to re-open")
+        </script>';
+    }else{
+        $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);       
 
-    $closeTask = "UPDATE tasks SET status ='0' 
-    WHERE task_id = '$task_id'";
+        $closeTask = "UPDATE tasks SET status ='0' 
+        WHERE task_id = '$task_id'";
 
-    $query = mysqli_query($conn, $closeTask);
+        $query = mysqli_query($conn, $closeTask);
 
-    echo "<meta http-equiv='refresh' content='0'>";
-
+        echo "<meta http-equiv='refresh' content='0'>";
+    }
 
 }
 

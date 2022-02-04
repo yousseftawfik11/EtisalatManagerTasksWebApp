@@ -181,15 +181,21 @@ include("db.php");
 
     if(isset($_POST["close_task"])){ //update info of tasks in database
 
-        $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);       
-    
-        $closeTask = "UPDATE tasks SET status ='1' 
-        WHERE task_id = '$task_id'";
-    
-        $query = mysqli_query($conn, $closeTask);
-    
-        echo "<meta http-equiv='refresh' content='0'>";
-    
+        if(empty($_POST['chosen_task'])){
+            echo '<script>
+            alert("Please choose task to close")
+            </script>';
+        }else{
+
+            $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);       
+            
+            $closeTask = "UPDATE tasks SET status ='1' 
+            WHERE task_id = '$task_id'";
+
+            $query = mysqli_query($conn, $closeTask);
+            
+            echo "<meta http-equiv='refresh' content='0'>";
+        }
     
     }
      
