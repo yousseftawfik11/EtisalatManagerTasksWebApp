@@ -24,7 +24,10 @@ body{
   border-radius: 16px;
 }
 
+h1{
+  font-family: 'Roboto', sans-serif;
 
+}
 /* login design start*/
 
 
@@ -41,4 +44,12 @@ body{
 
   color: white !important;
 
+}
+
+table{
+  background-color: rgb(179, 223, 179) !important;
+}
+
+.OpenTickSize{
+  width: 35px;
 }

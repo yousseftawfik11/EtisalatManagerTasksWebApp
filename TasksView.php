@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/styles.css">
 
     <title>View Tasks</title>
 </head>
@@ -60,7 +61,7 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<td>" . $row['Content'] . "</td>";
                 echo "<td>" . $row['start_Date'] . "</td>";
                 echo "<td>" . $row['due'] . "</td>";
-                echo "<td>Open</td>";
+                echo "<td><img src='images/success.svg' class='OpenTickSize'></td>";
                 echo "<td>" . $row['priority'] . "</td>";
                 echo "<td> <a href='uploads/". $row['attachment_name'] ."' target='_blank'>" . $row['attachment_name'] . "</a></td>";
                 echo "<td>";
@@ -123,7 +124,7 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<td>" . $row['Content'] . "</td>";
                 echo "<td>" . $row['start_Date'] . "</td>";
                 echo "<td>" . $row['due'] . "</td>";
-                echo "<td>Closed</td>";
+                echo "<td><img src='images/false.svg' class='OpenTickSize'></td>";
                 echo "<td>" . $row['priority'] . "</td>";
                 echo "<td> <a href='uploads/". $row['attachment_name'] ."'>" . $row['attachment_name'] . "</a></td>";
 
