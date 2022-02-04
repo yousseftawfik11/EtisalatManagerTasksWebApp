@@ -3,7 +3,21 @@
 
 if(isset($_POST["submit"])){
 
-  
+    if(empty($_POST["check_list_member"])){
+        echo '<script>
+        alert("Failed to create task, please choose members")
+        </script>';
+    }elseif(empty($_POST["check_list_leader"])){
+        echo '<script>
+        alert("Failed to create task, please choose leaders")
+        </script>';
+    }else{
+
+        $memberslist= $_POST["check_list_member"];
+ 
+   
+        $leaderslist= $_POST["check_list_leader"];
+    
 
     $pname = rand(1000,100000)."-".$_FILES["file"]["name"];
     $tname = $_FILES["file"]["tmp_name"];
@@ -41,10 +55,7 @@ if(isset($_POST["submit"])){
 
 
 
-    $memberslist= $_POST["check_list_member"];
  
-   
-    $leaderslist= $_POST["check_list_leader"];
 
     for($i=0; $i<sizeof($memberslist); $i++){
 
@@ -61,6 +72,8 @@ if(isset($_POST["submit"])){
     }
     //echo mysqli_error($conn); 
 
+    }
 }
+
 
 ?>

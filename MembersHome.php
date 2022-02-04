@@ -1,6 +1,5 @@
 <?php
 include("db.php");
-$member_id = 111;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +19,8 @@ $member_id = 111;
 <?php
     
     session_start();
-    $id = $_SESSION["username"];; 
-    echo $id;
+    $member_id = $_SESSION["username"];; 
+    echo $member_id;
 
     $filterQuery="SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
     INNER JOIN task_members ON task_members.task_id=tasks.task_id
