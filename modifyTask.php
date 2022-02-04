@@ -117,7 +117,7 @@ if(mysqli_num_rows($result1)>0){
     <input type="submit" name="Change_Leader" value="Change Leaders">
     <input type="submit" name="Change_Members" value ="Change Members">
 <input type="submit" name="load" value="Change"><br>
-
+<hr>
 
 </form>
 
@@ -125,22 +125,26 @@ if(mysqli_num_rows($result1)>0){
 <?php
 if(isset($_POST["load"])){ //loading info into the change textboxes and changing data in tasks
     
-    $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
- 
-    $_SESSION["task_id"] = $task_id;
-    // if($task_id && $leaderslist){        condition to handle if no inputs inserted
+    if(empty($_POST['chosen_task'])){
+        echo '<script>
+        alert("Please choose task to edit")
+        </script>';
+    }else{
+
+        $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
+        
+        $_SESSION["task_id"] = $task_id;
         $sql="SELECT Task_title,priority,Content FROM tasks WHERE task_id = ".$task_id;
         if($result= mysqli_query($conn,$sql)){
             if(mysqli_num_rows($result)>0){
                 while($row = mysqli_fetch_array($result)){
-
                     echo '<form action="'.$_SERVER["PHP_SELF"].'" method="post">
                     <label for="TaskTitle">Task title</label>
-                    <input type="text" name="TaskTitle" value="'.$row["Task_title"].'"><br>
-                    
+                    <input type="text" name="TaskTitle" required value="'.$row["Task_title"].'"><br>
+
                     <label for="TaskInfo">Task Info</label>
-                    <input type="text" name="TaskInfo" value="'.$row["Content"].'"><br>
-                    
+                    <input type="text" name="TaskInfo" required value="'.$row["Content"].'"><br>
+
                     <label for="priority">Priority: </label>
                     <select name="priority">
                       <option value="1">Low</option>
@@ -152,40 +156,41 @@ if(isset($_POST["load"])){ //loading info into the change textboxes and changing
                     <input type="submit" name="edit">
                     </form>';
 
-                    
-
                 }
             }
-     
+        
         }
 
 
-    // }
+    }
 }
 
 if(isset($_POST["edit"])){ //update info of tasks in database
 
     $task_id = $_SESSION["task_id"];
 
-
+    $sql="SELECT Task_title,priority,Content FROM tasks WHERE task_id = ".$task_id;
+    if($result= mysqli_query($conn,$sql)){
+        if(mysqli_num_rows($result)>0){
+            while($row = mysqli_fetch_array($result)){
+                $addToHistory="INSERT INTO tasks_history(task_id, task_title, Content, priority) 
+                VALUES(".$task_id.",".$row["Task_title"].", ".$row["Content"].",".$row["priority"].")";
+                $query2= mysqli_query($conn,$addToHistory);
+                echo mysqli_error($conn); 
+            }
+        }
+    }
 
     $title= mysqli_real_escape_string($conn,$_POST['TaskTitle']);
     $info = mysqli_real_escape_string($conn, $_POST['TaskInfo']);
     $priority = mysqli_real_escape_string($conn,$_POST["priority"]);
-   
-    $addToHistory="INSERT INTO tasks_history(task_id, task_title, Content, priority) 
-    VALUES('$task_id','$title','$info','$priority')";
-
-    $query2= mysqli_query($conn,$addToHistory);
-    echo mysqli_error($conn); 
-
+    
+    
     $addTask = "UPDATE tasks SET Task_title ='$title' ,Content = '$info',priority = '$priority' 
     WHERE task_id = '$task_id'";
-
     $query = mysqli_query($conn, $addTask);
-
     echo "<meta http-equiv='refresh' content='0'>";
-
+    
 
 }
 
@@ -194,10 +199,19 @@ if(isset($_POST["edit"])){ //update info of tasks in database
 // adding a submit button to change the leaders
 if(isset($_POST["Change_Leader"])){
 
-    $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
-    $leaderslist= $_POST["check_list_leaders"];
+    if(empty($_POST['chosen_task'])){
+        echo '<script>
+        alert("Please choose task to edit")
+        </script>';
+    }elseif(empty($_POST['check_list_leaders'])){
+        echo '<script>
+        alert("Please choose new leaders")
+        </script>';
+    }else{
+    
+        $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
+        $leaderslist= $_POST["check_list_leaders"];
 
-    // if($task_id && $leaderslist){        condition to handle if no inputs inserted
         $removeTask = "DELETE FROM task_leaders WHERE task_id = ".$task_id;
         $query = mysqli_query($conn, $removeTask);
 
@@ -213,16 +227,25 @@ if(isset($_POST["Change_Leader"])){
         echo "<meta http-equiv='refresh' content='0'>";
 
 
-
-    // }
+    }
+    
 }
 
 if(isset($_POST["Change_Members"])){ //adding button to change members
 
-    $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
-    $leaderslist= $_POST["check_list_leaders"];
+    if(empty($_POST['chosen_task'])){
+        echo '<script>
+        alert("Please choose task to edit")
+        </script>';
+    }elseif(empty($_POST['check_list_leaders'])){
+        echo '<script>
+        alert("Please choose new leaders")
+        </script>';
+    }else{
 
-    // if($task_id && $leaderslist){        condition to handle if no inputs inserted
+        $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
+        $leaderslist= $_POST["check_list_leaders"];
+
         $removeTask = "DELETE FROM task_members WHERE task_id = ".$task_id;
         $query = mysqli_query($conn, $removeTask);
 
@@ -239,13 +262,19 @@ if(isset($_POST["Change_Members"])){ //adding button to change members
 
 
 
-    // }
+    }
 }
 
 
 
 //change due date form
 if(isset($_POST["ChangeDate"])){
+
+    if(empty($_POST['tasks_list'])){
+        echo '<script>
+        alert("Please choose task to edit")
+        </script>';
+    }else{
 
     //task id from table
         $task_id= mysqli_real_escape_string($conn,$_POST['tasks_list']);
@@ -275,6 +304,8 @@ if(isset($_POST["ChangeDate"])){
         mysqli_query($conn,$updateDue);
         
     }
+}
+
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 
@@ -312,7 +343,7 @@ if($result= mysqli_query($conn,$sql)){
 <h1>Change Task Due Date</h1>
 
 <label for="new_due">New Due Date</label>
-<input type="date" name="new_due">
+<input type="date" name="new_due" required>
 <input type="submit" name="ChangeDate">
 </form>
 

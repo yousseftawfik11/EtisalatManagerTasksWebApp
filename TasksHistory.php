@@ -71,6 +71,12 @@ if($result= mysqli_query($conn,$sql)){
 
 if(isset($_POST["GetHistory"])){
 
+    if(empty($_POST['History_tasks_list'])){
+        echo '<script>
+        alert("Please choose task to view its history")
+        </script>';
+    }else{
+
     $task_id= mysqli_real_escape_string($conn,$_POST['History_tasks_list']);
 
     $getHistory= "SELECT old_due,new_due FROM due_history WHERE task_id='$task_id'";
@@ -94,7 +100,7 @@ if(isset($_POST["GetHistory"])){
                 echo "no records change";
             }
         }    
-
+    }
 }
 
 ?>
@@ -161,6 +167,12 @@ if($result= mysqli_query($conn,$sql)){
 
 if(isset($_POST["OldContent"])){
 
+    if(empty($_POST['History_tasks_list_content'])){
+        echo '<script>
+        alert("Please choose task to view its history")
+        </script>';
+    }else{
+
     $task_id= mysqli_real_escape_string($conn,$_POST['History_tasks_list_content']);
 
     $getHistory= "SELECT task_title,Content,priority FROM tasks_history WHERE task_id='$task_id'";
@@ -206,7 +218,7 @@ if(isset($_POST["OldContent"])){
                 echo "no records change";
             }
         }    
-
+    }
 }
 
 ?>
