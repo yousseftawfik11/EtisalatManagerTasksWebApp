@@ -28,6 +28,7 @@ include 'AddTask.php';
       <a class="nav-item nav-link active" href="ManagerHome.php">Create Tasks </a>
       <a class="nav-item nav-link" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link" href="modifyTask.php">Modify Tasks</a>
+      <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
     </div>
   </div>

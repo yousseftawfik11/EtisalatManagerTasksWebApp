@@ -115,18 +115,18 @@ $member_id = 111;
     
     if($result= mysqli_query($conn,$filterQuery)){
         if(mysqli_num_rows($result)>0){
-            echo "<table>";
+            echo "<table class='table table-hover'>";
             echo "<tr>";
-                    echo "<th>Title</th>";
-                    echo "<th>Content</th>";
-                    echo "<th>Start Date</th>";
-                    echo "<th>Due Date</th>";
-                    echo "<th>Status</th>";
-                    echo "<th>Priority</th>";
-                    echo "<th>Attachment</th>";
-                    echo "<th>Member Names</th>";
-                    echo "<th>leader Names</th>";
-                    echo "<th>Select task</th>"; 
+                    echo "<th scope='col'>Title</th>";
+                    echo "<th scope='col'>Content</th>";
+                    echo "<th scope='col'>Start Date</th>";
+                    echo "<th scope='col'>Due Date</th>";
+                    echo "<th scope='col'>Status</th>";
+                    echo "<th scope='col'>Priority</th>";
+                    echo "<th scope='col'>Attachment</th>";
+                    echo "<th scope='col'>Member Names</th>";
+                    echo "<th scope='col'>leader Names</th>";
+                    echo "<th scope='col'>Select task</th>"; 
                     
                 echo "</tr>";
     
@@ -146,12 +146,13 @@ $member_id = 111;
                  echo "<td>" . $row['due'] . "</td>";
                  echo "<td>Open</td>";
                  echo "<td>" . $row['priority'] . "</td>";
-                 echo "<td>";
                  echo "<td> <a href='/uploads/". $row['attachment_name'] ."'>" . $row['attachment_name'] . "</a></td>";
+                 echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
                  while($row2 = mysqli_fetch_array($names)){
-                     echo "<td><br>member".$row2['name']." </td>";
+                     echo "<a>".$row2['name']." </a> ";
                  }
+                 echo "</td>";
                    //get members names for each task query and exectution
                    $namesSql="SELECT name FROM team_members INNER JOIN 
                    task_leaders ON team_members.member_id=task_leaders.leader_id 
@@ -159,10 +160,12 @@ $member_id = 111;
                    $names= mysqli_query($conn,$namesSql);
                    echo mysqli_error($conn); 
     
+                   echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
                  while($row2 = mysqli_fetch_array($names)){
-                     echo "<td>Leader ".$row2['name']."<br></td>";
+                     echo "<a>".$row2['name']." </a>";
                  }
+                 echo "</td>";
                  echo "<td><input type='radio' name='chosen_task' value=".$row['task_id']."></input></td>";
 
              
