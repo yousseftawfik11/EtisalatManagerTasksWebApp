@@ -32,7 +32,7 @@ if(isset($_POST["submit"])){
    
 
     $addTask = "INSERT INTO tasks(Task_title,Content,due,manager_id,status,priority,attachment_name) 
-    VALUES ('$title','$info','$due','1234','0','$priority','$pname')";
+    VALUES ('$title','$info','$due','5000','0','$priority','$pname')";
 
     $query = mysqli_query($conn, $addTask);
 
