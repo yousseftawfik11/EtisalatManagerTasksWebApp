@@ -20,6 +20,7 @@
       <a class="nav-item nav-link " href="ManagerHome.php">Create Tasks</a>
       <a class="nav-item nav-link" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link active" href="modifyTask.php">Modify Tasks</a>
+      <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
     </div>
   </div>
@@ -168,6 +169,11 @@ if(isset($_POST["edit"])){ //update info of tasks in database
     $info = mysqli_real_escape_string($conn, $_POST['TaskInfo']);
     $priority = mysqli_real_escape_string($conn,$_POST["priority"]);
    
+    $addToHistory="INSERT INTO tasks_history(task_id, task_title, Content, priority) 
+    VALUES('$task_id','$title','$info','$priority')";
+
+    $query2= mysqli_query($conn,$addToHistory);
+    echo mysqli_error($conn); 
 
     $addTask = "UPDATE tasks SET Task_title ='$title' ,Content = '$info',priority = '$priority' 
     WHERE task_id = '$task_id'";
@@ -305,70 +311,8 @@ if($result= mysqli_query($conn,$sql)){
 <input type="date" name="new_due">
 <input type="submit" name="ChangeDate">
 </form>
-<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 
-<?php
 
-//get opened tasks to get due date history
-$sql="SELECT task_id,Task_title,Content,start_Date,due FROM tasks WHERE status='0'";
-if($result= mysqli_query($conn,$sql)){
-    if(mysqli_num_rows($result)>0){
-        echo "<table class='table table-hover'>";
-        echo "<tr>";
-                echo "<th scope='col'>Title</th>";
-                echo "<th scope='col'>Content</th>";
-                echo "<th scope='col'>Start Date</th>";
-                echo "<th scope='col'>Due Date</th>";
-                echo "<th scope='col'>Select Task</th>";               
-            echo "</tr>";
-
-         while($row = mysqli_fetch_array($result)){
-            echo "<tr>";
-            echo "<td>" . $row['Task_title'] . "</td>";
-            echo "<td>" . $row['Content'] . "</td>";
-            echo "<td>" . $row['start_Date'] . "</td>";
-            echo "<td>" . $row['due'] . "</td>";
-            //put radio buttons and set thjeir values to the corrsponding task id
-            echo "<td><input type='radio' name='History_tasks_list' value=".$row['task_id']."></input></td>";
-            echo "</tr>";
-
-         }
-        }
-    }
-
-?>
-<h1>View Deadline History</h1>
-<input type="submit" name="GetHistory" value="Get History">
-</form>
-<?php
-
-if(isset($_POST["GetHistory"])){
-
-    $task_id= mysqli_real_escape_string($conn,$_POST['History_tasks_list']);
-
-    $getHistory= "SELECT old_due,new_due FROM due_history WHERE task_id='$task_id'";
-
-    if($result= mysqli_query($conn,$getHistory)){
-        if(mysqli_num_rows($result)>0){
-            echo "<table class='table table-hover'>";
-            echo "<tr>";
-                    echo "<th>Old Date</th>";
-                    echo "<th>New Date</th>";             
-                echo "</tr>";
-    
-             while($row = mysqli_fetch_array($result)){
-                echo "<tr>";
-                echo "<td scope='col'>" . $row['old_due'] . "</td>";
-                echo "<td scope='col'>" . $row['new_due'] . "</td>";
-                echo "</tr>";
-
-             }
-            }
-        }    
-
-}
-
-?>
 
 
 <script src="js/controls.js"></script>
