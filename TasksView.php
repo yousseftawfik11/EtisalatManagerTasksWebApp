@@ -30,13 +30,17 @@
 
 <h1>Open Tasks</h1>
 
+<a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample">
+   <img src='images/collapse-up.svg'>
+  </a>
+  <div id='OpenTaskTable' class="collapse">
 <?php 
 include('db.php');
 
 $sql="SELECT task_id,Task_title,Content,start_Date,due,status,priority,attachment_name FROM tasks WHERE status='0'";
 if($result= mysqli_query($conn,$sql)){
     if(mysqli_num_rows($result)>0){
-        echo "<table class='table table-hover'>";
+        echo "<table class='table table-hover ' >";
         echo "<tr>";
         echo "<th scope='col'>Title</th>";
         echo "<th scope='col'>Content</th>";
@@ -98,7 +102,7 @@ if($result= mysqli_query($conn,$sql)){
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 }
 ?>
-
+</div>
 
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 

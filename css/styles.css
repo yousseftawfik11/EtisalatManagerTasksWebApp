@@ -8,7 +8,9 @@ body{
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap');
 
-
+.navBar-color{
+  background-color: #ebfff5 !important;
+}
 /* login design start*/
 .LoginContainer{
 
@@ -25,7 +27,7 @@ body{
 }
 
 h1{
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 850 !important;
 
 }
@@ -33,14 +35,14 @@ h1{
 
 
 .CreateTask{
-  width: 40%;
+  width: 500px;
   margin-left: auto;
   margin-right: auto;
   border: solid;
   margin-top: 3%;
   margin-bottom: 4%;
   border-radius: 50px;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   border-color: transparent;
 }
 
@@ -66,7 +68,7 @@ table{
   width: 400px;
 }
 .titleInput{
-  width: 400px;
+  width: 439px;
 }
 .FormCenter{
   margin-right: auto;
@@ -74,13 +76,14 @@ table{
   width: fit-content;
 }
 .NewTaskLabel{
-  font-family: 'Roboto Slab', serif;
-  font-weight: 600;
+font-family: 'Roboto', sans-serif;  
+font-weight: 600;
   font-size: medium;
+  margin-bottom: 16px;
 }
 .inputFeildsFont{
-  font-family: 'Roboto Slab', serif;
-  border-radius: 6px;
+  font-family: 'Roboto', sans-serif;
+    border-radius: 6px;
   border-color: rgb(202, 202, 202);
 
 }
@@ -90,35 +93,51 @@ table{
   font-size: 20px;
 }
 .Checkbox-btns{
-  width:49%;
+  width:47%;
   font-family: 'Roboto Slab', serif;
-  background-color:  #EEF1E6;
+  background-color:  #619b96;
   border-color: transparent;
+  border-radius: 8px;
+  color: white;
+  margin-top: 10px;
+
+}
+.Checkbox-Debtns{
+  width:47%;
+  font-family: 'Roboto Slab', serif;
+  background-color:  #b8e0d9;
+  border-color: transparent;
+  border-radius: 8px;
+  margin-left: 10px;
+  margin-top: 10px;
+
 
 }
 .TaskSubmit-btn{
   width: 100%;
-  margin-bottom: 10px;
-  font-family: 'Roboto Slab', serif;
-  background: #F9665E;
+  margin-bottom: 24px;
+  font-family: 'Roboto', sans-serif;
+    background: #e55e5e;
   color: white;
-  border-radius: 20px;
+  border-radius: 8px;
   font-size: 23px;
   border-color: transparent;
 
 }
 .fieldsSpacing{
   margin-bottom: 12px;
+  margin-top: 57px
 }
 
 .backgroundimage{
-  background-image:
-  url('../images/TeamSuccesBackground.jpg');
+  /* background-image:
+  url('../images/TeamSuccesBackground.jpg'); */
   height: 100%;
   width: 100%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 8px;
+  background-color: #3b3f3e;
   /* display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -132,4 +151,8 @@ table{
 .logoutAni:hover{
   width: 30px;
   transition: ease-in-out 0.4s;
+}
+
+.collapse-btn{
+  
 }
