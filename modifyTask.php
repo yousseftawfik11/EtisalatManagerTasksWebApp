@@ -23,6 +23,8 @@
       <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link " href="newUser.php">Add User</a>
+      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
+
 
     </div>
   </div>
@@ -69,7 +71,7 @@ if($result= mysqli_query($conn,$sql)){
              echo "<td>";
 //loop to get all names from the sql result beause each task can have many names
              while($row2 = mysqli_fetch_array($names)){
-                 echo "<a>".$row2['name']." </a>";
+                 echo "<a>".$row2['name']." </a></br>";
              }
              echo "</td>";
            

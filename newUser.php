@@ -22,30 +22,31 @@
       <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link active" href="newUser.php">Add User</a>
+      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
     </div>
   </div>
 </nav>
+<div class="CreateTask">
+    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="FormCenter" style="text-align:right" >
 
-<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+    <div class="fieldsSpacing">
+        <label for="Username">Name</label>
+        <input type="text" name="Username" required>
+    </div>
+    <div class="fieldsSpacing">
+        <label for="Email">Email</label>
+        <input type="email" name="userEmail" required>
+    </div>
+    <div class="fieldsSpacing">
+        <label for="pass">Password</label>
+        <input type="password" name="pass" required>
+    </div>
+    <div>
+        <input type="submit" name="NewUser" value="Create User" style="width:100%" >
+    </div>
 
-<div>
-    <label for="Username">Name</label>
-    <input type="text" name="Username" required>
+    </form>
 </div>
-<div>
-    <label for="Email">Email</label>
-    <input type="email" name="userEmail" required>
-</div>
-<div>
-    <label for="pass">Password</label>
-    <input type="password" name="pass" required>
-</div>
-<div>
-    <input type="submit" name="NewUser" value="Create User">
-</div>
-
-</form>
-
 <?php
 include('db.php');
     if(isset($_POST["NewUser"])){ //Add user to database
