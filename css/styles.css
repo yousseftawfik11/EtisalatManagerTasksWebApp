@@ -6,7 +6,7 @@ body{
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap');
 
 
 /* login design start*/
@@ -25,19 +25,23 @@ body{
 }
 
 h1{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 850 !important;
 
 }
 /* login design start*/
 
 
 .CreateTask{
-  width: 50%;
+  width: 40%;
   margin-left: auto;
   margin-right: auto;
   border: solid;
   margin-top: 3%;
-  border-radius: 8px;
+  margin-bottom: 4%;
+  border-radius: 50px;
+  background-color: #bcd8e2bd;
+  border-color: transparent;
 }
 
 .fc-title{
@@ -70,7 +74,62 @@ table{
   width: fit-content;
 }
 .NewTaskLabel{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Slab', serif;
   font-weight: 600;
   font-size: medium;
+}
+.inputFeildsFont{
+  font-family: 'Roboto Slab', serif;
+  border-radius: 6px;
+  border-color: rgb(202, 202, 202);
+
+}
+.checkboxesSpace{
+  margin-right: 30px;
+  margin-left: 7px;
+  font-size: 20px;
+}
+.Checkbox-btns{
+  width:49%;
+  font-family: 'Roboto Slab', serif;
+  background-color:  #EEF1E6;
+  border-color: transparent;
+
+}
+.TaskSubmit-btn{
+  width: 100%;
+  margin-bottom: 10px;
+  font-family: 'Roboto Slab', serif;
+  background: #F9665E;
+  color: white;
+  border-radius: 20px;
+  font-size: 23px;
+  border-color: transparent;
+
+}
+.fieldsSpacing{
+  margin-bottom: 12px;
+}
+
+.backgroundimage{
+  background-image:
+  url('../images/backgroundHolding.jpg');
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-radius: 8px;
+  /* display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px; */
+}
+
+.logoutAni{
+  width:23px;
+}
+
+.logoutAni:hover{
+  width: 30px;
+  transition: ease-in-out 0.4s;
 }

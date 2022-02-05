@@ -71,7 +71,7 @@ if($result= mysqli_query($conn,$sql)){
              echo "<td>";
 //loop to get all names from the sql result beause each task can have many names
              while($row2 = mysqli_fetch_array($names)){
-                 echo "<a>".$row2['name']." </a>";
+                 echo "<a>".$row2['name']." </a></br>";
              }
              echo "</td>";
            
