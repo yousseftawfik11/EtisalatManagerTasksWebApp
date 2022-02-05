@@ -17,7 +17,7 @@ include 'AddTask.php';
     <title>Manager Page</title>
 </head>
 
-<body>
+<body class="backgroundimage">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Tasks System</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,34 +31,36 @@ include 'AddTask.php';
       <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link " href="newUser.php">Add User</a>
-      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
+      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg"  class="logoutAni"></a>
     </div>
   </div>
 </nav>
 
 <div class="CreateTask">
-<h1>Create a new task</h1>
+<h1 style="text-align: center;">Create a new task</h1>
     
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" class="FormCenter">
-    <div>
+    <div class="fieldsSpacing">
       <div class="labelSpace">
        <label for="TaskTitle" class="NewTaskLabel">Task title</label>
       </div>
-      <input type="text" name="TaskTitle" class="titleInput" required>
+      <input type="text" name="TaskTitle" class="titleInput inputFeildsFont" required>
     </div>
-    <div>
+    <div class="fieldsSpacing">
       <div  class="labelSpace">
     <label for="TaskInfo" class="NewTaskLabel">Task Info</label>
     </div>
-    <input type="text" name="TaskInfo" class="contentInput" required>
+    <!-- <input type="text" name="TaskInfo" class="contentInput inputFeildsFont" required> -->
+    <textarea name="TaskInfo" rows="8" cols="50">
+    </textarea>
     </div>
-    <div>
+    <div class="fieldsSpacing">
       <div  class="labelSpace">
     <label for="TaskDue" class="NewTaskLabel">Task Due</label>
       </div>
     <input type="date" name="TaskDue" class="titleInput" required>
     </div>
-
+<div class="fieldsSpacing">
     <div>
     <label for="team_mem" class="NewTaskLabel">Team Members:</label>
     </div>
@@ -69,11 +71,11 @@ include 'AddTask.php';
 
         if(mysqli_num_rows($result1)>0){
 
-            echo '<div class="checkbox-group required">';
+            echo '<div class="checkbox-group required titleInput">';
 
             while($row= mysqli_fetch_assoc($result1)){
 
-                echo '<input type="checkbox" name="check_list_member[]" value="'.$row["member_id"].'" ><label>'.$row["name"].'</label>' ;                
+                echo '<input type="checkbox" name="check_list_member[]" value="'.$row["member_id"].'" ><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label>' ;                
             }
             echo'</div>';
         }else{
@@ -81,8 +83,10 @@ include 'AddTask.php';
         }       
         
 ?>
-    <input type="button" onclick='selectsMember()' value="Select All"/> 
-        <input type="button" onclick='deSelectMember()' value="Deselect All"/> 
+    <input type="button" class="Checkbox-btns" onclick='selectsMember()' value="Select All"/> 
+        <input type="button"  class="Checkbox-btns" onclick='deSelectMember()' value="Deselect All"/> 
+        </div>
+           <div class="fieldsSpacing">
 
 <div>
 <label for="team_mem" class="NewTaskLabel">Team Owners:</label>
@@ -93,39 +97,43 @@ include 'AddTask.php';
         $result1= mysqli_query($conn, $sqlQMembers);
 
         if(mysqli_num_rows($result1)>0){
+          echo '<div class="checkbox-group required titleInput">';
 
             while($row= mysqli_fetch_assoc($result1)){
 
-                echo '<input type="checkbox" name="check_list_leader[]" value="'.$row["member_id"].'" ><label>'.$row["name"].'</label> <br>' ;                
+                echo '<input type="checkbox" name="check_list_leader[]" value="'.$row["member_id"].'" ><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label>' ;                
             }
+            echo'</div>';
         }else{
             echo "0 records";
         }
                
 ?>
 <div>
-        <input type="button" onclick='selectsLeader()' value="Select All"/> 
-        <input type="button" onclick='deSelectLeader()' value="Deselect All"/> 
+        <input type="button"  class="Checkbox-btns" onclick='selectsLeader()' value="Select All"/> 
+        <input type="button" class="Checkbox-btns" onclick='deSelectLeader()' value="Deselect All"/> 
         </div>
+           </div>
+        <div class="fieldsSpacing">
         <div class="labelSpace">
 <label for="priority" class="NewTaskLabel">Priority: </label>
 </div>
-<select name="priority">
+<select name="priority" class="titleInput inputFeildsFont">
   <option value="1">Low</option>
   <option value="2">Medium</option>
   <option value="3">High</option>
   <option value="4">Very High</option>
 </select>
+</div>
 <div class="labelSpace">
-<label for="priority" class="NewTaskLabel">Upload File </label>
+<label for="priority" class="NewTaskLabel inputFeildsFont">Upload File </label>
 </div>
 <div >
-<input type="File" name="file">
+<input type="File" name="file" class="fieldsSpacing">
 </div>
-<input type="submit" name="submit">
+<input type="submit" name="submit" class="TaskSubmit-btn">
 </form>
 </div>
-
 
 
 
