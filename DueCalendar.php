@@ -23,6 +23,7 @@
           $(document).ready(function(){
             $('#calendar').fullCalendar({
                 editable:false,//Prevents user from moving around events
+                height:550,
                 header:{
                 left:'prev, next today',
                 center:'title',

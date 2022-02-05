@@ -82,17 +82,46 @@ if(isset($_POST['submit'])){
 
 </head>
 <body>
+	<?php 
+	if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])){
+
+		echo '
 		<div class="LoginContainer">
-				<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+				<form action="'.$_SERVER["PHP_SELF"].'" method="post">
 										<div>
 											<div>
 											<label for="userID" >Username</label>
-											<input id="userID" name="userMail" type="text">
+											<input id="userID" name="userMail" required value="'.$_COOKIE['member_ID'].'"type="text">
 											</div>
 										</div>
 										<div >
 											<label for="Loginpass" >Password</label>
-											<input id="Loginpass" name="Loginpass" type="password" data-type="password">
+											<input id="Loginpass" name="Loginpass" required value="'.$_COOKIE["member_Password"].'"type="password" data-type="password">
+										</div>
+										<div>
+											<input id="rememberme" type="checkbox" name="rememberme" value="1" checked = "checked">
+											<label for="rememberme"><span ></span> Keep me Signed in</label>
+										</div>
+										<div>
+											<input type="submit" name="submit" class="SignIn-btn" value="Sign In">
+										</div>
+
+									</form>
+		</div>
+		';
+	}else{
+		echo '
+		<div class="LoginContainer">
+				<form action="'.$_SERVER["PHP_SELF"].'" method="post">
+										<div>
+											<div>
+											<label for="userID" >Username</label>
+											<input id="userID" name="userMail" required type="text">
+											</div>
+										</div>
+										<div >
+											<label for="Loginpass" >Password</label>
+											<input id="Loginpass" name="Loginpass" required type="password" data-type="password">
 										</div>
 										<div>
 											<input id="rememberme" type="checkbox" name="rememberme" value="1">
@@ -104,6 +133,9 @@ if(isset($_POST['submit'])){
 
 									</form>
 		</div>
+		';
+	}
+		?>
 
 </body>
 </html> 
