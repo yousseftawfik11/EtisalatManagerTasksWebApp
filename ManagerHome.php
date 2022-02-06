@@ -18,19 +18,19 @@ include 'AddTask.php';
 </head>
 
 <body class="backgroundimage">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color">
-  <a class="navbar-brand" href="#">Tasks System</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" style="background-color: #3b6d4f !important;">
+  <a class="navbar-brand navBar-color" href="#">Tornado</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="ManagerHome.php">Create Tasks </a>
-      <a class="nav-item nav-link" href="TasksView.php">View Tasks</a>
-      <a class="nav-item nav-link" href="modifyTask.php">Modify Tasks</a>
-      <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
-      <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
-      <a class="nav-item nav-link " href="newUser.php">Add User</a>
+      <a class="nav-item nav-link active navBar-color" href="ManagerHome.php">Create Tasks </a>
+      <a class="nav-item nav-link navBar-color" href="TasksView.php">View Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="modifyTask.php">Modify Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="TasksHistory.php">History Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="DueCalendar.php">Calendar</a>
+      <a class="nav-item nav-link navBar-color" href="newUser.php">Add User</a>
       <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg"  class="logoutAni"></a>
     </div>
   </div>
@@ -71,7 +71,7 @@ include 'AddTask.php';
 
         if(mysqli_num_rows($result1)>0){
 
-            echo '<div class="checkbox-group required titleInput" style="width:450px">';
+            echo '<div class="checkbox-group required titleInput">';
 
             while($row= mysqli_fetch_assoc($result1)){
 
