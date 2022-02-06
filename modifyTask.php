@@ -200,7 +200,7 @@ if(isset($_POST["edit"])){ //update info of tasks in database
     $addTask = "UPDATE tasks SET Task_title ='$title' ,Content = '$info',priority = '$priority' 
     WHERE task_id = '$task_id'";
     $query = mysqli_query($conn, $addTask);
-    echo "<meta http-equiv='refresh' content='0'>";
+    // echo "<meta http-equiv='refresh' content='0'>";
     
 
 }
