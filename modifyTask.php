@@ -7,23 +7,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
 
-    <title>Document</title>
+    <title>Modify Tasks</title>
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Tasks System</a>
+<body class="backgroundimage" style="color:white;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color"  style="background-color: #3b6d4f !important;">
+  <a class="navbar-brand navBar-color" href="#">Tornado</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link " href="ManagerHome.php">Create Tasks</a>
-      <a class="nav-item nav-link" href="TasksView.php">View Tasks</a>
-      <a class="nav-item nav-link active" href="modifyTask.php">Modify Tasks</a>
-      <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
-      <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
-      <a class="nav-item nav-link " href="newUser.php">Add User</a>
-      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
+      <a class="nav-item nav-link navBar-color" href="ManagerHome.php">Create Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="TasksView.php">View Tasks</a>
+      <a class="nav-item nav-link navBar-color active" href="modifyTask.php">Modify Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="TasksHistory.php">History Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="DueCalendar.php">Calendar</a>
+      <a class="nav-item nav-link navBar-color" href="newUser.php">Add User</a>
+      <a class="nav-item nav-link navBar-color" href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
 
 
     </div>
@@ -35,11 +35,21 @@ include 'db.php';
 session_start();
 ?>
 
-<h1>Modify Tasks</h1>
+<div class="tableTitles">
+    <div>
+    <h1>Modify Tasks</h1>
+    </div>
+    <div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    style="background-color: transparent; border-color:transparent;">
+    <img src='images/collapse-up.svg' style="width: 33px;">
+    </a>
+    </div>
+  </div>
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 
     
-
+<div id="OpenTaskTable" class="collapse">
 <?php
    
                
@@ -117,10 +127,11 @@ if(mysqli_num_rows($result1)>0){
     <input type="submit" name="Change_Leader" value="Change Leaders">
     <input type="submit" name="Change_Members" value ="Change Members">
 <input type="submit" name="load" value="Change"><br>
+</div>
 <hr>
 
 </form>
-
+</div>
 
 <?php
 if(isset($_POST["load"])){ //loading info into the change textboxes and changing data in tasks

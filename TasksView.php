@@ -9,30 +9,36 @@
 
     <title>View Tasks</title>
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Tasks System</a>
+<body class="backgroundimage" style="color:white;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" style="background-color: #3b6d4f !important;">
+  <a class="navbar-brand navBar-color" href="#">Tornado</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link " href="ManagerHome.php">Create Tasks</a>
-      <a class="nav-item nav-link active" href="TasksView.php">View Tasks</a>
-      <a class="nav-item nav-link" href="modifyTask.php">Modify Tasks</a>
-      <a class="nav-item nav-link" href="TasksHistory.php">History Tasks</a>
-      <a class="nav-item nav-link" href="DueCalendar.php">Calendar</a>
-      <a class="nav-item nav-link " href="newUser.php">Add User</a>
-      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
+      <a class="nav-item nav-link navBar-color" href="ManagerHome.php">Create Tasks </a>
+      <a class="nav-item nav-link active navBar-color" href="TasksView.php">View Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="modifyTask.php">Modify Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="TasksHistory.php">History Tasks</a>
+      <a class="nav-item nav-link navBar-color" href="DueCalendar.php">Calendar</a>
+      <a class="nav-item nav-link navBar-color" href="newUser.php">Add User</a>
+      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg"  class="logoutAni"></a>
     </div>
   </div>
-</nav>  
+</nav>
 
-<h1>Open Tasks</h1>
-
-<a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample">
-   <img src='images/collapse-up.svg'>
-  </a>
+<div class="tableTitles">
+    <div>
+    <h1>Open Tasks</h1>
+    </div>
+    <div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    style="background-color: transparent; border-color:transparent;">
+    <img src='images/collapse-up.svg' style="width: 33px;">
+    </a>
+    </div>
+  </div>
   <div id='OpenTaskTable' class="collapse">
 <?php 
 include('db.php');
@@ -108,9 +114,19 @@ if($result= mysqli_query($conn,$sql)){
 
 <?php
 
-echo "<h1>Closed Tasks</h1>";
+echo '<div class="tableTitles">
+<div>
+<h1>Closed Tasks</h1>
+</div>
+<div>
+<a class="btn btn-primary" data-toggle="collapse" href="#ClosedTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
+style="background-color: transparent; border-color:transparent;">
+<img src="images/collapse-up.svg" style="width: 33px;">
+</a>
+</div>
+</div>';
 
-
+echo '<div id="ClosedTaskTable" class="collapse">';
 $sql="SELECT task_id,Task_title,Content,start_Date,due,status,priority,attachment_name FROM tasks WHERE status='1'";
 if($result= mysqli_query($conn,$sql)){
     if(mysqli_num_rows($result)>0){
@@ -175,13 +191,25 @@ if(isset($_POST["OpenClosedTask"])){ //Re-open closed tasks
 
 }
 
+echo '</div>'
 ?>
 
 </form>
 
 
 
-<h1>Team Members filter</h1>
+<div class="tableTitles">
+    <div>
+    <h1>Filter By Member</h1>
+    </div>
+    <div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#OpenMemberFilter" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    style="background-color: transparent; border-color:transparent;">
+    <img src='images/collapse-up.svg' style="width: 33px;">
+    </a>
+    </div>
+  </div>
+  <div id='OpenMemberFilter' class="collapse">
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 <?php
 
@@ -197,7 +225,7 @@ if($result= mysqli_query($conn,$query)){
 ?>
 <input type="submit" name="namesFilter">
 </form>
-
+</div>
 
 <?php
 if(isset($_POST["namesFilter"])){
@@ -281,6 +309,7 @@ if(isset($_POST["namesFilter"])){
      }
     
 ?>
+  
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
