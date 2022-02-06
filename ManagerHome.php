@@ -18,7 +18,7 @@ include 'AddTask.php';
 </head>
 
 <body class="backgroundimage">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color">
   <a class="navbar-brand" href="#">Tasks System</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,7 @@ include 'AddTask.php';
 </nav>
 
 <div class="CreateTask">
-<h1 style="text-align: center;">Create a new task</h1>
+<h1 style="text-align: center; margin-top:18px;">Create a new task</h1>
     
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" class="FormCenter">
     <div class="fieldsSpacing">
@@ -51,7 +51,7 @@ include 'AddTask.php';
     <label for="TaskInfo" class="NewTaskLabel">Task Info</label>
     </div>
     <!-- <input type="text" name="TaskInfo" class="contentInput inputFeildsFont" required> -->
-    <textarea name="TaskInfo" rows="8" cols="50">
+    <textarea name="TaskInfo" rows="8" cols="57">
     </textarea>
     </div>
     <div class="fieldsSpacing">
@@ -71,7 +71,7 @@ include 'AddTask.php';
 
         if(mysqli_num_rows($result1)>0){
 
-            echo '<div class="checkbox-group required titleInput">';
+            echo '<div class="checkbox-group required titleInput" style="width:450px">';
 
             while($row= mysqli_fetch_assoc($result1)){
 
@@ -84,7 +84,7 @@ include 'AddTask.php';
         
 ?>
     <input type="button" class="Checkbox-btns" onclick='selectsMember()' value="Select All"/> 
-        <input type="button"  class="Checkbox-btns" onclick='deSelectMember()' value="Deselect All"/> 
+        <input type="button"  class="Checkbox-Debtns" onclick='deSelectMember()' value="Deselect All"/> 
         </div>
            <div class="fieldsSpacing">
 
@@ -111,25 +111,25 @@ include 'AddTask.php';
 ?>
 <div>
         <input type="button"  class="Checkbox-btns" onclick='selectsLeader()' value="Select All"/> 
-        <input type="button" class="Checkbox-btns" onclick='deSelectLeader()' value="Deselect All"/> 
+        <input type="button" class="Checkbox-Debtns" onclick='deSelectLeader()' value="Deselect All"/> 
         </div>
            </div>
         <div class="fieldsSpacing">
         <div class="labelSpace">
 <label for="priority" class="NewTaskLabel">Priority: </label>
 </div>
-<select name="priority" class="titleInput inputFeildsFont">
+<select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
   <option value="1">Low</option>
   <option value="2">Medium</option>
   <option value="3">High</option>
   <option value="4">Very High</option>
 </select>
 </div>
-<div class="labelSpace">
-<label for="priority" class="NewTaskLabel inputFeildsFont">Upload File </label>
+<div class="labelSpace inputFeildsFont fieldsSpacing">
+<label for="priority" class="NewTaskLabel ">Upload File </label>
 </div>
 <div >
-<input type="File" name="file" class="fieldsSpacing">
+<input type="File" name="file" style="margin-bottom: 20px;">
 </div>
 <input type="submit" name="submit" class="TaskSubmit-btn">
 </form>
