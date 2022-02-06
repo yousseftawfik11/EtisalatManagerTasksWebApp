@@ -185,7 +185,7 @@ if(isset($_POST["edit"])){ //update info of tasks in database
         if(mysqli_num_rows($result)>0){
             while($row = mysqli_fetch_array($result)){
                 $addToHistory="INSERT INTO tasks_history(task_id, task_title, Content, priority) 
-                VALUES(".$task_id.",".$row["Task_title"].", ".$row["Content"].",".$row["priority"].")";
+                VALUES(".$task_id.",'".$row["Task_title"]."', '".$row["Content"]."',".$row["priority"].")";
                 $query2= mysqli_query($conn,$addToHistory);
                 echo mysqli_error($conn); 
             }
@@ -200,7 +200,8 @@ if(isset($_POST["edit"])){ //update info of tasks in database
     $addTask = "UPDATE tasks SET Task_title ='$title' ,Content = '$info',priority = '$priority' 
     WHERE task_id = '$task_id'";
     $query = mysqli_query($conn, $addTask);
-    // echo "<meta http-equiv='refresh' content='0'>";
+    
+    echo "<meta http-equiv='refresh' content='0'>";
     
 
 }
