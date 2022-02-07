@@ -14,6 +14,11 @@ include 'AddTask.php';
     <link rel="stylesheet" href="css/styles.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- alert box libraries -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
     <title>Manager Page</title>
 </head>
 
@@ -31,14 +36,17 @@ include 'AddTask.php';
       <a class="nav-item nav-link navBar-color" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link navBar-color" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link navBar-color" href="newUser.php">Add User</a>
-      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg"  class="logoutAni"></a>
+      <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg"  class="logoutAni"></a>
     </div>
   </div>
 </nav>
 
-<div class="CreateTask">
+<div class="CreateTask FlexContainer">
+<div class="LeftPart">
+  
 <h1 style="text-align: center; margin-top:18px;">Create a new task</h1>
-    
+
+
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" class="FormCenter">
     <div class="fieldsSpacing">
       <div class="labelSpace">
@@ -86,10 +94,12 @@ include 'AddTask.php';
     <input type="button" class="Checkbox-btns" onclick='selectsMember()' value="Select All"/> 
         <input type="button"  class="Checkbox-Debtns" onclick='deSelectMember()' value="Deselect All"/> 
         </div>
-           <div class="fieldsSpacing">
+        </div>
+        <div class="rightPart">
+           <div class="fieldsSpacing" style=" margin-top:125px;">
 
 <div>
-<label for="team_mem" class="NewTaskLabel">Team Owners:</label>
+<label for="team_mem" class="NewTaskLabel" >Team Owners:</label>
 </div>
  
 <?php
@@ -132,6 +142,7 @@ include 'AddTask.php';
 <input type="File" name="file" style="margin-bottom: 20px;">
 </div>
 <input type="submit" name="submit" class="TaskSubmit-btn">
+</div>
 </form>
 </div>
 

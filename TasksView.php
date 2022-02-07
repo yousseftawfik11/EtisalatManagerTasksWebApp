@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css">
 
+        <!-- alert box libraries -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
     <title>View Tasks</title>
 </head>
 <body class="backgroundimage" style="color:white;">
@@ -23,7 +29,7 @@
       <a class="nav-item nav-link navBar-color" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link navBar-color" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link navBar-color" href="newUser.php">Add User</a>
-      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg"  class="logoutAni"></a>
+      <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg"  class="logoutAni"></a>
     </div>
   </div>
 </nav>
@@ -164,7 +170,7 @@ if($result= mysqli_query($conn,$sql)){
         }
         echo "</table>";
         mysqli_free_result($result);
-        echo'<input type="submit" name="OpenClosedTask" value="Re-open Task">';
+        echo'<input type="submit" name="OpenClosedTask" class="submit_btns" value="Re-open Task">';
     }else{
         echo "No records";
     }
@@ -186,7 +192,12 @@ if(isset($_POST["OpenClosedTask"])){ //Re-open closed tasks
 
         $query = mysqli_query($conn, $closeTask);
 
-        echo "<meta http-equiv='refresh' content='0'>";
+        // echo "<meta http-equiv='refresh' content='0'>";
+        echo "<script>Swal.fire(
+            'Task Reopened Successfully',
+            '',
+            'success'
+          )</script>";
     }
 
 }
@@ -223,7 +234,7 @@ if($result= mysqli_query($conn,$query)){
     }
 }
 ?>
-<input type="submit" name="namesFilter">
+<input type="submit" class="submit_btns" name="namesFilter">
 </form>
 </div>
 

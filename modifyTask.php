@@ -23,7 +23,7 @@
       <a class="nav-item nav-link navBar-color" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link navBar-color" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link navBar-color" href="newUser.php">Add User</a>
-      <a class="nav-item nav-link navBar-color" href="logout.php"><img src="images/logout.svg" style="width:23px"></a>
+      <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg" style="width:23px"></a>
 
 
     </div>
@@ -321,6 +321,24 @@ if(isset($_POST["ChangeDate"])){
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 
+<div class="tableTitles">
+    <div>
+    <h1>Change Task Due Date</h1>
+    </div>
+    <div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable2" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    style="background-color: transparent; border-color:transparent;">
+    <img src='images/collapse-up.svg' style="width: 33px;">
+    </a>
+    </div>
+  </div>
+
+  <div id="OpenTaskTable2" class="collapse">
+
+<label for="new_due">New Due Date</label>
+<input type="date" name="new_due" required>
+<input type="submit" name="ChangeDate">
+
 <?php
 
 //get opened tasks to change their due date
@@ -352,11 +370,7 @@ if($result= mysqli_query($conn,$sql)){
 
 ?>
 
-<h1>Change Task Due Date</h1>
-
-<label for="new_due">New Due Date</label>
-<input type="date" name="new_due" required>
-<input type="submit" name="ChangeDate">
+</div>
 </form>
 
 

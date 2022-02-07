@@ -10,17 +10,35 @@ include("db.php");
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
 
+        <!-- alert box libraries -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
     <title>Members Page</title>
 </head>
-<body>
-    
-<h1>Your Open Tasks</h1>
+<body class="backgroundimage" style="color:white;">
+<a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg"  class="logoutAni"></a>
+
+<div class="tableTitles">
+    <div>
+    <h1>Your Open Tasks</h1>
+    </div>
+    <div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    style="background-color: transparent; border-color:transparent;">
+    <img src='images/collapse-up.svg' style="width: 33px;">
+    </a>
+    </div>
+  </div>
+  <div id='OpenTaskTable' class="collapse">
 
 <?php
     
     session_start();
     $member_id = $_SESSION["username"];; 
-    echo $member_id;
+
 
     $filterQuery="SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
     INNER JOIN task_members ON task_members.task_id=tasks.task_id
@@ -62,7 +80,7 @@ include("db.php");
                  echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
                  while($row2 = mysqli_fetch_array($names)){
-                     echo "<a>".$row2['name']."</a> ";
+                     echo "<a>".$row2['name']."</a></br> ";
                  }
                  echo "</td>";
                    //get members names for each task query and exectution
@@ -75,7 +93,7 @@ include("db.php");
                    echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
                  while($row2 = mysqli_fetch_array($names)){
-                     echo "<a>".$row2['name']."</a>";
+                     echo "<a>".$row2['name']."</a></br>";
                  }
                  echo "</td>";
     
@@ -93,16 +111,26 @@ include("db.php");
      
     
 ?>
+  </div>
 
+  <div class="tableTitles">
+    <div>
+    <h1>Tasks You Own</h1>
+    </div>
+    <div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable2" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    style="background-color: transparent; border-color:transparent;">
+    <img src='images/collapse-up.svg' style="width: 33px;">
+    </a>
+    </div>
+  </div>
 
-
-
-<h1>Tasks You Own</h1>
+  
 
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-
+<div id='OpenTaskTable2' class="collapse">
     
-    <input type="submit" name="close_task" value ="Close">
+   
 
 
 
@@ -149,7 +177,7 @@ include("db.php");
                  echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
                  while($row2 = mysqli_fetch_array($names)){
-                     echo "<a>".$row2['name']." </a> ";
+                     echo "<a>".$row2['name']." </a></br> ";
                  }
                  echo "</td>";
                    //get members names for each task query and exectution
@@ -162,7 +190,7 @@ include("db.php");
                    echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
                  while($row2 = mysqli_fetch_array($names)){
-                     echo "<a>".$row2['name']." </a>";
+                     echo "<a>".$row2['name']." </a></br>";
                  }
                  echo "</td>";
                  echo "<td><input type='radio' name='chosen_task' value=".$row['task_id']."></input></td>";
@@ -195,15 +223,22 @@ include("db.php");
             $query = mysqli_query($conn, $closeTask);
             
             echo "<meta http-equiv='refresh' content='0'>";
+
+            echo "<script>Swal.fire(
+                'Task Closed Succesfully!',
+                '',
+                'success'
+              )</script>";
         }
     
     }
      
     
 ?>
-
+ <input type="submit" name="close_task" value ="Close">
+ </div>
 </form>
-
+ 
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
