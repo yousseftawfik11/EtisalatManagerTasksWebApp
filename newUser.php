@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- alert box libraries -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
     <title>Create User</title>
 </head>
 <body class="backgroundimage">
@@ -22,27 +28,36 @@
       <a class="nav-item nav-link navBar-color" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link navBar-color " href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link navBar-color active" href="newUser.php">Add User</a>
-      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg"  class="logoutAni"></a>
+      <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg"  class="logoutAni"></a>
     </div>
   </div>
 </nav>
-<div class="CreateTask">
-    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="FormCenter" style="text-align:right" >
+<div class="CreateTask" style="padding-left: 80px;
+padding-right: 80px;
+">
+    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="FormCenter"  >
 
+    <h1>Add New Team Member</h1>
     <div class="fieldsSpacing">
+      <div>
         <label for="Username">Name</label>
-        <input type="text" name="Username" required>
+        </div>
+        <input type="text" name="Username" class="newUserInput" required>
     </div>
     <div class="fieldsSpacing">
+      <div>
         <label for="Email">Email</label>
-        <input type="email" name="userEmail" required>
+        </div>
+        <input type="email" name="userEmail"class="newUserInput" required>
     </div>
     <div class="fieldsSpacing">
+      <div>
         <label for="pass">Password</label>
-        <input type="password" name="pass" required>
+        </div>
+        <input type="password" name="pass" class="newUserInput" required>
     </div>
     <div>
-        <input type="submit" name="NewUser" value="Create User" style="width:100%" >
+        <input type="submit" name="NewUser" value="Add Team Member" class="TaskSubmit-btn" style="margin-top: 20px; margin-bottom:0px;" >
     </div>
 
     </form>
@@ -52,18 +67,36 @@ include('db.php');
     if(isset($_POST["NewUser"])){ //Add user to database
 
   
-        $name= mysqli_real_escape_string($conn,$_POST['Username']);
-        $password= mysqli_real_escape_string($conn,$_POST['pass']);
-        $email= mysqli_real_escape_string($conn,$_POST['userEmail']);
+        $name= strtolower(mysqli_real_escape_string($conn,$_POST['Username']));
+        $password= strtolower(mysqli_real_escape_string($conn,$_POST['pass']));
+        $email=strtolower( mysqli_real_escape_string($conn,$_POST['userEmail']));
 
+        //to make sure everything is in lower case in db
+        
+
+
+
+        $EmailQuery="SELECT email from team_members WHERE email='$email'";
+        if($result= mysqli_query($conn,$EmailQuery)){
+          if(mysqli_num_rows($result)>0){
+              echo "<script>Swal.fire({
+                icon: 'error',
+                title: 'Try Again!',
+                text: 'This Email Already Exists...'
+              })</script>";
+
+          }else{
         $query="INSERT INTO team_members(name,password,email) 
         VALUES('$name','$password','$email')";
         mysqli_query($conn,$query);
 
-        echo '<script>
-        alert("User Added")
-        </script>';
- 
+        echo "<script>Swal.fire(
+          'User Created Succesfully!',
+          '',
+          'success'
+        )</script>";
+          }
+        }
 
 
 

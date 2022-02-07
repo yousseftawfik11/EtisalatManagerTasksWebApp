@@ -6,8 +6,9 @@ include 'db.php';
 
 if(isset($_POST['submit'])){
 
-    $userMail = mysqli_real_escape_string($conn, $_POST['userMail']);
-	$password = mysqli_real_escape_string($conn, $_POST['Loginpass']);
+    $userMail = strtolower(mysqli_real_escape_string($conn, $_POST['userMail']));
+	$password = strtolower(mysqli_real_escape_string($conn, $_POST['Loginpass']));
+
 
     $ManagerLoginQuery = "SELECT * FROM managers WHERE email = '$userMail' AND password = '$password'";
     $ManagerCheck = mysqli_query($conn, $ManagerLoginQuery);
@@ -45,6 +46,17 @@ if(isset($_POST['submit'])){
 			session_start();
 			$_SESSION["username"] = $row2['member_id'];
 
+			if(isset($_POST["rememberme"])) { //set cookie if checkbox is checked
+				setcookie ("member_ID",  $userMail, time()+ (86400));
+				setcookie ("member_Password", $password, time()+ (86400));
+			}else { //delete cookie if checkbox is not checked
+				if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])) {
+					$CookieID = $_COOKIE["member_ID"];
+					$Cookiepassword = $_COOKIE["member_Password"];
+					setcookie("member_ID", $CookieID, time() - 1);
+					setcookie("member_Password", $Cookiepassword, time() - 1);
+				}
+			} 
 
 			echo '
 				<script>
@@ -81,11 +93,14 @@ if(isset($_POST['submit'])){
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
-<body class="backgroundimage">
+<body class="backgroundimage" style="background-color: #232625;">
 
-<div class="FlexContainer">
-<div>Welcome Back!</div>
+<div class="LoginBigContainer">
+<!-- <div>
+	<h1 class="welcomeText">Welcome Back!</h1>
+</div> -->
 
+<h1 class="welcomeText">Welcome Back Team!</h1>
 
 	<?php 
 	if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])){
@@ -93,19 +108,25 @@ if(isset($_POST['submit'])){
 		echo '
 		<div class="LoginContainer">
 				<form action="'.$_SERVER["PHP_SELF"].'" method="post">
-										<div>
+										<div class="loginSpacing">
 											<div>
-											<label for="userID" >Eamil</label>
+											<label for="userID" >Email</label>
+											</div>
+											<div>
 											<input id="userID" name="userMail" required value="'.$_COOKIE['member_ID'].'"type="text">
 											</div>
-										</div>
-										<div >
+											</div>
+										<div class="loginSpacing">
+										<div>
 											<label for="Loginpass" >Password</label>
+											</div>
+											<div>
 											<input id="Loginpass" name="Loginpass" required value="'.$_COOKIE["member_Password"].'"type="password" data-type="password">
+										</div>
 										</div>
 										<div>
 											<input id="rememberme" type="checkbox" name="rememberme" value="1" checked = "checked">
-											<label for="rememberme"><span ></span> Keep me Signed in</label>
+											<label for="rememberme" style="font-size:18px;font-size: 18px;"><span ></span> Keep me Signed in</label>
 										</div>
 										<div>
 											<input type="submit" name="submit" class="SignIn-btn" value="Sign In">
@@ -136,7 +157,7 @@ if(isset($_POST['submit'])){
 										</div>
 										<div class="loginSpacing" style="text-align:left">
 											<input id="rememberme" type="checkbox" name="rememberme" value="1">
-											<label for="rememberme"><span ></span> Keep me Signed in</label>
+											<label for="rememberme"style="font-size:18px;font-size: 18px;"><span ></span> Keep me Signed in</label>
 										</div>
 										<div>
 											<input type="submit" name="submit" class="SignIn-btn" value="Sign In">
