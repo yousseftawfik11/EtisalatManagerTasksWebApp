@@ -93,13 +93,14 @@ if(isset($_POST['submit'])){
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
-<body class="backgroundimage">
+<body class="backgroundimage" style="background-color: #232625;">
 
 <div class="LoginBigContainer">
-<div>
+<!-- <div>
 	<h1 class="welcomeText">Welcome Back!</h1>
-</div>
+</div> -->
 
+<h1 class="welcomeText">Welcome Back Team!</h1>
 
 	<?php 
 	if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])){
@@ -109,7 +110,7 @@ if(isset($_POST['submit'])){
 				<form action="'.$_SERVER["PHP_SELF"].'" method="post">
 										<div class="loginSpacing">
 											<div>
-											<label for="userID" >Eamil</label>
+											<label for="userID" >Email</label>
 											</div>
 											<div>
 											<input id="userID" name="userMail" required value="'.$_COOKIE['member_ID'].'"type="text">
@@ -125,7 +126,7 @@ if(isset($_POST['submit'])){
 										</div>
 										<div>
 											<input id="rememberme" type="checkbox" name="rememberme" value="1" checked = "checked">
-											<label for="rememberme"><span ></span> Keep me Signed in</label>
+											<label for="rememberme" style="font-size:18px;font-size: 18px;"><span ></span> Keep me Signed in</label>
 										</div>
 										<div>
 											<input type="submit" name="submit" class="SignIn-btn" value="Sign In">
@@ -156,7 +157,7 @@ if(isset($_POST['submit'])){
 										</div>
 										<div class="loginSpacing" style="text-align:left">
 											<input id="rememberme" type="checkbox" name="rememberme" value="1">
-											<label for="rememberme"><span ></span> Keep me Signed in</label>
+											<label for="rememberme"style="font-size:18px;font-size: 18px;"><span ></span> Keep me Signed in</label>
 										</div>
 										<div>
 											<input type="submit" name="submit" class="SignIn-btn" value="Sign In">
