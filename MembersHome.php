@@ -28,7 +28,7 @@ include("db.php");
     <div>
     <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
     style="background-color: transparent; border-color:transparent;">
-    <img src='images/collapse-up.svg' style="width: 33px;">
+    <img src='images/down-arrow.svg' style="width: 33px;">
     </a>
     </div>
   </div>

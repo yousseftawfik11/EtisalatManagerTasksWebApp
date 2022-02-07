@@ -45,12 +45,16 @@ body{
 }
 .SignIn-btn{
   width: 100%;
-  border-radius: 16px;
-  background-color: #3cb56c;
+  border-radius: 9px;
+  background-color: #38a53e;
   border-color: transparent;
   height: 40px;
   color: white;
+  transition: ease-in-out 0.3s;
+}
 
+.SignIn-btn:hover{
+  background-color: #21d500;
 }
 
 h1{
@@ -187,7 +191,10 @@ table{
 
 }
 .welcomeText{
-  margin-top: 50%;
+  margin-top: -27px;
+  margin-right: 17px;
+  margin-left: -20px;
+  text-align: center;
 }
 .newUserInput{
   width: 100%;
@@ -197,7 +204,7 @@ table{
 }
 
 .LoginBigContainer{
-  display: flex;
+  /* display: flex; */
   width: 680px;
   border-radius: 15px;
   padding: 60px;
@@ -207,14 +214,14 @@ table{
 
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
-  border: 1px solid rgb(60 181 108);
+  border: 1px solid #7aa53f;
   transition: all .2s;
-  box-shadow: 12px 12px 2px 1px rgb(60 181 108);
+  box-shadow: 12px 12px 2px 1px #7aa53f;
   
 }
  
 .LoginBigContainer:hover {
-  box-shadow: -12px 12px 2px -1px rgb(60 181 108);
+  box-shadow: -12px 12px 2px -1px #7aa53f;
  }
 
 /* From cssbuttons.io by @Zena4L */
