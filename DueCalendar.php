@@ -70,7 +70,7 @@
       <a class="nav-item nav-link navBar-color" href="TasksHistory.php">History Tasks</a>
       <a class="nav-item nav-link navBar-color active" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link navBar-color" href="newUser.php">Add User</a>
-      <a class="nav-item nav-link " href="logout.php"><img src="images/logout.svg"  class="logoutAni"></a>
+      <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg"  class="logoutAni"></a>
     </div>
   </div>
 </nav>

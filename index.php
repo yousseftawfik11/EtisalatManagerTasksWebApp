@@ -6,8 +6,9 @@ include 'db.php';
 
 if(isset($_POST['submit'])){
 
-    $userMail = mysqli_real_escape_string($conn, $_POST['userMail']);
-	$password = mysqli_real_escape_string($conn, $_POST['Loginpass']);
+    $userMail = strtolower(mysqli_real_escape_string($conn, $_POST['userMail']));
+	$password = strtolower(mysqli_real_escape_string($conn, $_POST['Loginpass']));
+
 
     $ManagerLoginQuery = "SELECT * FROM managers WHERE email = '$userMail' AND password = '$password'";
     $ManagerCheck = mysqli_query($conn, $ManagerLoginQuery);
@@ -45,6 +46,17 @@ if(isset($_POST['submit'])){
 			session_start();
 			$_SESSION["username"] = $row2['member_id'];
 
+			if(isset($_POST["rememberme"])) { //set cookie if checkbox is checked
+				setcookie ("member_ID",  $userMail, time()+ (86400));
+				setcookie ("member_Password", $password, time()+ (86400));
+			}else { //delete cookie if checkbox is not checked
+				if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])) {
+					$CookieID = $_COOKIE["member_ID"];
+					$Cookiepassword = $_COOKIE["member_Password"];
+					setcookie("member_ID", $CookieID, time() - 1);
+					setcookie("member_Password", $Cookiepassword, time() - 1);
+				}
+			} 
 
 			echo '
 				<script>
@@ -83,8 +95,10 @@ if(isset($_POST['submit'])){
 </head>
 <body class="backgroundimage">
 
-<div class="FlexContainer">
-<div>Welcome Back!</div>
+<div class="LoginBigContainer">
+<div>
+	<h1 class="welcomeText">Welcome Back!</h1>
+</div>
 
 
 	<?php 
@@ -93,15 +107,21 @@ if(isset($_POST['submit'])){
 		echo '
 		<div class="LoginContainer">
 				<form action="'.$_SERVER["PHP_SELF"].'" method="post">
-										<div>
+										<div class="loginSpacing">
 											<div>
 											<label for="userID" >Eamil</label>
+											</div>
+											<div>
 											<input id="userID" name="userMail" required value="'.$_COOKIE['member_ID'].'"type="text">
 											</div>
-										</div>
-										<div >
+											</div>
+										<div class="loginSpacing">
+										<div>
 											<label for="Loginpass" >Password</label>
+											</div>
+											<div>
 											<input id="Loginpass" name="Loginpass" required value="'.$_COOKIE["member_Password"].'"type="password" data-type="password">
+										</div>
 										</div>
 										<div>
 											<input id="rememberme" type="checkbox" name="rememberme" value="1" checked = "checked">
