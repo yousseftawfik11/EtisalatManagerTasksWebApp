@@ -83,7 +83,7 @@ if(isset($_POST["submit"])){
     $getTaskID= "SELECT MAX(task_id) FROM tasks";
     $result= mysqli_query($conn, $getTaskID);
     $value= mysqli_fetch_row($result);
-    echo $value[0];
+    // echo $value[0];
 
 
 
