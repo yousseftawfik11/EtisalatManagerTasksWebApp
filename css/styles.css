@@ -151,8 +151,8 @@ table{
   width: 100%;
   margin-bottom: 24px;
   font-family: 'Montserrat', sans-serif;
-      background: #e55e5e;
-  color: white;
+      background: #38a53e;
+  color: rgb(236, 232, 232);
   border-radius: 8px;
   font-size: 23px;
   border-color: transparent;
@@ -160,8 +160,8 @@ table{
 }
 
 .TaskSubmit-btn:hover{
-  background: #ef0101;
-
+color: white;
+box-shadow: 0 5px 15px #38a53e;
 }
 .fieldsSpacing{
   margin-bottom: 12px;
@@ -179,7 +179,7 @@ table{
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 8px;
-  background-color: #3b3f3e;
+  background-color: #282828;
   /* display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -282,5 +282,149 @@ table{
 .submit_btns:hover{
 background-color: #b8e0d9;
 color: black;
+
+}
+
+.fieldsSpacing2{
+  margin-bottom: 12px;
+  margin-top: 30px;
+}
+
+.textAreaSize{
+  height:10em;
+  width: 27em;
+}
+
+
+.lineBreak{
+  display: none;
+}
+
+.AddUserPadding{
+  padding-left: 80px;
+padding-right: 80px;
+}
+
+#footer {
+  position:fixed;
+  bottom:0;
+  width:100%;
+}
+
+/* media query start */
+@media only screen and (min-width: 992px) and (max-width: 1300px) {
+
+  #footer{
+
+      bottom: -84px;
+
+  }
+
+  .LoginBigContainer {
+    /* display: flex; */
+    width: 583px;
+    border-radius: 15px;
+    padding: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 31px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid #7aa53f;
+    transition: all .2s;
+    box-shadow: 12px 12px 2px 1px #7aa53f;
+    padding-bottom: 40px;
+    
+}
+}
+
+@media only screen and (max-width: 600px) {
+
+  .titleInput {
+    width: 270px;
+}
+.FlexContainer {
+  display:block;
+  background-color: #eeeeee;
+}
+.textAreaSize {
+  height: 10em;
+  width: 17em;
+}
+.rightPart {
+   padding-left: 0px;
+   margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+}
+.CreateTask {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid;
+  margin-top: 3%;
+  margin-bottom: 4%;
+  border-radius: 50px;
+  background-color: #eeeeee;
+  border-color: transparent;
+  padding: 0px;
+  padding-left: 14px;
+  padding-right: 14px;
+
+}
+
+#createTitle{
+  font-size: 1.5rem;
+}
+
+.TaskSubmit-btn {
+  width: 88%;
+  margin-bottom: 24px;
+  font-family: 'Montserrat', sans-serif;
+  background: #38a53e;
+  color: rgb(236, 232, 232);
+  border-radius: 8px;
+  font-size: 23px;
+  border-color: transparent;
+  transition: ease-in-out 0.3s;
+  margin-left: 16px;
+}
+
+
+.lineBreak{
+display: inline;
+}
+
+#PageTitle{
+  font-size: 20px;
+}
+.AddUserPadding{
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+
+.LoginBigContainer {
+  /* display: flex; */
+  width: fit-content;
+  border-radius: 15px;
+  padding: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 14px;
+  border: 1px solid #7aa53f;
+  transition: all .2s;
+  box-shadow: 12px 12px 2px 1px transparent;
+  padding-left: 35px;
+    padding-right: 33px;
+}
+.welcomeText{
+  font-size: 25px;
+  margin-right: -20px;
+}
 
 }
