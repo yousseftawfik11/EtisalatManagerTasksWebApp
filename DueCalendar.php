@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
+  echo '
+  <script>
+  window.location.href="index.php";
+  </script>
+';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

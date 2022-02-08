@@ -1,7 +1,17 @@
 <?php 
 
+session_start();
+
 include 'db.php';
 include 'AddTask.php';
+
+if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
+  echo '
+  <script>
+  window.location.href="index.php";
+  </script>
+';
+}
 
 ?>
 

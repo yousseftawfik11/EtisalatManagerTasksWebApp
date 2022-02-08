@@ -37,6 +37,14 @@ include("db.php");
 <?php
     
     session_start();
+    if(!isset($_SESSION["username"])||$_SESSION["username"]==5000){
+        echo '
+        <script>
+        window.location.href="index.php";
+        </script>
+      ';
+    }
+
     $member_id = $_SESSION["username"];; 
 
 
@@ -210,9 +218,13 @@ include("db.php");
     if(isset($_POST["close_task"])){ //update info of tasks in database
 
         if(empty($_POST['chosen_task'])){
-            echo '<script>
-            alert("Please choose task to close")
-            </script>';
+            echo "<script>Swal.fire({
+                icon: 'error',
+                title: 'Try Again!',
+                text: 'Please choose task to close',
+                confirmButtonColor: '#f27474',
+                confirmButtonText: 'OK'
+              })</script>";
         }else{
 
             $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);       
@@ -222,20 +234,24 @@ include("db.php");
 
             $query = mysqli_query($conn, $closeTask);
             
-            echo "<meta http-equiv='refresh' content='0'>";
-
-            echo "<script>Swal.fire(
-                'Task Closed Succesfully!',
-                '',
-                'success'
-              )</script>";
+            echo "<script>Swal.fire({
+                title: 'Task Closed Successfully!',
+                icon: 'success',
+                confirmButtonColor: '#38a53e',
+                confirmButtonText: 'OK'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href='MembersHome.php';
+              
+                }
+              })</script>";
         }
     
     }
      
     
 ?>
- <input type="submit" name="close_task" value ="Close">
+ <input type="submit" name="close_task" class="submit_btns" value ="Close">
  </div>
 </form>
  

@@ -1,16 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+</head>
+<body>
+    
+</body>
+</html>
 
 <?php
 
 if(isset($_POST["submit"])){
 
     if(empty($_POST["check_list_member"])){
-        echo '<script>
-        alert("Failed to create task, please choose members")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Failed to create task, please choose members'
+          })</script>";
     }elseif(empty($_POST["check_list_leader"])){
-        echo '<script>
-        alert("Failed to create task, please choose leaders")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Failed to create task, please choose leaders'
+          })</script>";
     }else{
 
         $memberslist= $_POST["check_list_member"];
@@ -37,15 +57,27 @@ if(isset($_POST["submit"])){
     $query = mysqli_query($conn, $addTask);
 
     if ($query) {
-        echo "<script>alert('Task created successfully');</script>";
-        echo '
-        <script>
-        window.location.href="TasksView.php";
-        </script>
-      ';
+
+    //     echo '
+    //     <script>
+    //     window.location.href="TasksView.php";
+    //     </script>
+    //   ';
+    echo "<script>Swal.fire({
+        title: 'Task Created Succesfully!',
+        icon: 'success',
+        confirmButtonColor: '#38a53e',
+        confirmButtonText: 'OK'
+      })</script>";
 
     } else {
-        echo "<script>alert('Failed to create task, please contact website admin');</script>";
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Failed to create task, please contact website admin',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }
 
     $getTaskID= "SELECT MAX(task_id) FROM tasks";
