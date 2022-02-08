@@ -11,7 +11,8 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
     <script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
+
     <title>Create User</title>
 </head>
 <body class="backgroundimage">
@@ -32,32 +33,30 @@
     </div>
   </div>
 </nav>
-<div class="CreateTask" style="padding-left: 80px;
-padding-right: 80px;
-">
+<div class="CreateTask AddUserPadding">
     <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="FormCenter"  >
 
-    <h1>Add New Team Member</h1>
-    <div class="fieldsSpacing">
+    <h1 id="PageTitle">Add New Team Member</h1>
+    <div class="fieldsSpacing2">
       <div>
         <label for="Username">Name</label>
         </div>
         <input type="text" name="Username" class="newUserInput" required>
     </div>
-    <div class="fieldsSpacing">
+    <div class="fieldsSpacing2">
       <div>
         <label for="Email">Email</label>
         </div>
         <input type="email" name="userEmail"class="newUserInput" required>
     </div>
-    <div class="fieldsSpacing">
+    <div class="fieldsSpacing2">
       <div>
         <label for="pass">Password</label>
         </div>
         <input type="password" name="pass" class="newUserInput" required>
     </div>
     <div>
-        <input type="submit" name="NewUser" value="Add Team Member" class="TaskSubmit-btn" style="margin-top: 20px; margin-bottom:0px;" >
+        <input type="submit" name="NewUser" value="Add Member" class="TaskSubmit-btn" style="margin-top: 20px; margin-bottom:0px;" >
     </div>
 
     </form>

@@ -44,7 +44,7 @@ include 'AddTask.php';
 <div class="CreateTask FlexContainer">
 <div class="LeftPart">
   
-<h1 style="text-align: center; margin-top:18px;">Create a new task</h1>
+<h1 id="createTitle" style="text-align: center; margin-top:18px;">Create a new task</h1>
 
 
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" class="FormCenter">
@@ -59,7 +59,7 @@ include 'AddTask.php';
     <label for="TaskInfo" class="NewTaskLabel">Task Info</label>
     </div>
     <!-- <input type="text" name="TaskInfo" class="contentInput inputFeildsFont" required> -->
-    <textarea name="TaskInfo" rows="8" cols="57">
+    <textarea name="TaskInfo" class="textAreaSize">
     </textarea>
     </div>
     <div class="fieldsSpacing">
@@ -83,7 +83,7 @@ include 'AddTask.php';
 
             while($row= mysqli_fetch_assoc($result1)){
 
-                echo '<input type="checkbox" name="check_list_member[]" value="'.$row["member_id"].'" ><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label>' ;                
+                echo '<input type="checkbox" name="check_list_member[]" value="'.$row["member_id"].'" ><label id="content1" class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label><span class="lineBreak"></br></span>' ;                
             }
             echo'</div>';
         }else{
@@ -111,7 +111,7 @@ include 'AddTask.php';
 
             while($row= mysqli_fetch_assoc($result1)){
 
-                echo '<input type="checkbox" name="check_list_leader[]" value="'.$row["member_id"].'" ><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label>' ;                
+                echo '<input type="checkbox" name="check_list_leader[]" value="'.$row["member_id"].'" ><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label><span class="lineBreak"></br></span>' ;                
             }
             echo'</div>';
         }else{
