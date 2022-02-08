@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
+    echo '
+    <script>
+    window.location.href="index.php";
+    </script>
+  ';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -181,9 +191,13 @@ if($result= mysqli_query($conn,$sql)){
 if(isset($_POST["OpenClosedTask"])){ //Re-open closed tasks
 
     if(empty($_POST['chosen_task'])){
-        echo '<script>
-        alert("Please choose task to re-open")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose task to re-open',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }else{
         $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);       
 
@@ -193,11 +207,12 @@ if(isset($_POST["OpenClosedTask"])){ //Re-open closed tasks
         $query = mysqli_query($conn, $closeTask);
 
         // echo "<meta http-equiv='refresh' content='0'>";
-        echo "<script>Swal.fire(
-            'Task Reopened Successfully',
-            '',
-            'success'
-          )</script>";
+        echo "<script>Swal.fire({
+            title: 'Task Reopened Successfully!',
+            icon: 'success',
+            confirmButtonColor: '#38a53e',
+            confirmButtonText: 'OK'
+          })</script>";
     }
 
 }
@@ -242,9 +257,11 @@ if($result= mysqli_query($conn,$query)){
 if(isset($_POST["namesFilter"])){
 
     if(empty($_POST["memberList"])){
-        echo '<script>
-        alert("Failed to show tasks, please choose member")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Failed to show tasks, please choose member'
+          })</script>";
     }else{
 
         $member_id=$_POST["memberList"];

@@ -1,5 +1,13 @@
 <?php
 include('db.php');
+session_start();
+if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
+    echo '
+    <script>
+    window.location.href="index.php";
+    </script>
+  ';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +17,11 @@ include('db.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
+        <!-- alert box libraries -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
     <title>History</title>
 </head>
 <body class="backgroundimage" style="color:white;">
@@ -75,7 +88,7 @@ if($result= mysqli_query($conn,$sql)){
         }
     }
 
-    echo '<input type="submit" name="GetHistory" value="Get Due Dates History">';
+    echo '<input type="submit" name="GetHistory" class="submit_btns" value="Get Due Dates History">';
     echo "</div>";
 ?>
 
@@ -146,7 +159,7 @@ $sql="SELECT task_id,Task_title,Content,priority FROM tasks WHERE status='0'";
              
             }
         }
-        echo '<input type="submit" name="OldContent" value="Get Content History">';
+        echo '<input type="submit" name="OldContent" class="submit_btns" value="Get Content History">';
         echo '</div>'
 
 ?>
@@ -158,9 +171,13 @@ $sql="SELECT task_id,Task_title,Content,priority FROM tasks WHERE status='0'";
 if(isset($_POST["OldContent"])){
 
     if(empty($_POST['History_tasks_list_content'])){
-        echo '<script>
-        alert("Please choose task to view its history")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose task to view its history',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }else{
 
     $task_id= mysqli_real_escape_string($conn,$_POST['History_tasks_list_content']);
@@ -220,9 +237,13 @@ if(isset($_POST["OldContent"])){
 if(isset($_POST["GetHistory"])){
 
     if(empty($_POST['History_tasks_list'])){
-        echo '<script>
-        alert("Please choose task to view its history")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose task to view its history',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }else{
 
     $task_id= mysqli_real_escape_string($conn,$_POST['History_tasks_list']);

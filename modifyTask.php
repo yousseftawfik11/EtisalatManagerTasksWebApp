@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
+        <!-- alert box libraries -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
 
     <title>Modify Tasks</title>
 </head>
@@ -33,6 +38,13 @@
 <?php
 include 'db.php';   
 session_start();
+if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
+    echo '
+    <script>
+    window.location.href="index.php";
+    </script>
+  ';
+}
 ?>
 
 <div class="tableTitles">
@@ -124,9 +136,9 @@ if(mysqli_num_rows($result1)>0){
 ?>
 <input type="button" onclick=selectsLeaders() value="Select All"/> 
     <input type="button" onclick=deSelectLeaders() value="Deselect All"/><br>   
-    <input type="submit" name="Change_Leader" value="Change Leaders">
-    <input type="submit" name="Change_Members" value ="Change Members">
-<input type="submit" name="load" value="Change"><br>
+    <input type="submit" name="Change_Leader" class="submit_btns" value="Change Leaders">
+    <input type="submit" name="Change_Members" class="submit_btns" value ="Change Members">
+<input type="submit" name="load" class="submit_btns" value="Change"><br>
 </div>
 <hr>
 
@@ -137,9 +149,13 @@ if(mysqli_num_rows($result1)>0){
 if(isset($_POST["load"])){ //loading info into the change textboxes and changing data in tasks
     
     if(empty($_POST['chosen_task'])){
-        echo '<script>
-        alert("Please choose task to edit")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose task to edit',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }else{
 
         $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
@@ -164,7 +180,7 @@ if(isset($_POST["load"])){ //loading info into the change textboxes and changing
                       <option value="4">Very High</option>
                     </select>
                     <br>
-                    <input type="submit" name="edit">
+                    <input type="submit" class="submit_btns" name="edit">
                     </form>';
 
                 }
@@ -201,8 +217,19 @@ if(isset($_POST["edit"])){ //update info of tasks in database
     WHERE task_id = '$task_id'";
     $query = mysqli_query($conn, $addTask);
     
-    echo "<meta http-equiv='refresh' content='0'>";
     
+    echo "<script>Swal.fire({
+  title: 'Task Edited Successfully!',
+  icon: 'success',
+  confirmButtonColor: '#38a53e',
+  confirmButtonText: 'OK'
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href='modifyTask.php';
+
+  }
+})</script>";
+
 
 }
 
@@ -212,13 +239,22 @@ if(isset($_POST["edit"])){ //update info of tasks in database
 if(isset($_POST["Change_Leader"])){
 
     if(empty($_POST['chosen_task'])){
-        echo '<script>
-        alert("Please choose task to edit")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose task to edit',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
+       
     }elseif(empty($_POST['check_list_leaders'])){
-        echo '<script>
-        alert("Please choose new leaders")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose new leaders',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }else{
     
         $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
@@ -232,11 +268,19 @@ if(isset($_POST["Change_Leader"])){
             $addTask = "INSERT INTO task_leaders(leader_id, task_id) VALUES(".$leaderslist[$i].",".$task_id.")";
             $query = mysqli_query($conn, $addTask);
             if ($query) {
-                echo "team members added";
-           }
+                echo "<script>Swal.fire({
+                    title: 'Task Edited Successfully!',
+                    icon: 'success',
+                    confirmButtonColor: '#38a53e',
+                    confirmButtonText: 'OK'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href='modifyTask.php';
+                  
+                    }
+                  })</script>";           }
      
         }
-        echo "<meta http-equiv='refresh' content='0'>";
 
 
     }
@@ -246,13 +290,21 @@ if(isset($_POST["Change_Leader"])){
 if(isset($_POST["Change_Members"])){ //adding button to change members
 
     if(empty($_POST['chosen_task'])){
-        echo '<script>
-        alert("Please choose task to edit")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose task to edit',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }elseif(empty($_POST['check_list_leaders'])){
-        echo '<script>
-        alert("Please choose new leaders")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose new leaders',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }else{
 
         $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
@@ -266,11 +318,21 @@ if(isset($_POST["Change_Members"])){ //adding button to change members
             $addTask = "INSERT INTO task_members(member_id, task_id) VALUES(".$leaderslist[$i].",".$task_id.")";
             $query = mysqli_query($conn, $addTask);
             if ($query) {
-                echo "team members added";
-           }
+                echo "<script>Swal.fire({
+                    title: 'Task Edited Successfully!',
+                    icon: 'success',
+                    confirmButtonColor: '#38a53e',
+                    confirmButtonText: 'OK'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href='modifyTask.php';
+                  
+                    }
+                  })</script>";
+            }
      
         }
-        echo "<meta http-equiv='refresh' content='0'>";
+
 
 
 
@@ -283,9 +345,13 @@ if(isset($_POST["Change_Members"])){ //adding button to change members
 if(isset($_POST["ChangeDate"])){
 
     if(empty($_POST['tasks_list'])){
-        echo '<script>
-        alert("Please choose task to edit")
-        </script>';
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose task to edit',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
     }else{
 
     //task id from table
@@ -314,6 +380,13 @@ if(isset($_POST["ChangeDate"])){
     //update the task record with new due date
         $updateDue="UPDATE tasks SET due='$newDue' WHERE task_id='$task_id'";
         mysqli_query($conn,$updateDue);
+
+        echo "<script>Swal.fire({
+            title: 'Date Updated Successfully!',
+            icon: 'success',
+            confirmButtonColor: '#38a53e',
+            confirmButtonText: 'OK'
+          })</script>";
         
     }
 }
@@ -337,7 +410,7 @@ if(isset($_POST["ChangeDate"])){
 
 <label for="new_due">New Due Date</label>
 <input type="date" name="new_due" required>
-<input type="submit" name="ChangeDate">
+<input type="submit" class="submit_btns" name="ChangeDate">
 
 <?php
 
