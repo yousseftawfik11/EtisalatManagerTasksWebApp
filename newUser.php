@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
+    echo '
+    <script>
+    window.location.href="index.php";
+    </script>
+  ';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,22 +89,25 @@ include('db.php');
         $EmailQuery="SELECT email from team_members WHERE email='$email'";
         if($result= mysqli_query($conn,$EmailQuery)){
           if(mysqli_num_rows($result)>0){
-              echo "<script>Swal.fire({
-                icon: 'error',
-                title: 'Try Again!',
-                text: 'This Email Already Exists...'
-              })</script>";
+            echo "<script>Swal.fire({
+              icon: 'error',
+              title: 'Try Again!',
+              text: 'This Email Already Exists...',
+              confirmButtonColor: '#f27474',
+              confirmButtonText: 'OK'
+            })</script>";
 
           }else{
         $query="INSERT INTO team_members(name,password,email) 
         VALUES('$name','$password','$email')";
         mysqli_query($conn,$query);
 
-        echo "<script>Swal.fire(
-          'User Created Succesfully!',
-          '',
-          'success'
-        )</script>";
+        echo "<script>Swal.fire({
+          title: 'User Created Successfully!',
+          icon: 'success',
+          confirmButtonColor: '#38a53e',
+          confirmButtonText: 'OK'
+        })</script>";
           }
         }
 
