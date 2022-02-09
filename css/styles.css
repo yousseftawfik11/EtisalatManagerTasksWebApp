@@ -192,6 +192,8 @@ box-shadow: 0 5px 15px #38a53e;
   margin-right: 17px;
   margin-left: -20px;
   text-align: center;
+  font-family: 'Montserrat', sans-serif !important;
+
 }
 .newUserInput{
   width: 100%;
