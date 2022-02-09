@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+ 
         <!-- alert box libraries -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -16,7 +21,7 @@
 </head>
 <body class="backgroundimage" style="color:white;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color"  style="background-color: #3b6d4f !important;">
-  <a class="navbar-brand navBar-color" href="#">Tornado</a>
+<a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -123,21 +128,24 @@ if($result= mysqli_query($conn,$sql)){
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 }
 
+echo "<div style='margin-left:23px;'>";
+
 $sqlQMembers="SELECT * FROM team_members";
 $result1= mysqli_query($conn, $sqlQMembers);
 if(mysqli_num_rows($result1)>0){
     while($row= mysqli_fetch_assoc($result1)){
-        echo '<input type="checkbox" name="check_list_leaders[]" value="'.$row["member_id"].'"><label>'.$row["name"].'</label> <br>' ;                
+        echo '<input type="checkbox" name="check_list_leaders[]" value="'.$row["member_id"].'"><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label> <br>' ;                
     }
 }else{
     echo "0 records";
 }
+echo "</div>";
 
 ?>
-<input type="button" onclick=selectsLeaders() value="Select All"/> 
-    <input type="button" onclick=deSelectLeaders() value="Deselect All"/><br>   
-    <input type="submit" name="Change_Leader" class="submit_btns" value="Change Leaders">
-    <input type="submit" name="Change_Members" class="submit_btns" value ="Change Members">
+<input type="button" onclick=selectsLeaders() class="submit_btns" value="Select All"/> 
+    <input type="button" onclick=deSelectLeaders() class="submit_btns" value="Deselect All"/> 
+    <input type="submit" name="Change_Leader" class="submit_btns" value="Change Leaders" style="width: fit-content;">
+    <input type="submit" name="Change_Members" class="submit_btns" value ="Change Members" style="width: fit-content;">
 <input type="submit" name="load" class="submit_btns" value="Change"><br>
 </div>
 <hr>
@@ -159,28 +167,30 @@ if(isset($_POST["load"])){ //loading info into the change textboxes and changing
     }else{
 
         $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
-        
+        echo "<div style='margin-left:23px;'>";
+
         $_SESSION["task_id"] = $task_id;
         $sql="SELECT Task_title,priority,Content FROM tasks WHERE task_id = ".$task_id;
         if($result= mysqli_query($conn,$sql)){
             if(mysqli_num_rows($result)>0){
                 while($row = mysqli_fetch_array($result)){
                     echo '<form action="'.$_SERVER["PHP_SELF"].'" method="post">
-                    <label for="TaskTitle">Task title</label>
+                    <label for="TaskTitle">Task title</label></br>
                     <input type="text" name="TaskTitle" required value="'.$row["Task_title"].'"><br>
 
-                    <label for="TaskInfo">Task Info</label>
-                    <input type="text" name="TaskInfo" required value="'.$row["Content"].'"><br>
-
-                    <label for="priority">Priority: </label>
+                    <label for="TaskInfo">Task Info</label></br>
+                    <textarea name="TaskInfo" class="textAreaSize">'.$row["Content"].'</textarea><br>
+                    <label for="priority">Priority: </label></br>
                     <select name="priority">
                       <option value="1">Low</option>
                       <option value="2">Medium</option>
                       <option value="3">High</option>
                       <option value="4">Very High</option>
                     </select>
+                    </div>
                     <br>
-                    <input type="submit" class="submit_btns" name="edit">
+                    <input type="submit" class="submit_btns" value="Edit" name="edit" style="margin-left:24px;">
+                    
                     </form>';
 
                 }
@@ -408,9 +418,9 @@ if(isset($_POST["ChangeDate"])){
 
   <div id="OpenTaskTable2" class="collapse">
 
-<label for="new_due">New Due Date</label>
-<input type="date" name="new_due" required>
-<input type="submit" class="submit_btns" name="ChangeDate">
+<label for="new_due" style="margin-left: 23px;">New Due Date</label>
+<input type="date" name="new_due"  required>
+<input type="submit" class="submit_btns" value="Edit" name="ChangeDate">
 
 <?php
 

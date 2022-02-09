@@ -2,7 +2,48 @@
 
 include 'db.php';
 
-// AY HAGA
+// AY HAG
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+	<link rel="stylesheet" href="css/styles.css">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+ 
+    <!-- alert box libraries -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+</head>
+<body class="backgroundimage" style="background-color: #282828;">
+
+<div class="LoginBigContainer">
+<!-- <div>
+	<h1 class="welcomeText">Welcome Back!</h1>
+</div> -->
+<?php
 
 if(isset($_POST['submit'])){
 
@@ -60,45 +101,23 @@ if(isset($_POST['submit'])){
 
 			echo '
 				<script>
-				window.location.href="MembersHome.php";
+				window.location.href="membersdash.php";
 				</script>
 			  ';
 
 		} else{
-			echo 'failed';
+			echo "<script>Swal.fire({
+				icon: 'error',
+				title: 'Try Again!',
+				text: 'Wrong email or password...',
+				confirmButtonColor: '#f27474',
+				confirmButtonText: 'OK'
+			  })</script>";
 		}
 
 
 }
-
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks</title>
-	<link rel="stylesheet" href="css/styles.css">
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-</head>
-<body class="backgroundimage" style="background-color: #282828;">
-
-<div class="LoginBigContainer">
-<!-- <div>
-	<h1 class="welcomeText">Welcome Back!</h1>
-</div> -->
 
 <h1 class="welcomeText">Welcome Back Team!</h1>
 

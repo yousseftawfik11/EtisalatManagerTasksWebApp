@@ -10,7 +10,7 @@
     <script src="sweetalert2.min.js"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
-<body class="backgroundimage" style="color:white;">
+<body class="backgroundimage">
     
 </body>
 </html>
@@ -83,7 +83,7 @@ if(isset($_POST["submit"])){
     $getTaskID= "SELECT MAX(task_id) FROM tasks";
     $result= mysqli_query($conn, $getTaskID);
     $value= mysqli_fetch_row($result);
-    // echo $value[0];
+
 
 
 
