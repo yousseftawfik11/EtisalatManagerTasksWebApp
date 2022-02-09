@@ -5,9 +5,6 @@ body{
   /* background-color: rgba(79, 171, 199, 0.486) !important; */
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 .active{
   font-weight: 800 !important;
@@ -100,7 +97,7 @@ table{
   width: 400px;
 }
 .titleInput{
-  width: 434px;
+  width: 472px;
 }
 .FormCenter{
   margin-right: auto;
@@ -292,7 +289,7 @@ color: black;
 
 .textAreaSize{
   height:10em;
-  width: 27em;
+  width: 29.5em;
 }
 
 
@@ -309,6 +306,52 @@ padding-right: 80px;
   position:fixed;
   bottom:0;
   width:100%;
+}
+
+
+#cardsContainer{
+  display: flex;
+  width:800px;
+  border: solid 1px white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  justify-content: space-around;
+  background-color: white;
+  border-radius: 10px;
+  padding: 40px;
+
+}
+.card1, .card2{
+  width:287px;
+  transition: ease-in-out 0.3s;
+}
+
+.cardsLabel{
+  text-align: center;
+  text-decoration: none !important;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+font-size: 25px;
+font-weight: 500px;
+transition: ease-in-out 0.3s;
+}
+.cardsLabel:hover{
+  font-size: 30px;
+}
+.logosize{
+  width: 40px;
+}
+.logoText{
+  font-family: 'Dancing Script', cursive;
+  font-size: 15px;
+}
+
+.backIcon{
+  transition: ease-in-out 0.3s;
+}
+.backIcon:hover{
+  width:30px;
 }
 
 /* media query start */
@@ -426,5 +469,20 @@ display: inline;
   font-size: 25px;
   margin-right: -20px;
 }
+#cardsContainer {
+  display: block;
+  width: fit-content;
+  border: solid 1px white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  justify-content: space-around;
+  background-color: white;
+  border-radius: 10px;
+  padding: 24px;}
+
+  .card1{
+    margin-bottom: 20px;
+  }
 
 }
