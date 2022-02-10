@@ -67,21 +67,20 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
       <div class="labelSpace">
        <label for="TaskTitle" class="NewTaskLabel">Task title</label>
       </div>
-      <input type="text" name="TaskTitle" class="titleInput inputFeildsFont" required>
+      <input type="text" name="TaskTitle" class="titleInput inputFeildsFont" required value="<?php if (isset($_POST['TaskTitle'])) echo $_POST['TaskTitle']; ?>">
     </div>
     <div class="fieldsSpacing">
       <div  class="labelSpace">
     <label for="TaskInfo" class="NewTaskLabel">Task Info</label>
     </div>
     <!-- <input type="text" name="TaskInfo" class="contentInput inputFeildsFont" required> -->
-    <textarea name="TaskInfo" class="textAreaSize" required>
-    </textarea>
+    <textarea name="TaskInfo" class="textAreaSize" required><?php if (isset($_POST['TaskInfo'])) echo $_POST['TaskInfo']; ?></textarea>
     </div>
     <div class="fieldsSpacing">
       <div  class="labelSpace">
     <label for="TaskDue" class="NewTaskLabel">Task Due</label>
       </div>
-    <input type="date" name="TaskDue" class="titleInput">
+    <input type="date" name="TaskDue" class="titleInput" value="<?php if (isset($_POST['TaskDue'])) echo $_POST['TaskDue']; ?>">
     </div>
 <div class="fieldsSpacing">
     <div>

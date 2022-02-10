@@ -68,10 +68,15 @@ if(isset($_POST["submit"])){
     //     </script>
     //   ';
     echo "<script>Swal.fire({
-        title: 'Task Created Succesfully!',
+        title: 'Task Created Successfully!',
         icon: 'success',
         confirmButtonColor: '#38a53e',
         confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href='TasksView.php';
+      
+        }
       })</script>";
 
     } else {
