@@ -33,6 +33,8 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]==5000){
     <div class="navbar-nav  ml-auto">
     <a class="nav-item nav-link navBar-color" href="membersdash.php"><img src="images/back.svg"  class="logoutAni backIcon"></a>
 <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg"  class="logoutAni"></a>
+<a class="nav-item nav-link navBar-color" href="changePasswordMem.php">Change Password </a>
+
 </div>
   </div>
 </nav>
