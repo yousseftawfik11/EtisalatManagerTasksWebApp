@@ -57,7 +57,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <h1>Modify Tasks</h1>
     </div>
     <div>
-    <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    <a id="ModifyCollap" class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
     style="background-color: transparent; border-color:transparent;">
     <img src='images/collapse-up.svg' style="width: 33px;">
     </a>
@@ -134,13 +134,19 @@ if($result= mysqli_query($conn,$sql)){
 
     <button id='ShoweditMem' type="submit" name="show" class="submit_btns"  style="width: fit-content;">Change Members/Owner</button>
 <input id='ShowModifyCont' type="submit" name="load" class="submit_btns" value="Change Content" style="width: fit-content;"><br>
-</div>
+<!-- </div> -->
 <hr>
 
 
 
 <?php
 if(isset($_POST["show"])){
+    echo "<script>
+                    document.getElementById('ModifyCollap').setAttribute('aria-expanded', 'true');
+                    document.getElementById('ModifyCollap').className = 'btn btn-primary';
+                    document.getElementById('OpenTaskTable').className = 'collapse show';
+
+                    </script>";
     if(empty($_POST['chosen_task'])){
         echo "<script>Swal.fire({
             icon: 'error',
@@ -175,6 +181,12 @@ if(isset($_POST["show"])){
 
 if(isset($_POST["load"])){ //loading info into the change textboxes and changing data in tasks
     
+    echo "<script>
+    document.getElementById('ModifyCollap').setAttribute('aria-expanded', 'true');
+    document.getElementById('ModifyCollap').className = 'btn btn-primary';
+    document.getElementById('OpenTaskTable').className = 'collapse show';
+
+    </script>";
     if(empty($_POST['chosen_task'])){
         echo "<script>Swal.fire({
             icon: 'error',
@@ -195,7 +207,7 @@ if(isset($_POST["load"])){ //loading info into the change textboxes and changing
                 while($row = mysqli_fetch_array($result)){
                     echo '<form action="'.$_SERVER["PHP_SELF"].'" method="post">
                     <label for="TaskTitle">Task title</label></br>
-                    <input type="text" name="TaskTitle" required value="'.$row["Task_title"].'"><br>
+                    <input type="text" style="width: 250px;" name="TaskTitle" required value="'.$row["Task_title"].'"><br>
 
                     <label for="TaskInfo">Task Info</label></br>
                     <textarea name="TaskInfo" class="textAreaSize">'.$row["Content"].'</textarea><br>

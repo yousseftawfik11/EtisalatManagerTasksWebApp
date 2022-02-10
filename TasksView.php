@@ -251,7 +251,7 @@ echo '</div>'
     <h1>Filter By Member</h1>
     </div>
     <div>
-    <a class="btn btn-primary" data-toggle="collapse" href="#OpenMemberFilter" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    <a id="MembersFilter" class="btn btn-primary" data-toggle="collapse" href="#OpenMemberFilter" role="button" aria-expanded="false" aria-controls="collapseExample" 
     style="background-color: transparent; border-color:transparent;">
     <img src='images/collapse-up.svg' style="width: 33px;">
     </a>
@@ -270,9 +270,9 @@ if($result= mysqli_query($conn,$query)){
 
     }
 }
-echo "</div>";
+
 ?>
-<input type="submit" value="Show" class="submit_btns" name="namesFilter" style="margin-left:23px;">
+<input type="submit" value="Show" class="submit_btns" name="namesFilter" style="margin-left:2px;">
 </form>
 </div>
 
@@ -286,7 +286,12 @@ if(isset($_POST["namesFilter"])){
             text: 'Failed to show tasks, please choose member'
           })</script>";
     }else{
-
+        echo "<script>
+        document.getElementById('MembersFilter').setAttribute('aria-expanded', 'true');
+        document.getElementById('MembersFilter').className = 'btn btn-primary';
+        document.getElementById('OpenMemberFilter').className = 'collapse show';
+    
+        </script>";
         $member_id=$_POST["memberList"];
         
         $filterQuery="(SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
@@ -358,6 +363,7 @@ if(isset($_POST["namesFilter"])){
                                        
                     }
              echo "</table>";
+             echo "</div>";
              mysqli_free_result($result);
              }else{
                  echo "No records";
