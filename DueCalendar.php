@@ -21,10 +21,6 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
  
 
-    <!--Libraries for bootstrap table-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
 
     
@@ -90,7 +86,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
   </div>
 </nav>
     <!--Calendar-->
-    <div class="container">
+    <div class="container" style="margin-top: 50px;">
         <div id="calendar"></div>
     </div>
 
