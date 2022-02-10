@@ -25,6 +25,10 @@ if(isset($_POST["submit"])){
             title: 'Try Again!',
             text: 'Failed to create task, please choose members'
           })</script>";
+          
+
+
+
     }elseif(empty($_POST["check_list_leader"])){
         echo "<script>Swal.fire({
             icon: 'error',

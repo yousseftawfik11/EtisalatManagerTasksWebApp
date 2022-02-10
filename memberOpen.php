@@ -24,13 +24,13 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]==5000){
     <title>Document</title>
 </head>
 <body class="backgroundimage" style="color:white;">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" style="background-color: #3b6d4f !important;">
+<nav class="navbar navbar-expand-lg navbar-light  navBar-color" >
 <a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav  ml-auto">
     <a class="nav-item nav-link navBar-color" href="membersdash.php"><img src="images/back.svg"  class="logoutAni backIcon"></a>
 <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg"  class="logoutAni"></a>
 </div>

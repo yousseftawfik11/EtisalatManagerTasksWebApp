@@ -20,13 +20,13 @@
     <title>Modify Tasks</title>
 </head>
 <body class="backgroundimage" style="color:white;">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color"  style="background-color: #3b6d4f !important;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" >
 <a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav  ml-auto">
       <a class="nav-item nav-link navBar-color" href="ManagerHome.php">Create Tasks</a>
       <a class="nav-item nav-link navBar-color" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link navBar-color active" href="modifyTask.php">Modify Tasks</a>
@@ -128,7 +128,7 @@ if($result= mysqli_query($conn,$sql)){
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 }
 
-echo "<div style='margin-left:23px;'>";
+echo "<div id='membersList' style='margin-left:23px;'>";
 
 $sqlQMembers="SELECT * FROM team_members";
 $result1= mysqli_query($conn, $sqlQMembers);
@@ -142,11 +142,14 @@ if(mysqli_num_rows($result1)>0){
 echo "</div>";
 
 ?>
+<div id="membersList-ctrl">
 <input type="button" onclick=selectsLeaders() class="submit_btns" value="Select All"/> 
     <input type="button" onclick=deSelectLeaders() class="submit_btns" value="Deselect All"/> 
     <input type="submit" name="Change_Leader" class="submit_btns" value="Change Leaders" style="width: fit-content;">
     <input type="submit" name="Change_Members" class="submit_btns" value ="Change Members" style="width: fit-content;">
-<input type="submit" name="load" class="submit_btns" value="Change"><br>
+    </div>
+    <button id='ShoweditMem' onclick=ShowEditMembers() class="submit_btns"  style="width: fit-content;">Change Members/Owner</button>
+<input id='ShowModifyCont' type="submit" name="load" class="submit_btns" value="Change Content" style="width: fit-content;"><br>
 </div>
 <hr>
 
@@ -180,6 +183,9 @@ if(isset($_POST["load"])){ //loading info into the change textboxes and changing
 
                     <label for="TaskInfo">Task Info</label></br>
                     <textarea name="TaskInfo" class="textAreaSize">'.$row["Content"].'</textarea><br>
+                    ';
+                    if($row['priority']==1){
+                    echo '
                     <label for="priority">Priority: </label></br>
                     <select name="priority">
                       <option value="1">Low</option>
@@ -192,6 +198,49 @@ if(isset($_POST["load"])){ //loading info into the change textboxes and changing
                     <input type="submit" class="submit_btns" value="Edit" name="edit" style="margin-left:24px;">
                     
                     </form>';
+                    }elseif($row['priority']==2){
+                        echo '
+                        <label for="priority">Priority: </label></br>
+                        <select name="priority">
+                          <option value="1">Low</option>
+                          <option value="2" selected="selected">Medium</option>
+                          <option value="3">High</option>
+                          <option value="4">Very High</option>
+                        </select>
+                        </div>
+                        <br>
+                        <input type="submit" class="submit_btns" value="Edit" name="edit" style="margin-left:24px;">
+                        
+                        </form>';
+                        }elseif($row['priority']==3){
+                            echo '
+                            <label for="priority">Priority: </label></br>
+                            <select name="priority">
+                              <option value="1">Low</option>
+                              <option value="2" >Medium</option>
+                              <option value="3" selected="selected">High</option>
+                              <option value="4">Very High</option>
+                            </select>
+                            </div>
+                            <br>
+                            <input type="submit" class="submit_btns" value="Edit" name="edit" style="margin-left:24px;">
+                            
+                            </form>';
+                            }elseif($row['priority']==4){
+                                echo '
+                                <label for="priority">Priority: </label></br>
+                                <select name="priority">
+                                  <option value="1">Low</option>
+                                  <option value="2" >Medium</option>
+                                  <option value="3" >High</option>
+                                  <option value="4" selected="selected">Very High</option>
+                                </select>
+                                </div>
+                                <br>
+                                <input type="submit" class="submit_btns" value="Edit" name="edit" style="margin-left:24px;">
+                                
+                                </form>';
+                                }
 
                 }
             }
@@ -456,7 +505,18 @@ if($result= mysqli_query($conn,$sql)){
 </div>
 </form>
 
+<script>
 
+   
+function ShowEditMembers() {
+    document.getElementById("membersList").style.display = "none";
+    document.getElementById("membersList-ctrl").style.display = "none";
+    document.getElementById("ShoweditMem").style.display = "none";
+    document.getElementById("ShowModifyCont").style.display = "none";
+
+  } 
+
+</script>
 
 
 <script src="js/controls.js"></script>

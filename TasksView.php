@@ -29,13 +29,13 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <title>View Tasks</title>
 </head>
 <body class="backgroundimage" style="color:white;">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" style="background-color: #3b6d4f !important;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color">
   <a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav  ml-auto">
       <a class="nav-item nav-link navBar-color" href="ManagerHome.php">Create Tasks </a>
       <a class="nav-item nav-link active navBar-color" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link navBar-color" href="modifyTask.php">Modify Tasks</a>
@@ -94,7 +94,26 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<td>" . $row['start_Date'] . "</td>";
                 echo "<td>" . $row['due'] . "</td>";
                 echo "<td><img src='images/success.svg' class='OpenTickSize'></td>";
-                echo "<td>" . $row['priority'] . "</td>";
+                switch($row['priority']){
+                    case 1:
+                        $priorityName="Low";
+                        break;
+                    case 2:
+                        $priorityName="Medium";
+                        break;
+                    case 3:
+                        $priorityName="High";
+                        break;
+                    case 4:
+                        $priorityName="Very High";
+                        break;
+                    default:
+                        $priorityName="default";
+    
+                }
+    
+    
+                echo "<td>".$priorityName."</td>";
                 echo "<td> <a href='uploads/". $row['attachment_name'] ."' target='_blank'>" . $row['attachment_name'] . "</a></td>";
                 echo "<td>";
 //loop to get all names from the sql result beause each task can have many names
@@ -270,9 +289,19 @@ if(isset($_POST["namesFilter"])){
 
         $member_id=$_POST["memberList"];
         
-        $filterQuery="SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
+        $filterQuery="(SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
         INNER JOIN task_members ON task_members.task_id=tasks.task_id
-        WHERE task_members.member_id=".$member_id;
+        WHERE task_members.member_id=".$member_id."
+        )UNION( 
+        SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
+        INNER JOIN task_leaders ON task_leaders.task_id=tasks.task_id
+        WHERE task_leaders.leader_id=".$member_id.")";
+
+
+// $filterQuery="SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
+// INNER JOIN task_members ON task_members.task_id=tasks.task_id 
+// INNER JOIN task_leaders ON task_leaders.task_id=tasks.task_id 
+// WHERE task_members.member_id=".$member_id."AND task_leaders.leader_id=".$member_id;
 
         if($result= mysqli_query($conn,$filterQuery)){
             if(mysqli_num_rows($result)>0){

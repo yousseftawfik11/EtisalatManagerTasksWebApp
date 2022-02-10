@@ -30,13 +30,13 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <title>Create User</title>
 </head>
 <body class="backgroundimage">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" style="background-color: #3b6d4f !important;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" >
 <a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav ml-auto">
       <a class="nav-item nav-link navBar-color" href="ManagerHome.php">Create Tasks </a>
       <a class="nav-item nav-link navBar-color" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link navBar-color" href="modifyTask.php">Modify Tasks</a>
@@ -82,6 +82,7 @@ include('db.php');
   
         $name= strtolower(mysqli_real_escape_string($conn,$_POST['Username']));
         $password= strtolower(mysqli_real_escape_string($conn,$_POST['pass']));
+        $hashed = password_hash($password,PASSWORD_DEFAULT);
         $email=strtolower( mysqli_real_escape_string($conn,$_POST['userEmail']));
 
         //to make sure everything is in lower case in db
@@ -102,7 +103,7 @@ include('db.php');
 
           }else{
         $query="INSERT INTO team_members(name,password,email) 
-        VALUES('$name','$password','$email')";
+        VALUES('$name','$hashed','$email')";
         mysqli_query($conn,$query);
 
         echo "<script>Swal.fire({
