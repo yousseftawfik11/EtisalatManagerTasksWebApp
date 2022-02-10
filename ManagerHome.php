@@ -23,6 +23,11 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+ 
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!-- alert box libraries -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -33,13 +38,13 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
 </head>
 
 <body class="backgroundimage">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" style="background-color: #3b6d4f !important;">
-  <a class="navbar-brand navBar-color" href="#">Tornado</a>
+<nav class="navbar navbar-expand-lg navbar-light  navBar-color" >
+<a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav  ml-auto">
       <a class="nav-item nav-link active navBar-color" href="ManagerHome.php">Create Tasks </a>
       <a class="nav-item nav-link navBar-color" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link navBar-color" href="modifyTask.php">Modify Tasks</a>
@@ -69,14 +74,14 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <label for="TaskInfo" class="NewTaskLabel">Task Info</label>
     </div>
     <!-- <input type="text" name="TaskInfo" class="contentInput inputFeildsFont" required> -->
-    <textarea name="TaskInfo" class="textAreaSize">
+    <textarea name="TaskInfo" class="textAreaSize" required>
     </textarea>
     </div>
     <div class="fieldsSpacing">
       <div  class="labelSpace">
     <label for="TaskDue" class="NewTaskLabel">Task Due</label>
       </div>
-    <input type="date" name="TaskDue" class="titleInput" required>
+    <input type="date" name="TaskDue" class="titleInput">
     </div>
 <div class="fieldsSpacing">
     <div>

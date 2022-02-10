@@ -17,6 +17,11 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+ 
         <!-- alert box libraries -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -25,13 +30,13 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <title>History</title>
 </head>
 <body class="backgroundimage" style="color:white;">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" style="background-color: #3b6d4f !important;">
-  <a class="navbar-brand navBar-color" href="#">Tornado</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" >
+<a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav  ml-auto">
       <a class="nav-item nav-link navBar-color" href="ManagerHome.php">Create Tasks</a>
       <a class="nav-item nav-link navBar-color" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link navBar-color" href="modifyTask.php">Modify Tasks</a>
@@ -48,7 +53,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <h1>View Deadline History</h1>
     </div>
     <div>
-    <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    <a id="DeadlineHistoryCollap" class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
     style="background-color: transparent; border-color:transparent;">
     <img src='images/collapse-up.svg' style="width: 33px;">
     </a>
@@ -88,8 +93,62 @@ if($result= mysqli_query($conn,$sql)){
         }
     }
 
-    echo '<input type="submit" name="GetHistory" class="submit_btns" value="Get Due Dates History">';
+    echo '<input type="submit" name="GetHistory" class="submit_btns" value="Get History" style="margin-bottom:10px;">';
+
+
+
+    if(isset($_POST["GetHistory"])){
+    
+        if(empty($_POST['History_tasks_list'])){
+            echo "<script>Swal.fire({
+                icon: 'error',
+                title: 'Try Again!',
+                text: 'Please choose task to view its history',
+                confirmButtonColor: '#f27474',
+                confirmButtonText: 'OK'
+              })</script>";
+        }else{
+    
+        $task_id= mysqli_real_escape_string($conn,$_POST['History_tasks_list']);
+    
+        $getHistory= "SELECT old_due,new_due FROM due_history WHERE task_id='$task_id'";
+    
+        if($result= mysqli_query($conn,$getHistory)){
+            if(mysqli_num_rows($result)>0){
+
+                echo "<script>
+                    document.getElementById('DeadlineHistoryCollap').setAttribute('aria-expanded', 'true');
+                    document.getElementById('DeadlineHistoryCollap').className = 'btn btn-primary';
+                    document.getElementById('OpenTaskTable').className = 'collapse show';
+
+                    </script>";
+                echo "<table class='table table-hover'>";
+                echo "<tr>";
+                        echo "<th>Old Date</th>";
+                        echo "<th>New Date</th>";             
+                    echo "</tr>";
+        
+                 while($row = mysqli_fetch_array($result)){
+                    echo "<tr>";
+                    echo "<td scope='col'>" . $row['old_due'] . "</td>";
+                    echo "<td scope='col'>" . $row['new_due'] . "</td>";
+                    echo "</tr>";
+    
+                 }
+                 echo "</table>";
+                 
+                }else{
+                    echo "no records change";
+                }
+            }    
+        }
+    }
     echo "</div>";
+
+
+
+
+    
 ?>
 
 </form>
@@ -108,7 +167,7 @@ $sql="SELECT task_id,Task_title,Content,priority FROM tasks WHERE status='0'";
     <h1>Content Change History</h1>
     </div>
     <div>
-    <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable2" role="button" aria-expanded="false" aria-controls="collapseExample" 
+    <a id="contentHistCollap" class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable2" role="button" aria-expanded="false" aria-controls="collapseExample" 
     style="background-color: transparent; border-color:transparent;">
     <img src="images/collapse-up.svg" style="width: 33px;">
     </a>
@@ -159,8 +218,8 @@ $sql="SELECT task_id,Task_title,Content,priority FROM tasks WHERE status='0'";
              
             }
         }
-        echo '<input type="submit" name="OldContent" class="submit_btns" value="Get Content History">';
-        echo '</div>'
+        echo '<input type="submit" name="OldContent" class="submit_btns" value="Get History" style="margin-bottom:10px;">';
+       
 
 ?>
 
@@ -169,6 +228,13 @@ $sql="SELECT task_id,Task_title,Content,priority FROM tasks WHERE status='0'";
 <?php
 
 if(isset($_POST["OldContent"])){
+
+echo "<script>
+document.getElementById('contentHistCollap').setAttribute('aria-expanded', 'true');
+document.getElementById('contentHistCollap').className = 'btn btn-primary';
+document.getElementById('OpenTaskTable2').className = 'collapse show';
+
+</script>";
 
     if(empty($_POST['History_tasks_list_content'])){
         echo "<script>Swal.fire({
@@ -222,6 +288,7 @@ if(isset($_POST["OldContent"])){
 
              }
              echo "</table>";
+             echo '</div>';
             }else{
                 echo "no records change";
             }
@@ -232,47 +299,6 @@ if(isset($_POST["OldContent"])){
 ?>
 
 
-<?php
-
-if(isset($_POST["GetHistory"])){
-
-    if(empty($_POST['History_tasks_list'])){
-        echo "<script>Swal.fire({
-            icon: 'error',
-            title: 'Try Again!',
-            text: 'Please choose task to view its history',
-            confirmButtonColor: '#f27474',
-            confirmButtonText: 'OK'
-          })</script>";
-    }else{
-
-    $task_id= mysqli_real_escape_string($conn,$_POST['History_tasks_list']);
-
-    $getHistory= "SELECT old_due,new_due FROM due_history WHERE task_id='$task_id'";
-
-    if($result= mysqli_query($conn,$getHistory)){
-        if(mysqli_num_rows($result)>0){
-            echo "<table class='table table-hover'>";
-            echo "<tr>";
-                    echo "<th>Old Date</th>";
-                    echo "<th>New Date</th>";             
-                echo "</tr>";
-    
-             while($row = mysqli_fetch_array($result)){
-                echo "<tr>";
-                echo "<td scope='col'>" . $row['old_due'] . "</td>";
-                echo "<td scope='col'>" . $row['new_due'] . "</td>";
-                echo "</tr>";
-
-             }
-            }else{
-                echo "no records change";
-            }
-        }    
-    }
-}
-
-?>
 
 
 <script src="js/controls.js"></script>

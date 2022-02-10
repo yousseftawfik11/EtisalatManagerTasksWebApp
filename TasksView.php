@@ -17,6 +17,9 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
         <!-- alert box libraries -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -26,13 +29,13 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
     <title>View Tasks</title>
 </head>
 <body class="backgroundimage" style="color:white;">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" style="background-color: #3b6d4f !important;">
-  <a class="navbar-brand navBar-color" href="#">Tornado</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color">
+  <a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav  ml-auto">
       <a class="nav-item nav-link navBar-color" href="ManagerHome.php">Create Tasks </a>
       <a class="nav-item nav-link active navBar-color" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link navBar-color" href="modifyTask.php">Modify Tasks</a>
@@ -91,7 +94,26 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<td>" . $row['start_Date'] . "</td>";
                 echo "<td>" . $row['due'] . "</td>";
                 echo "<td><img src='images/success.svg' class='OpenTickSize'></td>";
-                echo "<td>" . $row['priority'] . "</td>";
+                switch($row['priority']){
+                    case 1:
+                        $priorityName="Low";
+                        break;
+                    case 2:
+                        $priorityName="Medium";
+                        break;
+                    case 3:
+                        $priorityName="High";
+                        break;
+                    case 4:
+                        $priorityName="Very High";
+                        break;
+                    default:
+                        $priorityName="default";
+    
+                }
+    
+    
+                echo "<td>".$priorityName."</td>";
                 echo "<td> <a href='uploads/". $row['attachment_name'] ."' target='_blank'>" . $row['attachment_name'] . "</a></td>";
                 echo "<td>";
 //loop to get all names from the sql result beause each task can have many names
@@ -238,18 +260,19 @@ echo '</div>'
   <div id='OpenMemberFilter' class="collapse">
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 <?php
-
+echo "<div style='margin-left:23px;'>";
 $query="SELECT member_id,name FROM team_members";
 if($result= mysqli_query($conn,$query)){
     if(mysqli_num_rows($result)>0){
         while($row = mysqli_fetch_array($result)){
-            echo "<input type='radio' name='memberList' value=".$row['member_id'].">".$row['name']."</input><br>";
+            echo "<input  type='radio' name='memberList' value=".$row['member_id'].">".$row['name']."</input><br>";
         }
 
     }
 }
+echo "</div>";
 ?>
-<input type="submit" class="submit_btns" name="namesFilter">
+<input type="submit" value="Show" class="submit_btns" name="namesFilter" style="margin-left:23px;">
 </form>
 </div>
 
@@ -266,9 +289,19 @@ if(isset($_POST["namesFilter"])){
 
         $member_id=$_POST["memberList"];
         
-        $filterQuery="SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
+        $filterQuery="(SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
         INNER JOIN task_members ON task_members.task_id=tasks.task_id
-        WHERE task_members.member_id=".$member_id;
+        WHERE task_members.member_id=".$member_id."
+        )UNION( 
+        SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
+        INNER JOIN task_leaders ON task_leaders.task_id=tasks.task_id
+        WHERE task_leaders.leader_id=".$member_id.")";
+
+
+// $filterQuery="SELECT tasks.task_id,tasks.task_title,Content,start_Date,due,status,priority,attachment_name from tasks 
+// INNER JOIN task_members ON task_members.task_id=tasks.task_id 
+// INNER JOIN task_leaders ON task_leaders.task_id=tasks.task_id 
+// WHERE task_members.member_id=".$member_id."AND task_leaders.leader_id=".$member_id;
 
         if($result= mysqli_query($conn,$filterQuery)){
             if(mysqli_num_rows($result)>0){
@@ -338,7 +371,7 @@ if(isset($_POST["namesFilter"])){
     
 ?>
   
->
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
