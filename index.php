@@ -37,7 +37,7 @@ include 'db.php';
 
 
 </head>
-<body class="backgroundimage" style="background-color: #282828;">
+<body class="backgroundimage">
 
 <div class="LoginBigContainer">
 <!-- <div>
@@ -55,9 +55,12 @@ if(isset($_POST['submit'])){
     $ManagerCheck = mysqli_query($conn, $ManagerLoginQuery);
 	$row = mysqli_fetch_array($ManagerCheck);
 
-	$MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail' AND password = '$password'";
+	// $MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail' AND password = '$password'";
+     $MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail'";
+
     $MemberCheck = mysqli_query($conn, $MemberLoginQuery);
 	$row2 = mysqli_fetch_array($MemberCheck);
+
 
 
     if(mysqli_num_rows($ManagerCheck) > 0){
@@ -67,7 +70,7 @@ if(isset($_POST['submit'])){
 
 		if(isset($_POST["rememberme"])) { //set cookie if checkbox is checked
 			setcookie ("member_ID",  $userMail, time()+ (86400));
-			setcookie ("member_Password", $password, time()+ (86400));
+			setcookie ("member_Password", $row['password'], time()+ (86400));
 		}else { //delete cookie if checkbox is not checked
 			if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])) {
 				$CookieID = $_COOKIE["member_ID"];
@@ -83,6 +86,9 @@ if(isset($_POST['submit'])){
 				</script>
 			  ';
 		}  elseif(mysqli_num_rows($MemberCheck) > 0) {
+
+			if(password_verify($password, $row2['password'])) {
+
 
 			session_start();
 			$_SESSION["username"] = $row2['member_id'];
@@ -114,6 +120,8 @@ if(isset($_POST['submit'])){
 				confirmButtonText: 'OK'
 			  })</script>";
 		}
+	}
+		
 
 
 }
@@ -189,7 +197,4 @@ if(isset($_POST['submit'])){
 		?>
 </div>
 <div id="footer">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#63811F" fill-opacity="1" d="M0,64L34.3,64C68.6,64,137,64,206,74.7C274.3,85,343,107,411,138.7C480,171,549,213,617,197.3C685.7,181,754,107,823,101.3C891.4,96,960,160,1029,160C1097.1,160,1166,96,1234,74.7C1302.9,53,1371,75,1406,85.3L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>
-</div>
-</body>
-</html> 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#7cad3e " fill-opacity="1" d="M0,224L26.7,218.7C53.3,213,107,203,160,176C213.3,149,267,107,320,117.3C373.3,128,427,192,480,202.7C533.3,213,587,171,640,170.7C693.3,171,747,213,800,234.7C853.3,256,907,256,960,240C1013.3,224,1067,192,1120,181.3C1173.3,171,1227,181,1280,165.3C1333.3,149,1387,107,1413,85.3L1440,64L1440,320L1413.3,320C1386.7,320,1333,320,1280,320C1226.7,320,1173,320,1120,320C1066.7,320,1013,320,960,320C906.7,320,853,320,800,320C746.7,320,693,320,640,320C586.7,320,533,320,480,320C426.7,320,373,320,320,320C266.7,320,213,320,160,320C106.7,320,53,320,27,320L0,320Z"></path></svg></html> 
