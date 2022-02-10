@@ -128,35 +128,51 @@ if($result= mysqli_query($conn,$sql)){
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 }
 
-echo "<div id='membersList' style='margin-left:23px;'>";
 
-$sqlQMembers="SELECT * FROM team_members";
-$result1= mysqli_query($conn, $sqlQMembers);
-if(mysqli_num_rows($result1)>0){
-    while($row= mysqli_fetch_assoc($result1)){
-        echo '<input type="checkbox" name="check_list_leaders[]" value="'.$row["member_id"].'"><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label> <br>' ;                
-    }
-}else{
-    echo "0 records";
-}
-echo "</div>";
 
 ?>
-<div id="membersList-ctrl">
-<input type="button" onclick=selectsLeaders() class="submit_btns" value="Select All"/> 
-    <input type="button" onclick=deSelectLeaders() class="submit_btns" value="Deselect All"/> 
-    <input type="submit" name="Change_Leader" class="submit_btns" value="Change Leaders" style="width: fit-content;">
-    <input type="submit" name="Change_Members" class="submit_btns" value ="Change Members" style="width: fit-content;">
-    </div>
-    <button id='ShoweditMem' onclick=ShowEditMembers() class="submit_btns"  style="width: fit-content;">Change Members/Owner</button>
+
+    <button id='ShoweditMem' type="submit" name="show" class="submit_btns"  style="width: fit-content;">Change Members/Owner</button>
 <input id='ShowModifyCont' type="submit" name="load" class="submit_btns" value="Change Content" style="width: fit-content;"><br>
 </div>
 <hr>
 
-</form>
-</div>
+
 
 <?php
+if(isset($_POST["show"])){
+    if(empty($_POST['chosen_task'])){
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Try Again!',
+            text: 'Please choose task to edit',
+            confirmButtonColor: '#f27474',
+            confirmButtonText: 'OK'
+          })</script>";
+    }else{
+
+    echo "<div id='membersList' style='margin-left:23px;'>";
+    $_SESSION["task_id"] = $_POST['chosen_task'];
+    $sqlQMembers="SELECT * FROM team_members";
+    $result1= mysqli_query($conn, $sqlQMembers);
+    if(mysqli_num_rows($result1)>0){
+        while($row= mysqli_fetch_assoc($result1)){
+            echo '<input type="checkbox" name="check_list_leaders[]" value="'.$row["member_id"].'"><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label> <br>' ;                
+        }
+    }else{
+        echo "0 records";
+    }
+    echo "</div>";
+    echo'<div id="membersList-ctrl">
+    <input type="button" onclick=selectsLeaders() class="submit_btns" value="Select All"/> 
+        <input type="button" onclick=deSelectLeaders() class="submit_btns" value="Deselect All"/> 
+        <input type="submit" name="Change_Leader" class="submit_btns" value="Change Leaders" style="width: fit-content;">
+        <input type="submit" name="Change_Members" class="submit_btns" value ="Change Members" style="width: fit-content;">
+        </div>';
+    }
+
+}
+
 if(isset($_POST["load"])){ //loading info into the change textboxes and changing data in tasks
     
     if(empty($_POST['chosen_task'])){
@@ -250,7 +266,10 @@ if(isset($_POST["load"])){ //loading info into the change textboxes and changing
 
     }
 }
-
+?>
+</form>
+</div>
+<?php
 if(isset($_POST["edit"])){ //update info of tasks in database
 
     $task_id = $_SESSION["task_id"];
@@ -297,16 +316,7 @@ if(isset($_POST["edit"])){ //update info of tasks in database
 // adding a submit button to change the leaders
 if(isset($_POST["Change_Leader"])){
 
-    if(empty($_POST['chosen_task'])){
-        echo "<script>Swal.fire({
-            icon: 'error',
-            title: 'Try Again!',
-            text: 'Please choose task to edit',
-            confirmButtonColor: '#f27474',
-            confirmButtonText: 'OK'
-          })</script>";
-       
-    }elseif(empty($_POST['check_list_leaders'])){
+    if(empty($_POST['check_list_leaders'])){
         echo "<script>Swal.fire({
             icon: 'error',
             title: 'Try Again!',
@@ -316,7 +326,7 @@ if(isset($_POST["Change_Leader"])){
           })</script>";
     }else{
     
-        $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
+        $task_id = $_SESSION["task_id"];
         $leaderslist= $_POST["check_list_leaders"];
 
         $removeTask = "DELETE FROM task_leaders WHERE task_id = ".$task_id;
@@ -348,15 +358,7 @@ if(isset($_POST["Change_Leader"])){
 
 if(isset($_POST["Change_Members"])){ //adding button to change members
 
-    if(empty($_POST['chosen_task'])){
-        echo "<script>Swal.fire({
-            icon: 'error',
-            title: 'Try Again!',
-            text: 'Please choose task to edit',
-            confirmButtonColor: '#f27474',
-            confirmButtonText: 'OK'
-          })</script>";
-    }elseif(empty($_POST['check_list_leaders'])){
+    if(empty($_POST['check_list_leaders'])){
         echo "<script>Swal.fire({
             icon: 'error',
             title: 'Try Again!',
@@ -366,7 +368,7 @@ if(isset($_POST["Change_Members"])){ //adding button to change members
           })</script>";
     }else{
 
-        $task_id = mysqli_real_escape_string($conn,$_POST['chosen_task']);
+        $task_id = $_SESSION["task_id"];
         $leaderslist= $_POST["check_list_leaders"];
 
         $removeTask = "DELETE FROM task_members WHERE task_id = ".$task_id;
