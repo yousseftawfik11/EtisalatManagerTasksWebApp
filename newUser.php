@@ -63,12 +63,6 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
         </div>
         <input type="email" name="userEmail"class="newUserInput" required>
     </div>
-    <div class="fieldsSpacing2">
-      <div>
-        <label for="pass">Password</label>
-        </div>
-        <input type="password" name="pass" class="newUserInput" required>
-    </div>
     <div>
         <input type="submit" name="NewUser" value="Add Member" class="TaskSubmit-btn" style="margin-top: 20px; margin-bottom:0px;" >
     </div>
@@ -81,9 +75,10 @@ include('db.php');
 
   
         $name= strtolower(mysqli_real_escape_string($conn,$_POST['Username']));
-        $password= strtolower(mysqli_real_escape_string($conn,$_POST['pass']));
-        $hashed = password_hash($password,PASSWORD_DEFAULT);
+        // $password= strtolower(mysqli_real_escape_string($conn,$_POST['pass']));
         $email=strtolower( mysqli_real_escape_string($conn,$_POST['userEmail']));
+        $hashed = password_hash($email,PASSWORD_DEFAULT);
+       
 
         //to make sure everything is in lower case in db
         

@@ -37,6 +37,7 @@ include('db.php');
 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav  ml-auto">
 <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg"  class="logoutAni"></a>
+<a class="nav-item nav-link navBar-color" href="changePasswordMem.php">Change Password </a>
 </div>
   </div>
 </nav>
