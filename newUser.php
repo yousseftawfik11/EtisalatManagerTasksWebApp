@@ -77,7 +77,6 @@ include('db.php');
         $name= strtolower(mysqli_real_escape_string($conn,$_POST['Username']));
         // $password= strtolower(mysqli_real_escape_string($conn,$_POST['pass']));
         $email=strtolower( mysqli_real_escape_string($conn,$_POST['userEmail']));
-        $hashed = password_hash($email,PASSWORD_DEFAULT);
        
 
         //to make sure everything is in lower case in db
@@ -98,7 +97,7 @@ include('db.php');
 
           }else{
         $query="INSERT INTO team_members(name,password,email) 
-        VALUES('$name','$hashed','$email')";
+        VALUES('$name','$email','$email')";
         mysqli_query($conn,$query);
 
         echo "<script>Swal.fire({
