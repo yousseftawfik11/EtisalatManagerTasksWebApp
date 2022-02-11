@@ -81,16 +81,14 @@ include('db.php');
         // $password= strtolower(mysqli_real_escape_string($conn,$_POST['pass']));
         $newPassword=strtolower( mysqli_real_escape_string($conn,$_POST['newPass']));
         $ConfirmPass=strtolower( mysqli_real_escape_string($conn,$_POST['ConfirmPass']));
-        $passCheck="SELECT * FROM team_members WHERE member_id=$userId";
+        $passCheck="SELECT * FROM team_members WHERE member_id=$userId AND password = '$oldPass'";
         $queryExec=mysqli_query($conn,$passCheck);
         $row = mysqli_fetch_array($queryExec);
 
-        if(password_verify($oldPass,$row['password'])){
-            
+    if(mysqli_num_rows($queryExec) > 0){
         if($newPassword==$ConfirmPass){
-            $hashed = password_hash($newPassword,PASSWORD_DEFAULT);
 
-            $updateQuery="UPDATE team_members SET password=' $hashed' 
+            $updateQuery="UPDATE team_members SET password=' $newPassword' 
             WHERE  member_id=$userId";
                     $queryExec=mysqli_query($conn,$updateQuery);
 
