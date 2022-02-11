@@ -172,6 +172,13 @@ if(isset($_POST['priority'])){
           <option value="4"selected="selected">Very High</option>
         </select>';  
           
+      }else{
+        echo '<select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+        <option value="4">Very High</option>
+      </select>';
       }
     }
       else{
