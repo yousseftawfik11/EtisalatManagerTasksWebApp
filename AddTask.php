@@ -19,17 +19,14 @@
 
 if(isset($_POST["submit"])){
 
-    if(empty($_POST["check_list_member"])){
-        echo "<script>Swal.fire({
-            icon: 'error',
-            title: 'Try Again!',
-            text: 'Failed to create task, please choose members'
-          })</script>";
-          
-
-
-
-    }elseif(empty($_POST["check_list_leader"])){
+    // if(empty($_POST["check_list_member"])){
+    //     echo "<script>Swal.fire({
+    //         icon: 'error',
+    //         title: 'Try Again!',
+    //         text: 'Failed to create task, please choose members'
+    //       })</script>";
+    // }else  //removed making the members selection required
+    if(empty($_POST["check_list_leader"])){
         echo "<script>Swal.fire({
             icon: 'error',
             title: 'Try Again!',
@@ -37,7 +34,11 @@ if(isset($_POST["submit"])){
           })</script>";
     }else{
 
-        $memberslist= $_POST["check_list_member"];
+        if(empty($_POST["check_list_member"])){
+            $memberslist= [];
+        }else{
+            $memberslist= $_POST["check_list_member"];
+        }
  
    
         $leaderslist= $_POST["check_list_leader"];
@@ -62,11 +63,6 @@ if(isset($_POST["submit"])){
 
     if ($query) {
 
-    //     echo '
-    //     <script>
-    //     window.location.href="TasksView.php";
-    //     </script>
-    //   ';
     echo "<script>Swal.fire({
         title: 'Task Created Successfully!',
         icon: 'success',

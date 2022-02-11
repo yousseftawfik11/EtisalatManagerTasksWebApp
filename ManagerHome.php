@@ -96,8 +96,14 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
             echo '<div class="checkbox-group required titleInput">';
 
             while($row= mysqli_fetch_assoc($result1)){
+              
+            if(isset($_POST['check_list_member'])){
+              $checked = (in_array($row["member_id"],$_REQUEST['check_list_member']) ? 'checked' : '');
+            }else{
+              $checked = '';
+            }
+            echo '<input type="checkbox" name="check_list_member[]" value="'.$row["member_id"].'" '.$checked.' ><label id="content1" class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label><span class="lineBreak"></br></span>' ;                
 
-                echo '<input type="checkbox" name="check_list_member[]" value="'.$row["member_id"].'" ><label id="content1" class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label><span class="lineBreak"></br></span>' ;                
             }
             echo'</div>';
         }else{
@@ -125,7 +131,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
 
             while($row= mysqli_fetch_assoc($result1)){
 
-                echo '<input type="checkbox" name="check_list_leader[]" value="'.$row["member_id"].'" ><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label><span class="lineBreak"></br></span>' ;                
+              echo '<input type="checkbox" name="check_list_leader[]" value="'.$row["member_id"].'" ><label class="checkboxesSpace inputFeildsFont">'.$row["name"].'</label><span class="lineBreak"></br></span>' ;                
             }
             echo'</div>';
         }else{
