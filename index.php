@@ -56,8 +56,7 @@ if(isset($_POST['submit'])){
 	$row = mysqli_fetch_array($ManagerCheck);
 
 	// $MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail' AND password = '$password'";
-     $MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail'";
-
+	$MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail' AND password = '$password'";
     $MemberCheck = mysqli_query($conn, $MemberLoginQuery);
 	$row2 = mysqli_fetch_array($MemberCheck);
 
@@ -85,10 +84,7 @@ if(isset($_POST['submit'])){
 				window.location.href="ManagerHome.php";
 				</script>
 			  ';
-		}  elseif(mysqli_num_rows($MemberCheck) > 0) {
-
-			if(password_verify($password, $row2['password'])) {
-
+		}   elseif(mysqli_num_rows($MemberCheck) > 0) {
 
 			session_start();
 			$_SESSION["username"] = $row2['member_id'];
@@ -120,8 +116,6 @@ if(isset($_POST['submit'])){
 				confirmButtonText: 'OK'
 			  })</script>";
 		}
-	}
-		
 
 
 }
