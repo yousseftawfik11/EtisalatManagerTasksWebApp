@@ -88,7 +88,7 @@ include('db.php');
     if(mysqli_num_rows($queryExec) > 0){
         if($newPassword==$ConfirmPass){
 
-            $updateQuery="UPDATE team_members SET password=' $newPassword' 
+            $updateQuery="UPDATE team_members SET password='$newPassword' 
             WHERE  member_id=$userId";
                     $queryExec=mysqli_query($conn,$updateQuery);
 
