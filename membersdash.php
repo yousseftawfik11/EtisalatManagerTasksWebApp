@@ -47,7 +47,7 @@ include('db.php');
             <a href="memberOpen.php">
                 <img src="images/open.svg">
                 <div class="cardsLabel">
-                    OPEN TASKS
+                    Open Tasks
                 </div>
                 </a>
         </div>
@@ -56,7 +56,7 @@ include('db.php');
 
         <img src="images/owner.svg">
         <div class="cardsLabel">
-                     TASKS YOU OWN
+                     Tasks You Own
                 </div>
 </a>
         </div>

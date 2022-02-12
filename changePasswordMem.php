@@ -64,7 +64,7 @@ include('db.php');
         <input type="text" name="ConfirmPass"class="newUserInput" required>
     </div>
     <div>
-        <input type="submit" name="changePass" value="Add Member" class="TaskSubmit-btn" style="margin-top: 20px; margin-bottom:0px;" >
+        <input type="submit" name="changePass" value="Change Password" class="TaskSubmit-btn" style="margin-top: 20px; margin-bottom:0px;" >
     </div>
 
     </form>

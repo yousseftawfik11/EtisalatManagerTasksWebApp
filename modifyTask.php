@@ -94,7 +94,7 @@ if($result= mysqli_query($conn,$sql)){
 
              echo "<tr>";
              echo "<td>" . $row['Task_title'] . "</td>";
-             echo "<td>" . $row['Content'] . "</td>";
+             echo "<td><pre>" . $row['Content'] . "</pre></td>";
              echo "<td>";
 //loop to get all names from the sql result beause each task can have many names
              while($row2 = mysqli_fetch_array($names)){
@@ -504,7 +504,7 @@ if($result= mysqli_query($conn,$sql)){
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
             echo "<td>" . $row['Task_title'] . "</td>";
-            echo "<td>" . $row['Content'] . "</td>";
+            echo "<td><pre>" . $row['Content'] . "</pre></td>";
             echo "<td>" . $row['start_Date'] . "</td>";
             echo "<td>" . $row['due'] . "</td>";
             //put radio buttons and set thjeir values to the corrsponding task id

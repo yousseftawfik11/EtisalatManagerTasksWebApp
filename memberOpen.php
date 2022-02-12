@@ -21,7 +21,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]==5000){
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
  
-    <title>Document</title>
+    <title>Your Open Tasks</title>
 </head>
 <body class="backgroundimage" style="color:white;">
 <nav class="navbar navbar-expand-lg navbar-light  navBar-color" >
@@ -45,7 +45,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]==5000){
     <div>
     <a class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
     style="background-color: transparent; border-color:transparent;">
-    <img src='images/down-arrow.svg' style="width: 33px;">
+    <img src='images/collapse-up.svg' style="width: 33px;">
     </a>
     </div>
   </div>
@@ -89,11 +89,30 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]==5000){
      
                  echo "<tr>";
                  echo "<td>" . $row['task_title'] . "</td>";
-                 echo "<td>" . $row['Content'] . "</td>";
+                 echo "<td><pre>" . $row['Content'] . "</pre></td>";
                  echo "<td>" . $row['start_Date'] . "</td>";
                  echo "<td>" . $row['due'] . "</td>";
-                 echo "<td>Open</td>";
-                 echo "<td>" . $row['priority'] . "</td>";
+                 echo "<td><img src='images/success.svg' class='OpenTickSize'></td>";
+                 switch($row['priority']){
+                     case 1:
+                         $priorityName="Low";
+                         break;
+                     case 2:
+                         $priorityName="Medium";
+                         break;
+                     case 3:
+                         $priorityName="High";
+                         break;
+                     case 4:
+                         $priorityName="Very High";
+                         break;
+                     default:
+                         $priorityName="default";
+     
+                 }
+     
+     
+                 echo "<td>".$priorityName."</td>";
                  echo "<td> <a href='/uploads/". $row['attachment_name'] ."'>" . $row['attachment_name'] . "</a></td>";
                  echo "<td>";
     //loop to get all names from the sql result beause each task can have many names
