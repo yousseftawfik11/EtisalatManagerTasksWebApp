@@ -338,6 +338,7 @@ padding-right: 80px;
   color: black;
   font-family: 'Montserrat', sans-serif;
 font-size: 25px;
+font-weight: bolder;
 font-weight: 500px;
 transition: ease-in-out 0.3s;
 }
@@ -345,12 +346,13 @@ transition: ease-in-out 0.3s;
   font-size: 30px;
 }
 .logosize{
-  width: 40px; 
+  width: 57px; 
   margin-left: 17px;
 }
 .logoText{
-  font-family: 'Dancing Script', cursive;
+  font-family:cursive;
   font-size: 27px;
+  margin-top: 10px;
 }
 
 .backIcon{
@@ -367,7 +369,7 @@ transition: ease-in-out 0.3s;
 
 
 /* media query start */
-@media only screen and (min-width: 992px) and (max-width: 1500px) {
+@media only screen and (min-width: 992px) and (max-width: 1800px) {
 
   #footer{
 

@@ -31,7 +31,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
 </head>
 <body class="backgroundimage" style="color:white;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" >
-<a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
+<a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><span class="logoText">Tornado</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -40,7 +40,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
       <a class="nav-item nav-link navBar-color" href="ManagerHome.php">Create Tasks</a>
       <a class="nav-item nav-link navBar-color" href="TasksView.php">View Tasks</a>
       <a class="nav-item nav-link navBar-color" href="modifyTask.php">Modify Tasks</a>
-      <a class="nav-item nav-link navBar-color active" href="TasksHistory.php">History Tasks</a>
+      <a class="nav-item nav-link navBar-color active" href="TasksHistory.php">Tasks History</a>
       <a class="nav-item nav-link navBar-color" href="DueCalendar.php">Calendar</a>
       <a class="nav-item nav-link navBar-color" href="newUser.php">Add User</a>
       <a class="nav-item nav-link navBar-color" href="logout.php">Log Out <img src="images/logout.svg" style="width:23px"></a>
@@ -50,7 +50,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
 </nav>
 <div class="tableTitles">
     <div>
-    <h1>View Deadline History</h1>
+    <h1>History(Deadline)</h1>
     </div>
     <div>
     <a id="DeadlineHistoryCollap" class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable" role="button" aria-expanded="false" aria-controls="collapseExample" 
@@ -80,7 +80,7 @@ if($result= mysqli_query($conn,$sql)){
          while($row = mysqli_fetch_array($result)){
             echo "<tr>";
             echo "<td>" . $row['Task_title'] . "</td>";
-            echo "<td>" . $row['Content'] . "</td>";
+            echo "<td><pre>" . $row['Content'] . "</pre></td>";
             echo "<td>" . $row['start_Date'] . "</td>";
             echo "<td>" . $row['due'] . "</td>";
             //put radio buttons and set thjeir values to the corrsponding task id
@@ -164,7 +164,7 @@ $sql="SELECT task_id,Task_title,Content,priority FROM tasks WHERE status='0'";
 
     echo '<div class="tableTitles">
     <div>
-    <h1>Content Change History</h1>
+    <h1>History(Content)</h1>
     </div>
     <div>
     <a id="contentHistCollap" class="btn btn-primary" data-toggle="collapse" href="#OpenTaskTable2" role="button" aria-expanded="false" aria-controls="collapseExample" 
@@ -188,7 +188,7 @@ $sql="SELECT task_id,Task_title,Content,priority FROM tasks WHERE status='0'";
              while($row = mysqli_fetch_array($result)){
                 echo "<tr>";
                 echo "<td>" . $row['Task_title'] . "</td>";
-                echo "<td>" . $row['Content'] . "</td>";
+                echo "<td><pre>" . $row['Content'] . "</pre></td>";
                 switch($row['priority']){
                     case 1:
                         $priorityName="Low";
@@ -262,7 +262,7 @@ document.getElementById('OpenTaskTable2').className = 'collapse show';
              while($row = mysqli_fetch_array($result)){
                 echo "<tr>";
                 echo "<td>" . $row['task_title'] . "</td>";
-                echo "<td>" . $row['Content'] . "</td>";
+                echo "<td><pre>" . $row['Content'] . "</pre></td>";
 
                 switch($row['priority']){
                     case 1:

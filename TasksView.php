@@ -90,7 +90,7 @@ if($result= mysqli_query($conn,$sql)){
 
                 echo "<tr>";
                 echo "<td>" . $row['Task_title'] . "</td>";
-                echo "<td>" . $row['Content'] . "</td>";
+                echo "<td><pre>" . $row['Content'] . "</pre></td>";
                 echo "<td>" . $row['start_Date'] . "</td>";
                 echo "<td>" . $row['due'] . "</td>";
                 echo "<td><img src='images/success.svg' class='OpenTickSize'></td>";
@@ -188,7 +188,7 @@ if($result= mysqli_query($conn,$sql)){
                 
                 echo "<tr>";
                 echo "<td>" . $row['Task_title'] . "</td>";
-                echo "<td>" . $row['Content'] . "</td>";
+                echo "<td><pre>" . $row['Content'] . "</pre></td>";
                 echo "<td>" . $row['start_Date'] . "</td>";
                 echo "<td>" . $row['due'] . "</td>";
                 echo "<td><img src='images/false.svg' class='OpenTickSize'></td>";
@@ -335,7 +335,7 @@ if(isset($_POST["namesFilter"])){
                     
                      echo "<tr>";
                      echo "<td>" . $row['task_title'] . "</td>";
-                     echo "<td>" . $row['Content'] . "</td>";
+                     echo "<td><pre>" . $row['Content'] . "</pre></td>";
                      echo "<td>" . $row['start_Date'] . "</td>";
                      echo "<td>" . $row['due'] . "</td>";
                      echo "<td>Closed</td>";
