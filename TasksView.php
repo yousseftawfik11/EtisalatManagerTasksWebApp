@@ -338,7 +338,12 @@ if(isset($_POST["namesFilter"])){
                      echo "<td><pre>" . $row['Content'] . "</pre></td>";
                      echo "<td>" . $row['start_Date'] . "</td>";
                      echo "<td>" . $row['due'] . "</td>";
-                     echo "<td>Closed</td>";
+
+                     if($row['status']==0){
+                        echo "<td><img src='images/success.svg' class='OpenTickSize'></td>";
+                     }else{
+                        echo "<td><img src='images/false.svg' class='OpenTickSize'></td>";
+                     }
                      echo "<td>" . $row['priority'] . "</td>";
                      echo "<td> <a href='uploads/". $row['attachment_name'] ."' target='_blank'>" . $row['attachment_name'] . "</a></td>";
                      echo "<td>";
