@@ -28,11 +28,14 @@ if(isset($_POST["submit"])){
     //       })</script>";
     // }else  //removed making the members selection required
     if(empty($_POST["check_list_leader"])){
+        
         echo "<script>Swal.fire({
-            icon: 'error',
-            title: 'Try Again!',
-            text: 'Failed to create task, please choose leaders'
-          })</script>";
+        icon: 'error',
+        title: 'Try Again!',
+        text: 'Failed to create task, please choose leaders',
+        confirmButtonColor: '#f27474',
+        confirmButtonText: 'OK'
+        })</script>";
     }else{
 
         if(empty($_POST["check_list_member"])){

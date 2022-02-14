@@ -96,7 +96,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
             echo '<div class="checkbox-group required titleInput">';
 
             while($row= mysqli_fetch_assoc($result1)){
-              
+
             if(isset($_POST['check_list_member'])){
               $checked = (in_array($row["member_id"],$_REQUEST['check_list_member']) ? 'checked' : '');
             }else{
@@ -148,12 +148,55 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
         <div class="labelSpace">
 <label for="priority" class="NewTaskLabel">Priority: </label>
 </div>
-<select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
+<?php
+if(isset($_POST['priority'])){
+  if($_POST['priority']==2){
+    echo '<select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
+    <option value="1">Low</option>
+    <option value="2"selected="selected">Medium</option>
+    <option value="3">High</option>
+    <option value="4">Very High</option>
+  </select>'; 
+      }elseif($_POST['priority']==3){
+        echo '<select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3"selected="selected">High</option>
+        <option value="4">Very High</option>
+      </select>'; 
+          }elseif($_POST['priority']==4){
+            echo '<select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
+          <option value="1">Low</option>
+          <option value="2">Medium</option>
+          <option value="3">High</option>
+          <option value="4"selected="selected">Very High</option>
+        </select>';  
+          
+      }else{
+        echo '<select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+        <option value="4">Very High</option>
+      </select>';
+      }
+    }
+      else{
+          echo '<select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
+          <option value="1">Low</option>
+          <option value="2">Medium</option>
+          <option value="3">High</option>
+          <option value="4">Very High</option>
+        </select>';
+        }
+        
+?>
+<!-- <select name="priority" class="titleInput inputFeildsFont" style="height: 35px;">
   <option value="1">Low</option>
   <option value="2">Medium</option>
   <option value="3">High</option>
   <option value="4">Very High</option>
-</select>
+</select> -->
 </div>
 <div class="labelSpace inputFeildsFont fieldsSpacing">
 <label for="priority" class="NewTaskLabel ">Upload File </label>

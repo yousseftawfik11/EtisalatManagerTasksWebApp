@@ -155,6 +155,7 @@ session_start();
          }
          echo "</table>";
          mysqli_free_result($result);
+         echo '<input type="submit" name="close_task" class="submit_btns" value ="Close">';
      }else{
          echo "No records";
      }
@@ -199,7 +200,7 @@ session_start();
      
     
 ?>
- <input type="submit" name="close_task" class="submit_btns" value ="Close">
+
  </div>
 </form>
 
