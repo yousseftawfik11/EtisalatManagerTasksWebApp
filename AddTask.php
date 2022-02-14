@@ -16,6 +16,7 @@
 </html>
 
 <?php
+include('sendmail.php');
 
 if(isset($_POST["submit"])){
 
@@ -99,17 +100,37 @@ if(isset($_POST["submit"])){
         $QueryMembersTasksTable="INSERT INTO task_members(member_id, task_id) VALUES('".$memberslist[$i]."','$value[0]')" ;
         $query = mysqli_query($conn, $QueryMembersTasksTable);
         
+        $getEmail="SELECT email FROM team_members WHERE member_id=".$memberslist[$i];
+        $Emailexexcute= mysqli_query($conn, $getEmail);
+        while($row = mysqli_fetch_array($Emailexexcute)){
+            sendMailMember($row['email'],$_POST['TaskInfo'],$_POST['TaskDue']);
+    }
+
+        
     }
 
     for($i=0; $i<sizeof($leaderslist); $i++){
 
         $QueryMembersTasksTable="INSERT INTO task_leaders(leader_id, task_id) VALUES('".$leaderslist[$i]."','$value[0]')" ;
         $query = mysqli_query($conn, $QueryMembersTasksTable);
+
+        $getEmail="SELECT email FROM team_members WHERE member_id=".$memberslist[$i];
+        $Emailexexcute= mysqli_query($conn, $getEmail);
+        while($row = mysqli_fetch_array($Emailexexcute)){
+            sendMailLeader($row['email'],$_POST['TaskInfo'],$_POST['TaskDue']);
+    }
         
     }
+
+    $getEmail="SELECT email FROM managers WHERE M_ID= '5000'";
+    $Emailexexcute= mysqli_query($conn, $getEmail);
+    while($row = mysqli_fetch_array($Emailexexcute)){
+        sendMailManager($row['email'],$_POST['TaskInfo'],$_POST['TaskDue']);
+}
     //echo mysqli_error($conn); 
 
     }
+
 }
 
 
