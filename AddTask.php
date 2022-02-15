@@ -124,7 +124,9 @@ if(isset($_POST["submit"])){
         $Emailexexcute= mysqli_query($conn, $getEmail);
         $LeadermailArray=[];
         while($row = mysqli_fetch_array($Emailexexcute)){
+
          array_push($LeadermailArray,$row['email']);
+
     }
     sendOwner($LeadermailArray,$_POST['TaskInfo'],$_POST['TaskDue']);
  
