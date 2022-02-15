@@ -31,7 +31,11 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
 </head>
 <body class="backgroundimage" style="color:white;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navBar-color" >
-<a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><span class="logoText">Tornado</span></a>
+<a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'>
+
+<span class="logoText">Tornado</span>
+
+</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
