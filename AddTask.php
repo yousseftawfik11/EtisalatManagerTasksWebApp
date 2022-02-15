@@ -17,6 +17,7 @@
 
 <?php
 include('sendmail.php');
+include('mailer.php');
 
 if(isset($_POST["submit"])){
 
@@ -48,7 +49,7 @@ if(isset($_POST["submit"])){
         $leaderslist= $_POST["check_list_leader"];
     
 
-    $pname = rand(1000,100000)."-".$_FILES["file"]["name"];
+    $pname = $_FILES["file"]["name"];
     $tname = $_FILES["file"]["tmp_name"];
     $uploads_dir= 'C:/xampp/htdocs/taskSys/uploads';
 
@@ -103,11 +104,13 @@ if(isset($_POST["submit"])){
         $QueryMembersTasksTable="INSERT INTO task_members(member_id, task_id) VALUES('".$memberslist[$i]."','$value[0]')" ;
         $query = mysqli_query($conn, $QueryMembersTasksTable);
         
-        $getEmail="SELECT email FROM team_members WHERE member_id=".$memberslist[$i];
+        $getEmail="SELECT email,name FROM team_members WHERE member_id=".$memberslist[$i];
         $Emailexexcute= mysqli_query($conn, $getEmail);
+        $mailArray=[];
         while($row = mysqli_fetch_array($Emailexexcute)){
-            sendMailMember($row['email'],$_POST['TaskInfo'],$_POST['TaskDue']);
+         array_push($mailArray,$row['email']);
     }
+    sendMember($mailArray,$_POST['TaskInfo'],$_POST['TaskDue']);
 
         
     }
@@ -117,21 +120,17 @@ if(isset($_POST["submit"])){
         $QueryMembersTasksTable="INSERT INTO task_leaders(leader_id, task_id) VALUES('".$leaderslist[$i]."','$value[0]')" ;
         $query = mysqli_query($conn, $QueryMembersTasksTable);
 
-        $getEmail="SELECT email FROM team_members WHERE member_id=".$memberslist[$i];
+        $getEmail="SELECT email FROM team_members WHERE member_id=".$leaderslist[$i];
         $Emailexexcute= mysqli_query($conn, $getEmail);
+        $LeadermailArray=[];
         while($row = mysqli_fetch_array($Emailexexcute)){
-            sendMailLeader($row['email'],$_POST['TaskInfo'],$_POST['TaskDue']);
+         array_push($LeadermailArray,$row['email']);
     }
-        
+    sendOwner($LeadermailArray,$_POST['TaskInfo'],$_POST['TaskDue']);
+ 
     }
 
-    $getEmail="SELECT email FROM managers WHERE M_ID= '5000'";
-    $Emailexexcute= mysqli_query($conn, $getEmail);
-    while($row = mysqli_fetch_array($Emailexexcute)){
-        sendMailManager($row['email'],$_POST['TaskInfo'],$_POST['TaskDue']);
-}
     //echo mysqli_error($conn); 
-
     }
 
 }
