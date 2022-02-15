@@ -106,7 +106,7 @@ if(isset($_POST["submit"])){
         $getEmail="SELECT email FROM team_members WHERE member_id=".$memberslist[$i];
         $Emailexexcute= mysqli_query($conn, $getEmail);
         while($row = mysqli_fetch_array($Emailexexcute)){
-            sendMailMember($row['email'],$_POST['TaskInfo'],$_POST['TaskDue']);
+            sendMailMember($row['email'],$_POST['TaskTitle'],$_POST['TaskInfo'],$_POST['TaskDue']);
     }
 
         
@@ -120,7 +120,7 @@ if(isset($_POST["submit"])){
         $getEmail="SELECT email FROM team_members WHERE member_id=".$memberslist[$i];
         $Emailexexcute= mysqli_query($conn, $getEmail);
         while($row = mysqli_fetch_array($Emailexexcute)){
-            sendMailLeader($row['email'],$_POST['TaskInfo'],$_POST['TaskDue']);
+            sendMailLeader($row['email'],$_POST['TaskTitle'],$_POST['TaskInfo'],$_POST['TaskDue']);
     }
         
     }
