@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'sendmail.php';
+include 'mailer.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -303,28 +304,50 @@ if(isset($_POST["edit"])){ //update info of tasks in database
                 echo mysqli_error($conn); 
             }
         
+
             $memberid="(SELECT member_id FROM task_members WHERE task_id = ".$task_id.")
             UNION(SELECT leader_id FROM task_leaders WHERE task_id = ".$task_id.")";
-            if($result= mysqli_query($conn,$memberid)){
+            // if($result= mysqli_query($conn,$memberid)){
+            //     if(mysqli_num_rows($result)>0){
+            //         while($row = mysqli_fetch_array($result)){
+            //             $getEmail="SELECT email FROM team_members WHERE member_id=".$row["member_id"];
+            //             $Emailexexcute= mysqli_query($conn, $getEmail);
+            //             while($row2 = mysqli_fetch_array($Emailexexcute)){
+
+            //                 $sql2="SELECT due FROM tasks WHERE task_id = ".$task_id;
+            //                 if($result2= mysqli_query($conn,$sql2)){
+            //                     if(mysqli_num_rows($result2)>0){
+            //                         while($row3 = mysqli_fetch_array($result2)){
+            //                             sendMailMemberModify($row2['email'],$title,$info,$priority,$row3['due']);
+            //                         }
+            //                     }
+            //                 }
+            //             }   
+            //         }
+            //     }
+            // }
+        $mailArray=[];
+           
+           if($result= mysqli_query($conn,$memberid)){
                 if(mysqli_num_rows($result)>0){
                     while($row = mysqli_fetch_array($result)){
                         $getEmail="SELECT email FROM team_members WHERE member_id=".$row["member_id"];
                         $Emailexexcute= mysqli_query($conn, $getEmail);
                         while($row2 = mysqli_fetch_array($Emailexexcute)){
-
-                            $sql2="SELECT due FROM tasks WHERE task_id = ".$task_id;
+                            array_push($mailArray,$row2['email']);
+                        }   
+                        $sql2="SELECT due FROM tasks WHERE task_id = ".$task_id;
                             if($result2= mysqli_query($conn,$sql2)){
                                 if(mysqli_num_rows($result2)>0){
                                     while($row3 = mysqli_fetch_array($result2)){
-                                        sendMailMemberModify($row2['email'],$title,$info,$priority,$row3['due']);
+                                        // sendMailMemberModify($row2['email'],$title,$info,$priority,$row3['due']);
+                                        sendModify($mailArray,$info,$row3['due'],$title,$priority);
                                     }
                                 }
                             }
-                        }   
                     }
                 }
             }
-
 
         }
     }
