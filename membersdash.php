@@ -1,5 +1,18 @@
-
 <?php
+session_start();
+setcookie ("member_ID",$_SESSION["member_ID"], time()+ (86400));
+setcookie ("member_Password",$_SESSION["member_Password"], time()+ (86400));
+unset($_SESSION["member_ID"]);
+unset($_SESSION["member_Password"]);
+  
+  
+  if(!isset($_SESSION["username"])||$_SESSION["username"]==5000){
+      echo '
+      <script>
+      window.location.href="index.php";
+      </script>
+    ';
+  }
 include('db.php');
 ?>
 <!DOCTYPE html>
@@ -19,16 +32,7 @@ include('db.php');
     <title>Members Dashboard</title>
 </head>
 <body  class="backgroundimage">
-<?php    
-  session_start();
-  if(!isset($_SESSION["username"])||$_SESSION["username"]==5000){
-      echo '
-      <script>
-      window.location.href="index.php";
-      </script>
-    ';
-  }
-?>
+
 <nav class="navbar navbar-expand-lg navbar-light  navBar-color" >
 <a class="navbar-brand navBar-color" href="#"><img class="logosize" src='images/horse.svg'><br><span class="logoText">Tornado</span></a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
