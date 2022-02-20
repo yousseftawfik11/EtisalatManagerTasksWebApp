@@ -2,6 +2,20 @@
 
 session_start();
 
+setcookie ("member_ID",  $_SESSION["member_ID"], time()+ (86400));
+setcookie ("member_Password", $_SESSION["member_Password"], time()+ (86400));
+unset($_SESSION["member_ID"]);
+unset($_SESSION["member_Password"]);
+
+// if(isset($_SESSION["rememberme"])&&$_SESSION["rememberme"]=="yes"){
+//     echo $_SESSION["rememberme"];
+//     unset($_SESSION["rememberme"]);
+//     setcookie ("member_ID",  $_SESSION["member_ID"], time()-1);
+//     setcookie ("member_Password", $_SESSION["member_Password"], time()-1);
+//     unset($_SESSION["member_ID"]);
+//     unset($_SESSION["member_Password"]);
+// }
+
 include 'db.php';
 include 'AddTask.php';
 
