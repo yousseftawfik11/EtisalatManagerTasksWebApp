@@ -39,10 +39,15 @@ include 'db.php';
 </head>
 <body class="backgroundimage">
 
+<nav class="navbar navbar-expand-lg navbar-light  navBar-color" >
+<a class="navbar-brand navBar-color" href="#" style="height:71px !important;"><img class="logosize" src='images/horse.svg' style="height:51px;"><br><span class="logoText" style="margin-top:17px;">Tornado</span></a>
+</nav>
+
 <div class="LoginBigContainer">
 <!-- <div>
 	<h1 class="welcomeText">Welcome Back!</h1>
 </div> -->
+
 <?php
 
 if(isset($_POST['submit'])){
@@ -190,5 +195,5 @@ if(isset($_POST['submit'])){
 	}
 		?>
 </div>
-<div id="footer">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#7cad3e " fill-opacity="1" d="M0,224L26.7,218.7C53.3,213,107,203,160,176C213.3,149,267,107,320,117.3C373.3,128,427,192,480,202.7C533.3,213,587,171,640,170.7C693.3,171,747,213,800,234.7C853.3,256,907,256,960,240C1013.3,224,1067,192,1120,181.3C1173.3,171,1227,181,1280,165.3C1333.3,149,1387,107,1413,85.3L1440,64L1440,320L1413.3,320C1386.7,320,1333,320,1280,320C1226.7,320,1173,320,1120,320C1066.7,320,1013,320,960,320C906.7,320,853,320,800,320C746.7,320,693,320,640,320C586.7,320,533,320,480,320C426.7,320,373,320,320,320C266.7,320,213,320,160,320C106.7,320,53,320,27,320L0,320Z"></path></svg></html> 
+</body>
+</html> 
