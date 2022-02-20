@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'db.php';
 
 // AY HAG
@@ -69,13 +69,17 @@ if(isset($_POST['submit'])){
 
     if(mysqli_num_rows($ManagerCheck) > 0){
 
-		session_start();
+
         $_SESSION["username"] = $row['M_ID'];
 
 		if(isset($_POST["rememberme"])) { //set cookie if checkbox is checked
-			setcookie ("member_ID",  $userMail, time()+ (86400));
-			setcookie ("member_Password", $row['password'], time()+ (86400));
+			$_SESSION["rememberme"]="yes";
+			$_SESSION["member_ID"]=$userMail;
+			$_SESSION["member_Password"]=$row['password'];
+			// setcookie ("member_ID",  $userMail, time()+ (86400));
+			// setcookie ("member_Password", $row['password'], time()+ (86400));
 		}else { //delete cookie if checkbox is not checked
+			$_SESSION["rememberme"]="no";
 			if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])) {
 				$CookieID = $_COOKIE["member_ID"];
 				$Cookiepassword = $_COOKIE["member_Password"];
@@ -95,9 +99,13 @@ if(isset($_POST['submit'])){
 			$_SESSION["username"] = $row2['member_id'];
 
 			if(isset($_POST["rememberme"])) { //set cookie if checkbox is checked
-				setcookie ("member_ID",  $userMail, time()+ (86400));
-				setcookie ("member_Password", $password, time()+ (86400));
-			}else { //delete cookie if checkbox is not checked
+				$_SESSION["rememberme"]="yes";
+		    	$_SESSION["member_ID"]=$userMail;
+			    $_SESSION["member_Password"]=$password;
+			// setcookie ("member_ID",  $userMail, time()+ (86400));
+			// setcookie ("member_Password", $row['password'], time()+ (86400));
+			}else { //delete cookie if checkbox is not checked					
+			    $_SESSION["rememberme"]="no";
 				if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])) {
 					$CookieID = $_COOKIE["member_ID"];
 					$Cookiepassword = $_COOKIE["member_Password"];
