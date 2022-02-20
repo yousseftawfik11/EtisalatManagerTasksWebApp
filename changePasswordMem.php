@@ -1,4 +1,6 @@
 <?php
+        session_start();
+        $userId=$_SESSION["username"];
 include('db.php');
 
 ?>
@@ -73,8 +75,7 @@ include('db.php');
 <?php
 include('db.php');
     if(isset($_POST["changePass"])){ //Add user to database
-        session_start();
-        $userId=$_SESSION["username"];
+
 
 
         $oldPass= strtolower(mysqli_real_escape_string($conn,$_POST['oldPass']));
