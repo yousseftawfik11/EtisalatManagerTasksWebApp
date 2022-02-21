@@ -138,6 +138,20 @@ if(isset($_POST['submit'])){
 
 	<?php 
 	if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])){
+$pass=$_COOKIE["member_Password"];
+
+$options   = 0;
+// Storingthe cipher method 
+$ciphering = "AES-128-CTR";
+
+// Non-NULL Initialization Vector for decryption 
+$decryption_iv = '1234567891011121';
+
+// Storing the decryption key 
+$decryption_key = "losangleslakers";
+
+// Using openssl_decrypt() function to decrypt the data 
+$decryption = openssl_decrypt($pass, $ciphering, $decryption_key, $options, $decryption_iv);
 
 		echo '
 		<div class="LoginContainer">
@@ -155,7 +169,7 @@ if(isset($_POST['submit'])){
 											<label for="Loginpass" >Password</label>
 											</div>
 											<div>
-											<input id="Loginpass" name="Loginpass" required value="'.$_COOKIE["member_Password"].'"type="password" data-type="password">
+											<input id="Loginpass" name="Loginpass" required value="'.$decryption.'"type="password" data-type="password">
 										</div>
 										</div>
 										<div>

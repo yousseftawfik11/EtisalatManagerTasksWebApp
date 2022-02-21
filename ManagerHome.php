@@ -2,8 +2,27 @@
 
 session_start();
 
+$password=$_SESSION["member_Password"];
+
+// Storingthe cipher method 
+$ciphering = "AES-128-CTR";
+
+// Using OpenSSl Encryption method 
+$iv_length = openssl_cipher_iv_length($ciphering);
+$options   = 0;
+
+// Non-NULL Initialization Vector for encryption 
+$encryption_iv = '1234567891011121';
+
+// Storing the encryption key 
+$encryption_key = "losangleslakers";
+
+// Using openssl_encrypt() function to encrypt the data 
+$encryption = openssl_encrypt($password, $ciphering, $encryption_key, $options, $encryption_iv);
+
+
 setcookie ("member_ID",  $_SESSION["member_ID"], time()+ (86400));
-setcookie ("member_Password", $_SESSION["member_Password"], time()+ (86400));
+setcookie ("member_Password",$encryption, time()+ (86400));
 unset($_SESSION["member_ID"]);
 unset($_SESSION["member_Password"]);
 
