@@ -87,7 +87,7 @@ include('db.php');
         $queryExec=mysqli_query($conn,$passCheck);
         $row = mysqli_fetch_array($queryExec);
 
-    if(mysqli_num_rows($queryExec) > 0 || password_verify($password,$row['password'])){
+    if(mysqli_num_rows($queryExec) > 0 && password_verify($oldPass,$row['password'])){
         if($newPassword==$ConfirmPass){
 
             $updateQuery="UPDATE team_members SET password='$hashPass' 

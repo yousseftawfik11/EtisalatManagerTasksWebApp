@@ -93,7 +93,7 @@ if(isset($_POST['submit'])){
 				window.location.href="ManagerHome.php";
 				</script>
 			  ';
-		}   elseif(mysqli_num_rows($MemberCheck) > 0 || password_verify($password,$row2['password'])) {
+		}   elseif(mysqli_num_rows($MemberCheck) > 0 && password_verify($password,$row2['password'])) {
 
 			session_start();
 			$_SESSION["username"] = $row2['member_id'];
