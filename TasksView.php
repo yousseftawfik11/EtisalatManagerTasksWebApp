@@ -91,8 +91,15 @@ if($result= mysqli_query($conn,$sql)){
                 echo "<tr>";
                 echo "<td>" . $row['Task_title'] . "</td>";
                 echo "<td><pre>" . $row['Content'] . "</pre></td>";
-                echo "<td>" . $row['start_Date'] . "</td>";
-                echo "<td>" . $row['due'] . "</td>";
+                echo "<td>" . substr($row['start_Date'], 0, -9) . "</td>";
+
+                if($row['due']=='0000-00-00'){
+                    echo "<td>On Going Task</td>";
+
+                }else{
+                    echo "<td>" . $row['due'] . "</td>";
+
+                }
                 echo "<td><img src='images/success.svg' class='OpenTickSize'></td>";
                 switch($row['priority']){
                     case 1:
