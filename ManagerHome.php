@@ -113,7 +113,7 @@ if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
       <div  class="labelSpace">
     <label for="TaskDue" class="NewTaskLabel">Task Due</label>
       </div>
-    <input type="date" name="TaskDue" class="titleInput" value="<?php if (isset($_POST['TaskDue'])) echo $_POST['TaskDue']; ?>">
+    <input type="date" name="TaskDue" min="<?php echo date('Y-m-d');?>" class="titleInput" value="<?php if (isset($_POST['TaskDue'])) echo $_POST['TaskDue']; ?>">
     </div>
 <div class="fieldsSpacing">
     <div>

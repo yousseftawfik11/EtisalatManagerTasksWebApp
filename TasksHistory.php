@@ -142,8 +142,13 @@ if($result= mysqli_query($conn,$sql)){
                  echo "</table>";
                  
                 }else{
-                    echo "no records change";
-                }
+                    echo "<script>Swal.fire({
+                        icon: 'error',
+                        title: 'Try Again!',
+                        text: 'No Records Change',
+                        confirmButtonColor: '#f27474',
+                        confirmButtonText: 'OK'
+                      })</script>";                }
             }    
         }
     }
@@ -294,7 +299,13 @@ document.getElementById('OpenTaskTable2').className = 'collapse show';
              echo "</table>";
              echo '</div>';
             }else{
-                echo "no records change";
+                echo "<script>Swal.fire({
+                    icon: 'error',
+                    title: 'Try Again!',
+                    text: 'No Records Change',
+                    confirmButtonColor: '#f27474',
+                    confirmButtonText: 'OK'
+                  })</script>";
             }
         }    
     }
