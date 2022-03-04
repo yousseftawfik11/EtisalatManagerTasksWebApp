@@ -2,6 +2,13 @@
         session_start();
         $userId=$_SESSION["username"];
 include('db.php');
+if(!isset($_SESSION["username"])||$_SESSION["username"]!=5000){
+  echo '
+  <script>
+  window.location.href="index.php";
+  </script>
+';
+}
 
 ?>
 
