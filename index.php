@@ -61,7 +61,7 @@ if(isset($_POST['submit'])){
 	$row = mysqli_fetch_array($ManagerCheck);
 
 	// $MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail' AND password = '$password'";
-	$MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail' AND password = '$password'";
+	$MemberLoginQuery = "SELECT * FROM team_members WHERE email = '$userMail'";
     $MemberCheck = mysqli_query($conn, $MemberLoginQuery);
 	$row2 = mysqli_fetch_array($MemberCheck);
 
@@ -93,7 +93,7 @@ if(isset($_POST['submit'])){
 				window.location.href="ManagerHome.php";
 				</script>
 			  ';
-		}   elseif(mysqli_num_rows($MemberCheck) > 0) {
+		}   elseif(mysqli_num_rows($MemberCheck) > 0 && password_verify($password,$row2['password'])) {
 
 			session_start();
 			$_SESSION["username"] = $row2['member_id'];
@@ -138,6 +138,20 @@ if(isset($_POST['submit'])){
 
 	<?php 
 	if(isset($_COOKIE['member_ID']) && isset($_COOKIE["member_Password"])){
+$pass=$_COOKIE["member_Password"];
+
+$options   = 0;
+// Storingthe cipher method 
+$ciphering = "AES-128-CTR";
+
+// Non-NULL Initialization Vector for decryption 
+$decryption_iv = '1234567891011121';
+
+// Storing the decryption key 
+$decryption_key = "losangleslakers";
+
+// Using openssl_decrypt() function to decrypt the data 
+$decryption = openssl_decrypt($pass, $ciphering, $decryption_key, $options, $decryption_iv);
 
 		echo '
 		<div class="LoginContainer">
@@ -155,7 +169,7 @@ if(isset($_POST['submit'])){
 											<label for="Loginpass" >Password</label>
 											</div>
 											<div>
-											<input id="Loginpass" name="Loginpass" required value="'.$_COOKIE["member_Password"].'"type="password" data-type="password">
+											<input id="Loginpass" name="Loginpass" required value="'.$decryption.'"type="password" data-type="password">
 										</div>
 										</div>
 										<div>
