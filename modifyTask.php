@@ -116,7 +116,7 @@ if($result= mysqli_query($conn,$sql)){
             echo "<td>";
  //loop to get all names from the sql result beause each task can have many names
             while($row2 = mysqli_fetch_array($names)){
-                echo "<a> ".$row2['name']."</a>";
+                echo "<a> ".$row2['name']."</a></br>";
             }
             echo "</td>";
             echo "<td><input type='radio' name='chosen_task' value=".$row['task_id']."></input></td>";
@@ -534,7 +534,7 @@ if(isset($_POST["ChangeDate"])){
   <div id="OpenTaskTable2" class="collapse">
 
 <label for="new_due" style="margin-left: 23px;">New Due Date</label>
-<input type="date" name="new_due"  required>
+<input type="date" name="new_due" >
 <input type="submit" class="submit_btns" value="Edit" name="ChangeDate">
 
 <?php
