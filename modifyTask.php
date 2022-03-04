@@ -426,7 +426,7 @@ if(isset($_POST["Change_Members"])){ //adding button to change members
         echo "<script>Swal.fire({
             icon: 'error',
             title: 'Try Again!',
-            text: 'Please choose new leaders',
+            text: 'Please choose new members',
             confirmButtonColor: '#f27474',
             confirmButtonText: 'OK'
           })</script>";
