@@ -200,4 +200,41 @@ function sendModify($UseremailLeader,$info,$due,$title,$priority){
         }
         }
 
+        function SendVer($email, $code){
+            $mail = new PHPMailer(true);
+        
+        
+        try {
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'tornadoteam.website';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'announcements@tornadoteam.website';                     //SMTP username
+            $mail->Password   = 'Ymtk_Ymtk11';                               //SMTP password
+           // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            //Recipients
+            $mail->setFrom('announcements@tornadoteam.website', 'Tornado Team');
+
+                $mail->addAddress($email, 'Tornado Team Member');     //Add a recipient
+        
+            // $mail->addReplyTo('info@example.com', 'Information');
+            // $mail->addBCC('bcc@example.com');
+        
+            //Attachments
+            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+        
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Verification Code';
+            $mail->Body    = 'Your verification code is '.$code;
+            //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        
+            $mail->send();
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        } 
+        }
+
 ?>

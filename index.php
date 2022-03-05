@@ -177,6 +177,9 @@ $decryption = openssl_decrypt($pass, $ciphering, $decryption_key, $options, $dec
 											<label for="rememberme" style="font-size:18px;font-size: 18px;"><span ></span> Keep me Signed in</label>
 										</div>
 										<div>
+										<a href="getVerif.php">Forgot Password?</a>
+										</div>
+										<div>
 											<input type="submit" name="submit" class="SignIn-btn" value="Sign In">
 										</div>
 
@@ -206,6 +209,9 @@ $decryption = openssl_decrypt($pass, $ciphering, $decryption_key, $options, $dec
 										<div class="loginSpacing" style="text-align:left">
 											<input id="rememberme" type="checkbox" name="rememberme" value="1">
 											<label for="rememberme"style="font-size:18px; font-weight 500px;"><span ></span> Keep me Signed in</label>
+										</div>
+										<div>
+										<a href="getVerif.php">Forgot Password?</a>
 										</div>
 										<div>
 											<input type="submit" name="submit" class="SignIn-btn" value="Sign In">
